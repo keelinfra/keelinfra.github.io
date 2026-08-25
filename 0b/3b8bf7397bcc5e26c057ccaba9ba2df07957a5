@@ -1,0 +1,25 @@
+CNAME
+  s_daf9a6a1e085cf::t_d4f9cf9558f8ba 1
+index.html
+  s_daf9a6a1e085cf::t_dc2abf63d96414 1-294
+keycloak/index.html
+  s_daf9a6a1e085cf::t_d233ec5222407a 1-5
+pricing/index.html
+  s_daf9a6a1e085cf::t_48891af4e80f95 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "0b3b8bf7397bcc5e26c057ccaba9ba2df07957a5",
+  "prompts": {},
+  "sessions": {
+    "s_daf9a6a1e085cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "00e14330-d378-4b7d-9ecb-68cf59eb16b3",
+        "model": "claude-fable-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
