@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>keelinfra — Production-ready self-hosted Keycloak</title>
+<meta name="description" content="Production-ready self-hosted Keycloak distribution: HA cluster, PostgreSQL HA, backups/PITR, monitoring, and CI-tested upgrade paths. One command on your own infrastructure.">
+<link rel="canonical" href="https://keelinfra.io/">
+<meta property="og:title" content="keelinfra — Production-ready self-hosted Keycloak">
+<meta property="og:description" content="HA, backups, monitoring, and tested upgrade paths — on your own infrastructure, in one command.">
+<meta property="og:url" content="https://keelinfra.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b2239'/%3E%3Cpath d='M8 6v20M8 16l10-10M8 16l10 10M22 6c3 3 4 7 4 10s-1 7-4 10' stroke='%23e8a33d' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f7f8fa; --panel:#ffffff; --ink:#16222e; --muted:#5b6b7a;
+  --line:#e3e8ee; --navy:#0b2239; --accent:#b06d10;
+  --accent-bright:#e8a33d; --ok:#1a7f4e; --code-bg:#0e1b28; --code-ink:#d7e3ee;
+  --mark:#0b2239;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0c141d; --panel:#121e2a; --ink:#e4ecf3; --muted:#8fa1b3;
+    --line:#22303e; --navy:#0b2239; --accent:#e8a33d; --accent-bright:#e8a33d;
+    --ok:#4cc38a; --code-bg:#0a1520; --code-ink:#cfdeea; --mark:#e8a33d;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+code,pre{font-family:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace}
+
+/* nav */
+nav{border-bottom:1px solid var(--line);background:var(--bg)}
+.nav-in{display:flex;align-items:center;gap:28px;height:60px}
+.logo{font-weight:700;font-size:18px;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:9px}
+.logo svg{display:block}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:14.5px}
+.nav-links a{text-decoration:none;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a.gh{color:var(--ink);font-weight:600}
+
+/* hero */
+.hero{padding:72px 0 56px}
+.hero h1{font-size:clamp(28px,4.6vw,42px);line-height:1.18;letter-spacing:-.025em;max-width:21ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.sub{margin-top:18px;font-size:18px;color:var(--muted);max-width:58ch}
+.hero-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:11px 20px;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn-primary{background:var(--mark);color:var(--bg)}
+.btn-primary:hover{opacity:.9}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--muted)}
+pre.term{
+  margin-top:34px;background:var(--code-bg);color:var(--code-ink);
+  border-radius:10px;padding:20px 22px;font-size:14px;line-height:1.8;
+  overflow-x:auto;border:1px solid rgba(255,255,255,.06)
+}
+pre.term .c{color:#5f7d99}
+pre.term .p{color:#e8a33d}
+
+/* proof */
+.proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
+.proof-in{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:26px 0}
+.proof-item{padding:6px 26px;border-left:1px solid var(--line)}
+.proof-item:first-child{border-left:none;padding-left:0}
+.proof-item .n{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.proof-item .n span{color:var(--ok)}
+.proof-item .d{font-size:13.5px;color:var(--muted);margin-top:2px}
+@media(max-width:700px){
+  .proof-in{grid-template-columns:1fr}
+  .proof-item{border-left:none;padding:10px 0;border-top:1px solid var(--line)}
+  .proof-item:first-child{border-top:none}
+}
+
+/* sections */
+section{padding:64px 0}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h2{font-size:26px;letter-spacing:-.02em;margin-top:10px}
+.lead{color:var(--muted);margin-top:12px;max-width:62ch}
+
+/* features */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:32px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.card h3{font-size:15.5px;margin-bottom:6px}
+.card p{font-size:14px;color:var(--muted)}
+
+/* status table */
+table{width:100%;border-collapse:collapse;margin-top:28px;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14.5px}
+th,td{text-align:left;padding:11px 18px;border-top:1px solid var(--line)}
+thead th{border-top:none;font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:transparent}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px}
+.tag.ok{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.tag.plan{color:var(--muted);background:color-mix(in srgb,var(--muted) 12%,transparent)}
+.table-scroll{overflow-x:auto}
+
+/* services */
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:32px}
+.svc .card{display:flex;flex-direction:column}
+.svc .price{font-size:22px;font-weight:700;margin:10px 0 2px}
+.svc .price small{font-size:13px;font-weight:500;color:var(--muted)}
+.svc ul{margin:12px 0 18px 18px;font-size:14px;color:var(--muted)}
+.svc li{margin:5px 0}
+.svc .btn{margin-top:auto;text-align:center}
+.note{font-size:13.5px;color:var(--muted);margin-top:18px;max-width:70ch}
+
+/* sub teaser */
+.teaser{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px 30px;margin-top:32px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.teaser .t-main{flex:1;min-width:260px}
+.teaser h3{font-size:17px}
+.teaser p{font-size:14.5px;color:var(--muted);margin-top:6px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:13.5px;color:var(--muted)}
+footer .f-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--ink)}
+footer .legal{max-width:78ch;line-height:1.6}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0b2239"/><path d="M8 6v20M8 16l10-10M8 16l10 10M22 6c3 3 4 7 4 10s-1 7-4 10" stroke="#e8a33d" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      keelinfra
+    </a>
+    <div class="nav-links">
+      <a href="#product">Product</a>
+      <a href="#services">Services</a>
+      <a href="#status">Status</a>
+      <a class="gh" href="https://github.com/keelinfra/keycloak">GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Production-ready self-hosted <em>Keycloak</em>, in one command.</h1>
+    <p class="sub">keelinfra packages what every team ends up building by hand: an HA Keycloak cluster,
+    PostgreSQL with automatic failover, encrypted backups with PITR, monitoring — and the part nobody
+    ships: <strong>upgrade paths that are actually tested</strong>. On your infrastructure. Your data never leaves.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://github.com/keelinfra/keycloak">View on GitHub</a>
+      <a class="btn btn-ghost" href="#services">Need help with Keycloak? →</a>
+    </div>
+<pre class="term"><span class="c"># three commands on clean Linux nodes — nothing pre-installed</span>
+<span class="p">$</span> git clone https://github.com/keelinfra/keycloak &amp;&amp; cd keycloak
+<span class="p">$</span> ./configure -c examples/ha-3node.yml
+<span class="p">$</span> ./install        <span class="c"># ≈12 minutes later: HA cluster + backups + monitoring</span></pre>
+  </div>
+</header>
+
+<div class="proof">
+  <div class="wrap proof-in">
+    <div class="proof-item">
+      <div class="n"><span>156/156</span> probes OK</div>
+      <div class="d">measured during a rolling patch upgrade — zero downtime, sessions intact</div>
+    </div>
+    <div class="proof-item">
+      <div class="n"><span>~16 s</span> window</div>
+      <div class="d">measured for a minor version upgrade — logged-in sessions survive the restart</div>
+    </div>
+    <div class="proof-item">
+      <div class="n"><span>1 command</span> drills</div>
+      <div class="d">failover, backup-restore and session-survival drills ship with the distribution</div>
+    </div>
+  </div>
+</div>
+
+<section id="product">
+  <div class="wrap">
+    <div class="kicker">The distribution</div>
+    <h2>Everything Keycloak needs to survive production</h2>
+    <p class="lead">Keycloak is powerful; running it in production is not. Managed vendors solve this by
+    hosting your identity data on their cloud. If you can't or won't do that — regulated industry, data
+    residency, air-gapped — keelinfra is the third option: a distribution you run yourself, free and
+    open source under Apache-2.0.</p>
+    <div class="grid">
+      <div class="card"><h3>HA Keycloak cluster</h3><p>Multi-node, DB-persisted sessions, load-balanced, TLS everywhere. A node can die without logging anyone out.</p></div>
+      <div class="card"><h3>PostgreSQL HA</h3><p>Patroni-managed with automatic failover — writes keep flowing when the leader goes down.</p></div>
+      <div class="card"><h3>Backups &amp; PITR</h3><p>pgBackRest, encrypted, scheduled — and restore-tested, because a backup you never restored is a rumor.</p></div>
+      <div class="card"><h3>Tested upgrades</h3><p>Rolling for patches, stop-start for minors. Every supported path is executed end-to-end before we list it.</p></div>
+      <div class="card"><h3>Observability</h3><p>Prometheus + Grafana wired in, with alert rules for the things that actually page you.</p></div>
+      <div class="card"><h3>Config as code</h3><p>Realms, clients and roles managed declaratively via keycloak-config-cli. Git is the source of truth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="kicker">Services</div>
+    <h2>Get Keycloak expertise on your side</h2>
+    <p class="lead">Fixed-scope engagements on your infrastructure, delivered by the people who build
+    the distribution. Every engagement ends with a written runbook your team keeps.</p>
+    <div class="svc">
+      <div class="card">
+        <h3>Deployment &amp; HA hardening</h3>
+        <div class="price">from $3,000 <small>fixed scope</small></div>
+        <ul>
+          <li>Production HA deployment on your VMs or bare metal</li>
+          <li>PostgreSQL HA, backups/PITR, monitoring included</li>
+          <li>Failover &amp; restore drills run with your team</li>
+          <li>Handover runbook + 30 days of email support</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:hello@keelinfra.io?subject=Deployment%20%26%20HA%20hardening">Get a quote</a>
+      </div>
+      <div class="card">
+        <h3>Migration &amp; upgrades</h3>
+        <div class="price">from $5,000 <small>fixed scope</small></div>
+        <ul>
+          <li>Legacy / RH-SSO / managed-vendor → self-hosted</li>
+          <li>Multi-version upgrade paths, rehearsed on a staging copy</li>
+          <li>Session &amp; realm integrity verified before cutover</li>
+          <li>Rollback plan you can actually execute</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:hello@keelinfra.io?subject=Migration%20%2F%20upgrade">Get a quote</a>
+      </div>
+      <div class="card">
+        <h3>Emergency &amp; expert help</h3>
+        <div class="price">$200<small>/hour</small></div>
+        <ul>
+          <li>Production down, upgrade gone wrong, cluster split-brain</li>
+          <li>Architecture &amp; config review</li>
+          <li>Root-cause analysis with a written post-mortem</li>
+          <li>No retainer required</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:hello@keelinfra.io?subject=Keycloak%20help">Email us</a>
+      </div>
+    </div>
+    <p class="note">Based in the EU · invoices with VAT · response within one business day.
+    Not sure which fits? Describe your situation at
+    <a href="mailto:hello@keelinfra.io">hello@keelinfra.io</a> and you'll get an honest answer —
+    including "you don't need us" when you don't.</p>
+
+    <div class="teaser" id="pricing">
+      <div class="t-main">
+        <h3>Annual self-hosted subscription — early access</h3>
+        <p>Per-node pricing (not per user): tested upgrade runbooks, CVE tracking, and direct access
+        to the people who build keelinfra. Launching once the upgrade-matrix CI goes live.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="kicker">Status</div>
+    <h2>An honest roadmap</h2>
+    <p class="lead">We flip a row to <em>working</em> only after it has passed our own drills on real
+    clusters — never before. Verified upgrade paths live in
+    <a href="https://github.com/keelinfra/keycloak/blob/main/UPGRADES.md">UPGRADES.md</a>.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>Component</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>3-node HA install</td><td><span class="tag ok">working</span></td></tr>
+        <tr><td>PostgreSQL HA (Patroni, automatic failover)</td><td><span class="tag ok">working</span></td></tr>
+        <tr><td>Backup / PITR (pgBackRest, restore-tested)</td><td><span class="tag ok">working</span></td></tr>
+        <tr><td>Monitoring (Prometheus + Grafana + alerts)</td><td><span class="tag ok">working</span></td></tr>
+        <tr><td>Tested upgrades (rolling patch / stop-start minor)</td><td><span class="tag ok">working</span></td></tr>
+        <tr><td>Upgrade matrix in CI (every upstream release, automatically)</td><td><span class="tag plan">in progress</span></td></tr>
+        <tr><td>Single-node install</td><td><span class="tag plan">CI smoke only</span></td></tr>
+        <tr><td>Air-gapped bundle</td><td><span class="tag plan">planned</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-links">
+      <a href="https://github.com/keelinfra/keycloak">GitHub</a>
+      <a href="https://github.com/keelinfra/keycloak/blob/main/UPGRADES.md">Supported upgrades</a>
+      <a href="mailto:hello@keelinfra.io">hello@keelinfra.io</a>
+    </div>
+    <p class="legal">© 2026 keelinfra · Apache-2.0 licensed.
+    Keycloak is a trademark of The Linux Foundation. keelinfra is an independent project and is not
+    affiliated with or endorsed by The Linux Foundation, the Cloud Native Computing Foundation,
+    Red Hat, or the Keycloak project.</p>
+  </div>
+</footer>
+
+</body>
+</html>
