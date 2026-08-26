@@ -190,5 +190,5 @@ migration, or a very bad Keycloak day: [keelinfra.io](https://keelinfra.io) ·
 hello@keelinfra.io.*
 
 *Keycloak is a trademark of The Linux Foundation. keelinfra is an independent
-project, not affiliated with or endorsed by The Linux Foundation, CNCF, Red Hat,
-or the Keycloak project.*
+project, not affiliated with or endorsed by The Linux Foundation or the
+Keycloak project.*
