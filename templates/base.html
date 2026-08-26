@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- if page %}
+  {%- set m_title = page.title ~ " — keelinfra" %}
+  {%- set m_desc = page.description | default(value=config.description) %}
+  {%- set m_path = page.path %}
+  {%- set m_og = page.extra.og_image | default(value=config.extra.og_image_default) %}
+{%- elif section %}
+  {%- if section.path == "/" %}
+    {%- set m_title = "keelinfra — Production-grade self-hosted Keycloak, proven nightly" %}
+  {%- else %}
+    {%- set m_title = section.title ~ " — keelinfra" %}
+  {%- endif %}
+  {%- set m_desc = section.description | default(value=config.description) %}
+  {%- set m_path = section.path %}
+  {%- set m_og = section.extra.og_image | default(value=config.extra.og_image_default) %}
+{%- else %}
+  {%- set m_title = "keelinfra" %}
+  {%- set m_desc = config.description %}
+  {%- set m_path = "/" %}
+  {%- set m_og = config.extra.og_image_default %}
+{%- endif %}
+{%- block seo %}
+<title>{{ m_title }}</title>
+<meta name="description" content="{{ m_desc }}">
+<link rel="canonical" href="{{ config.base_url ~ m_path }}">
+<meta property="og:title" content="{{ m_title }}">
+<meta property="og:description" content="{{ m_desc }}">
+<meta property="og:url" content="{{ config.base_url ~ m_path }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="keelinfra">
+<meta property="og:image" content="{{ config.base_url ~ m_og }}">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ m_title }}">
+<meta name="twitter:description" content="{{ m_desc }}">
+<meta name="twitter:image" content="{{ config.base_url ~ m_og }}">
+{%- endblock %}
+<link rel="stylesheet" href="{{ get_url(path='css/site.css', cachebust=true) }}">
+<link rel="alternate" type="application/atom+xml" title="keelinfra blog" href="{{ config.base_url }}/blog/atom.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b2239'/%3E%3Cpath d='M8 6v20M8 16l10-10M8 16l10 10M22 6c3 3 4 7 4 10s-1 7-4 10' stroke='%23e8a33d' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"keelinfra","url":"https://keelinfra.io/","logo":"https://keelinfra.io/assets/logo.svg","email":"hello@keelinfra.io","sameAs":["https://github.com/keelinfra"]}</script>
+{%- block jsonld %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+{%- set current = current_path | default(value="/404.html") %}
+<nav class="site">
+  <div class="wrap nav-in">
+    <a class="logo" href="/">
+      <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0b2239"/><path d="M8 6v20M8 16l10-10M8 16l10 10M22 6c3 3 4 7 4 10s-1 7-4 10" stroke="#e8a33d" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      keelinfra
+    </a>
+    <div class="nav-links">
+      <a href="/keycloak/"{% if current is starting_with(pat="/keycloak/") %} aria-current="page"{% endif %}>Keycloak</a>
+      <a href="/docs/keycloak/"{% if current is starting_with(pat="/docs/") %} aria-current="page"{% endif %}>Docs</a>
+      <a href="/pricing/"{% if current is starting_with(pat="/pricing/") %} aria-current="page"{% endif %}>Pricing</a>
+      <a href="/evidence/"{% if current is starting_with(pat="/evidence/") %} aria-current="page"{% endif %}>Evidence</a>
+      <a href="/blog/"{% if current is starting_with(pat="/blog/") %} aria-current="page"{% endif %}>Blog</a>
+      <a class="gh" href="{{ config.extra.github }}">GitHub ↗</a>
+    </div>
+    <details>
+      <summary aria-label="Menu">Menu</summary>
+      <div class="nav-menu">
+        <a href="/keycloak/">Keycloak</a>
+        <a href="/docs/keycloak/">Docs</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/evidence/">Evidence</a>
+        <a href="/blog/">Blog</a>
+        <a href="{{ config.extra.github }}">GitHub ↗</a>
+      </div>
+    </details>
+  </div>
+</nav>
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+<footer>
+  <div class="wrap">
+    <div class="f-links">
+      <a href="/docs/keycloak/">Docs</a>
+      <a href="/evidence/">Evidence</a>
+      <a href="/compare/managed-keycloak/">Compare</a>
+      <a href="/security/">Security</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/blog/">Blog</a>
+      <a href="{{ config.extra.github }}">GitHub</a>
+      <a href="https://github.com/keelinfra/keycloak/blob/main/UPGRADES.md">Supported upgrades</a>
+      <a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a>
+    </div>
+    <p class="legal">© 2026 keelinfra · Apache-2.0 licensed.
+    Keycloak is a trademark of The Linux Foundation. keelinfra is an independent project and is not
+    affiliated with or endorsed by The Linux Foundation, the Cloud Native Computing Foundation,
+    Red Hat, or the Keycloak project.</p>
+  </div>
+</footer>
+</body>
+</html>

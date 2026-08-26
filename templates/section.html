@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="prose">
+  <h1>{{ section.title }}</h1>
+  {{ section.content | safe }}
+  {% if section.pages | length > 0 %}
+  <ul class="post-list">
+    {% for p in section.pages %}
+    <li>
+      <h3><a href="{{ p.permalink | safe }}">{{ p.title }}</a></h3>
+      {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>
+{% endblock %}

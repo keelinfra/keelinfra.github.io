@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":{{ page.title | json_encode | safe }},"datePublished":"{{ page.date }}","url":"{{ page.permalink | safe }}","author":{"@type":"Organization","name":"keelinfra","url":"https://keelinfra.io/"}}</script>
+{% endblock %}
+{% block content %}
+<article class="prose">
+  <h1>{{ page.title }}</h1>
+  <p class="meta">{{ page.date | date(format="%Y-%m-%d") }} · keelinfra</p>
+  {{ page.content | safe }}
+</article>
+{% endblock %}

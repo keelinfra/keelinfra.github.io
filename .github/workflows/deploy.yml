@@ -1,0 +1,59 @@
+---
+name: deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  ZOLA_VERSION: v0.23.4
+  ZOLA_SHA256: 54d1a347781b2f32330914fcc02def81c7e3ddb6111b36d1cc89c06557aed1de
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install Zola (pinned, checksum-verified)
+        run: |
+          curl -sL "https://github.com/getzola/zola/releases/download/${ZOLA_VERSION}/zola-${ZOLA_VERSION}-x86_64-unknown-linux-gnu.tar.gz" -o zola.tar.gz
+          echo "${ZOLA_SHA256}  zola.tar.gz" | sha256sum -c -
+          tar xzf zola.tar.gz && sudo mv zola /usr/local/bin/ && zola --version
+
+      - name: Docs must match keelinfra/keycloak (no copy-drift, no hand-edits)
+        run: python3 scripts/sync_docs.py --check
+
+      - name: Build
+        run: zola build
+
+      - name: Internal links, anchors, inbound-URL contract, external-request budget
+        run: python3 scripts/check_site.py public
+
+      - name: HTML validation
+        run: |
+          pipx install html5validator==0.4.2
+          html5validator --root public/ --also-check-svg --log INFO
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

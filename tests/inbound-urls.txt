@@ -1,0 +1,19 @@
+# URLs that other repos, READMEs, issue templates, and sent mailtos depend on.
+# Breaking any of these breaks links in the wild. check_site.py enforces this list.
+/
+/#product
+/#services
+/#pricing
+/#status
+/keycloak/
+/pricing/
+/docs/keycloak/
+/docs/keycloak/upgrades/
+/evidence/
+/security/
+/about/
+/blog/
+/blog/atom.xml
+/blog/zero-downtime-keycloak-upgrades/
+/compare/managed-keycloak/
+/sitemap.xml

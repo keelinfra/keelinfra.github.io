@@ -1,0 +1,18 @@
+base_url = "https://keelinfra.io"
+title = "keelinfra"
+description = "Production-grade self-hosted Keycloak distribution: HA cluster, Postgres auto-failover, backups with PITR, monitoring, and upgrade paths re-proven nightly in public CI. Apache-2.0."
+default_language = "en"
+compile_sass = false
+build_search_index = false
+generate_feeds = false
+minify_html = false
+
+[markdown]
+external_links_target_blank = false
+smart_punctuation = false
+
+
+[extra]
+github = "https://github.com/keelinfra/keycloak"
+email = "hello@keelinfra.io"
+og_image_default = "/assets/social-preview.png"

@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="hero">
+  <div class="wrap">
+    <h1>Production-grade self-hosted <em>Keycloak</em>. Proven nightly, in public.</h1>
+    <p class="sub">keelinfra is an open-source (Apache-2.0) distribution that installs an HA Keycloak
+    cluster — PostgreSQL with automatic failover, encrypted backups with PITR, monitoring, and tested
+    upgrades — on your own VMs in ~10 minutes. Every supported upgrade path re-proves itself in public
+    CI every night. Your data never leaves.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://github.com/keelinfra/keycloak">View on GitHub</a>
+      <a class="btn btn-ghost" href="/docs/keycloak/">Read the docs</a>
+      <a class="textlink" href="/evidence/">Watch tonight's proof →</a>
+    </div>
+<pre class="term"><span class="c"># three commands on clean Linux nodes — nothing pre-installed</span>
+<span class="p">$</span> git clone https://github.com/keelinfra/keycloak &amp;&amp; cd keycloak
+<span class="p">$</span> ./configure -c examples/ha-3node.yml
+<span class="p">$</span> ./install        <span class="c"># ~10 minutes later: HA cluster + backups + monitoring</span></pre>
+  </div>
+</header>
+
+<div class="proof">
+  <div class="wrap proof-in">
+    <a class="proof-item" href="/blog/zero-downtime-keycloak-upgrades/">
+      <div class="n"><span>156/156</span> probes OK</div>
+      <div class="d">rolling patch upgrade, measured — zero downtime, sessions intact. Read the probe log →</div>
+    </a>
+    <a class="proof-item" href="/docs/keycloak/upgrades/">
+      <div class="n"><span>~16 s</span> window</div>
+      <div class="d">measured for a minor version upgrade — logged-in sessions survive. See the table →</div>
+    </a>
+    <a class="proof-item" href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">
+      <div class="n"><span>Nightly</span> matrix</div>
+      <div class="d">every supported upgrade path re-proves itself in public CI. Watch it run →</div>
+    </a>
+    <a class="proof-item" href="/docs/keycloak/verify/">
+      <div class="n"><span>1 command</span> drills</div>
+      <div class="d">failover, backup-restore and session-survival drills ship with the distribution →</div>
+    </a>
+  </div>
+</div>
+
+<section id="product">
+  <div class="wrap">
+    <div class="kicker">The distribution</div>
+    <h2>Everything Keycloak needs to survive production</h2>
+    <p class="lead">Managed Keycloak vendors solve production by hosting your identity data on their
+    cloud. If you can't or won't do that — regulated industry, data residency, air-gapped — the usual
+    answer is "build it yourself." keelinfra is the third option: a distribution you run on your own
+    machines, free and Apache-2.0, with the ops knowledge open instead of paywalled.
+    <a href="/compare/managed-keycloak/">How we compare →</a></p>
+    <div class="grid">
+      <div class="card"><h3>HA Keycloak cluster</h3><p>Multi-node, DB-persisted sessions, load-balanced, TLS everywhere. A node can die without logging anyone out.</p></div>
+      <div class="card"><h3>PostgreSQL HA</h3><p>Patroni-managed with automatic failover — writes keep flowing when the leader goes down.</p></div>
+      <div class="card"><h3>Backups &amp; PITR</h3><p>pgBackRest, encrypted, scheduled — and restore-tested, because a backup you never restored is a rumor.</p></div>
+      <div class="card"><h3>Tested upgrades</h3><p>Rolling for patches, stop-start for minors. Every supported path re-runs nightly in public CI: install the old version, log in, upgrade — the pre-upgrade session must still refresh.</p></div>
+      <div class="card"><h3>Observability</h3><p>Prometheus + Grafana wired in, with alert rules for the things that actually page you.</p></div>
+      <div class="card"><h3>Config as code</h3><p>Realms, clients and roles managed declaratively via keycloak-config-cli. Git is the source of truth.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <div class="kicker">Verify it yourself</div>
+    <h2>Don't take our word for it</h2>
+    <p class="lead">Every claim on this page is a public CI run, a published probe log, or a drill you
+    can run against your own cluster. <a href="/evidence/">The full ledger →</a></p>
+<pre class="term"><span class="p">$</span> ./verify                     <span class="c"># health of every component</span>
+<span class="p">$</span> ./verify --drill failover    <span class="c"># switch the PostgreSQL leader over, write through it</span>
+<span class="p">$</span> ./verify --drill restore     <span class="c"># restore the latest backup to a scratch directory</span>
+<span class="p">$</span> ./verify --drill session     <span class="c"># rolling-restart every node; logins must survive</span></pre>
+    <p class="note">CI runs a clean install plus the session drill on every commit, and the
+    <a href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">upgrade matrix</a>
+    re-proves every supported upgrade path nightly.</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="kicker">Services</div>
+    <h2>Get Keycloak expertise on your side</h2>
+    <p class="lead">Fixed-scope engagements on your infrastructure, delivered by the people who build
+    the distribution. Every engagement ends with a written runbook your team keeps.</p>
+    <div class="svc">
+      <div class="card">
+        <h3>Deployment &amp; HA hardening</h3>
+        <div class="price">from $3,000 <small>fixed scope</small></div>
+        <p>Production HA deployment on your VMs or bare metal, drills run with your team, handover runbook.</p>
+        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+      </div>
+      <div class="card">
+        <h3>Migration &amp; upgrades</h3>
+        <div class="price">from $5,000 <small>fixed scope</small></div>
+        <p>Legacy / RH-SSO / managed-vendor → self-hosted, rehearsed on a staging copy before cutover.</p>
+        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+      </div>
+      <div class="card">
+        <h3>Emergency &amp; expert help</h3>
+        <div class="price">$200<small>/hour</small></div>
+        <p>Production down, upgrade gone wrong, split-brain. Root-cause analysis with a written post-mortem.</p>
+        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+      </div>
+    </div>
+    <p class="note">Based in the EU · invoices with VAT · response within one business day.
+    Not sure which fits? Describe your situation at
+    <a href="mailto:hello@keelinfra.io">hello@keelinfra.io</a> and you'll get an honest answer —
+    including "you don't need us" when you don't.</p>
+
+    <div class="teaser" id="pricing">
+      <div class="t-main">
+        <h3>Self-hosted subscription — $1,500 per node, per year <small style="font-weight:500;color:var(--muted)">· early access</small></h3>
+        <p>Offline/air-gapped install bundles, CVE tracking with operator actions, tested upgrade
+        runbooks, and direct access to the engineers who build keelinfra. Priced per node, not per
+        user. Subscriptions open when the air-gapped bundle ships — joining the early-access list
+        locks this price. <a href="/pricing/">Full pricing →</a></p>
+      </div>
+      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
+    </div>
+  </div>
+</section>
+
+{% set blog = get_section(path="blog/_index.md") %}
+{% if blog.pages | length > 0 %}
+<section id="writing">
+  <div class="wrap">
+    <div class="kicker">From the blog</div>
+    <h2>Measured, not promised</h2>
+    <ul class="post-list">
+      {% for post in blog.pages %}{% if loop.index <= 3 %}
+      <li>
+        <div class="date">{{ post.date | date(format="%Y-%m-%d") }}</div>
+        <h3><a href="{{ post.permalink | safe }}">{{ post.title }}</a></h3>
+        {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+      </li>
+      {% endif %}{% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

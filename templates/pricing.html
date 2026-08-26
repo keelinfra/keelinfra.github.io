@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">[
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"keelinfra/keycloak","url":"https://keelinfra.io/keycloak/","license":"https://www.apache.org/licenses/LICENSE-2.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{%- for s in page.extra.services -%}
+,{"@context":"https://schema.org","@type":"Service","name":{{ s.name | json_encode | safe }},"provider":{"@type":"Organization","name":"keelinfra"},"offers":{"@type":"Offer","price":"{{ s.price }}","priceCurrency":"USD"{% if s.price_note == "/hour" %},"priceSpecification":{"@type":"UnitPriceSpecification","price":"{{ s.price }}","priceCurrency":"USD","unitCode":"HUR"}{% endif %}}}
+{%- endfor -%}
+]</script>
+{% endblock %}
+{% block content %}
+<header class="hero" style="padding-bottom:24px">
+  <div class="wrap">
+    <h1>The distribution is free.<br>You pay for people and guarantees.</h1>
+    <p class="sub">Everything the distribution does is open source, Apache-2.0, with no gated
+    features and no open-core split. Money changes hands when you want our hands: deployment,
+    migration, emergencies — or the per-node subscription.</p>
+  </div>
+</header>
+
+<section id="oss" style="padding-top:24px">
+  <div class="wrap">
+    <div class="teaser">
+      <div class="t-main">
+        <h3>Open source — $0, forever</h3>
+        <p>The full distribution: HA cluster, PostgreSQL failover, backups &amp; PITR, monitoring,
+        config as code, tested upgrades, all drills. Apache-2.0 — there is no rug to pull.
+        <a href="/docs/keycloak/">Install it yourself →</a></p>
+      </div>
+      <a class="btn btn-ghost" href="https://github.com/keelinfra/keycloak">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">Services</div>
+    <h2>Fixed-scope engagements, delivered by the people who build the distribution</h2>
+    <p class="lead">Every engagement ends with a written runbook your team keeps.</p>
+    <div class="svc">
+      {% for s in page.extra.services %}
+      <div class="card">
+        <h3>{{ s.name }}</h3>
+        <div class="price">{{ s.price_label }} <small>{{ s.price_note }}</small></div>
+        <ul>
+          {% for b in s.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+        <a class="btn btn-ghost" href="{{ s.mailto }}">{{ s.cta }}</a>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="note">Based in the EU · invoices with VAT · response within one business day.
+    Not sure which fits? Describe your situation at
+    <a href="mailto:hello@keelinfra.io">hello@keelinfra.io</a> and you'll get an honest answer —
+    including "you don't need us" when you don't.</p>
+  </div>
+</section>
+
+<section id="subscription" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">Subscription</div>
+    <h2>Self-hosted subscription — $1,500 per node, per year</h2>
+    <p class="lead">For teams that run the distribution themselves and want someone on the hook for
+    the boring, critical parts:</p>
+    <div class="grid">
+      <div class="card"><h3>Offline / air-gapped bundles</h3><p>All install and upgrade artifacts packaged for environments with no internet at deploy time.</p></div>
+      <div class="card"><h3>CVE tracking</h3><p>When an upstream CVE affects deployments made by this distribution, you get the version bump and the required operator actions.</p></div>
+      <div class="card"><h3>Tested upgrade runbooks</h3><p>Step-by-step runbooks for every supported path — the same ones our nightly CI matrix executes.</p></div>
+      <div class="card"><h3>Direct access</h3><p>You talk to the engineers who build keelinfra, not an account manager. EU business hours.</p></div>
+    </div>
+    <div class="teaser">
+      <div class="t-main">
+        <h3>Early access</h3>
+        <p>Priced per node, not per user — a 3-node HA cluster is <strong>$4,500/year</strong> no
+        matter how many people log in. Subscriptions open when the air-gapped bundle ships; joining
+        the early-access list locks this price.</p>
+      </div>
+      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2>Straight answers</h2>
+    <div class="grid">
+      <div class="card"><h3>Do I need the subscription to run keelinfra?</h3><p>No. The distribution is complete without it — install, upgrades, drills, monitoring, everything. The subscription adds offline bundles, CVE guidance and people.</p></div>
+      <div class="card"><h3>Per node vs per user — the math</h3><p>A 3-node HA cluster serving 50,000 users is $4,500/year. A managed tier at $599/month is $7,188/year before add-ons — and per-MAU vendors charge multiples of that. Growth costs you nothing here.</p></div>
+      <div class="card"><h3>What does "fixed scope" mean?</h3><p>We agree on the deliverables and the price before work starts. If it takes us longer, that's our problem, not your invoice.</p></div>
+      <div class="card"><h3>What are your support hours?</h3><p>EU business hours, response within one business day. Emergency help is best-effort — we do not sell a 24/7 SLA we cannot staff honestly.</p></div>
+      <div class="card"><h3>Invoicing?</h3><p>EU-based, invoices with VAT. Standard rails — no procurement portal required.</p></div>
+    </div>
+    <p class="note">Choosing between self-hosting and a managed vendor?
+    <a href="/compare/managed-keycloak/">Read the honest comparison →</a></p>
+  </div>
+</section>
+{% endblock %}

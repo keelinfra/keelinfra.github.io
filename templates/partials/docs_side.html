@@ -1,0 +1,10 @@
+{%- set docs = get_section(path="docs/keycloak/_index.md") %}
+<aside class="docs-side">
+  <div class="side-title">Keycloak distribution</div>
+  <ul>
+    <li><a href="{{ docs.permalink | safe }}"{% if cur == docs.path %} aria-current="page"{% endif %}>Overview</a></li>
+    {%- for p in docs.pages %}
+    <li><a href="{{ p.permalink | safe }}"{% if cur == p.path %} aria-current="page"{% endif %}>{{ p.title }}</a></li>
+    {%- endfor %}
+  </ul>
+</aside>

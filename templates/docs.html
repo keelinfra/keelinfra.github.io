@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="docs-layout">
+  {% set cur = section.path %}{% include "partials/docs_side.html" %}
+  <div class="docs-main">
+    <article class="prose">
+      <h1>{{ section.title }}</h1>
+      {{ section.content | safe }}
+    </article>
+  </div>
+</div>
+{% endblock %}
