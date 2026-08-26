@@ -1,0 +1,21 @@
+content/blog/zero-downtime-keycloak-upgrades.md
+  s_021f4e55466d20::t_068b90c4ac067a 193-194
+templates/base.html
+  s_021f4e55466d20::t_c6cdb20d9631dc 97
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "dcf75b34f5d6f7c3ff4455bd9d0ef4d57300f64b",
+  "prompts": {},
+  "sessions": {
+    "s_021f4e55466d20": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6f21185-c836-4673-a35f-6e6e258035a1",
+        "model": "claude-fable-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
