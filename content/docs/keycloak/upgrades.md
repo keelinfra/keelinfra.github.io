@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "d15af5e"
+source_sha = "1f6f693"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@d15af5e (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@1f6f693 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end by our verification suite:
 install the source version on a 3-node HA cluster, create realms/users/sessions,
@@ -22,7 +22,7 @@ still refreshes on the target version.
 
 | From | To | Strategy | Sessions survive | Verified on | Notes |
 |---|---|---|---|---|---|
-| 26.6.0 | 26.6.2 | rolling | ✅ | 2026-08-25 | 156/156 probes OK during upgrade — zero downtime |
+| 26.6.0 | 26.6.2 | rolling | ✅ | 2026-08-25 | 156/156 probes OK during upgrade — zero downtime ([probe log](https://keelinfra.io/blog/zero-downtime-keycloak-upgrades/)) |
 | 26.6.2 | 26.7.0 | stop-start | ✅ | 2026-08-25 | ~16s service window measured (staged artifacts, stop → cut over → start); sessions persisted in PostgreSQL across the restart |
 
 ## Strategies
