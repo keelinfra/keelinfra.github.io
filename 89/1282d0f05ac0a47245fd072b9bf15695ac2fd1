@@ -1,0 +1,25 @@
+content/docs/keycloak/example-ha-3node.md
+  s_021f4e55466d20::t_e9f1a11a2da203 7,10
+content/docs/keycloak/example-single-node.md
+  s_021f4e55466d20::t_3bdbf18ad4f92d 7,10
+content/docs/keycloak/security.md
+  s_021f4e55466d20::t_28bbcaee322d14 7,10
+content/docs/keycloak/upgrades.md
+  s_021f4e55466d20::t_f4c7ee66979765 7,10,25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "891282d0f05ac0a47245fd072b9bf15695ac2fd1",
+  "prompts": {},
+  "sessions": {
+    "s_021f4e55466d20": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e6f21185-c836-4673-a35f-6e6e258035a1",
+        "model": "claude-fable-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
