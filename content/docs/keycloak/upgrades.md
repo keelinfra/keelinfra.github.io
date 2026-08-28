@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "fe0c49a"
+source_sha = "5c622bf"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@fe0c49a (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@5c622bf (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end by our verification suite:
 install the source version on a 3-node HA cluster, create realms/users/sessions,
