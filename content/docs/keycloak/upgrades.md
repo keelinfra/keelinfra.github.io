@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "5c622bf"
+source_sha = "f987cb1"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@5c622bf (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@f987cb1 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end by our verification suite:
 install the source version on a 3-node HA cluster, create realms/users/sessions,
@@ -24,6 +24,18 @@ still refreshes on the target version.
 |---|---|---|---|---|---|
 | 26.6.0 | 26.6.2 | rolling | ✅ | 2026-08-25 | 156/156 probes OK during upgrade — zero downtime ([probe log](https://keelinfra.io/blog/zero-downtime-keycloak-upgrades/)) |
 | 26.6.2 | 26.7.0 | stop-start | ✅ | 2026-08-25 | ~16s service window measured (staged artifacts, stop → cut over → start); sessions persisted in PostgreSQL across the restart |
+
+## KeelInfra LTS builds
+
+Upstream cuts patch tags on maintenance branches (e.g. `26.2.6..26.2.16`)
+without publishing community artifacts — fixes on those tags ship only in
+Red Hat's commercial build. We build the tags ourselves and publish them as
+[`kc-<version>-keel<rev>` releases](https://github.com/keelinfra/keycloak/releases)
+(see [lts/](lts/)); `./upgrade --dist-url <release url>` installs them.
+
+| From | To | Strategy | Sessions survive | Verified on | Notes |
+|---|---|---|---|---|---|
+| 26.2.5 | 26.2.16 ([kc-26.2.16-keel1](https://github.com/keelinfra/keycloak/releases/tag/kc-26.2.16-keel1)) | rolling | ✅ | 2026-08-28 | Single-node CI drill, runs nightly in the matrix: install the last community release, upgrade via `--dist-url`, pre-upgrade session refreshes, full session drill passes. The 3-node HA drill has **not** yet run for this path — Infinispan was upgraded within the 26.2 branch (15.0.16), so a multi-node rolling upgrade briefly mixes Infinispan versions; run the HA drill before relying on rolling there. |
 
 ## Strategies
 
