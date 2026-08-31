@@ -25,6 +25,8 @@ LINK_MAP = {
     "LICENSE": f"{REPO_URL}/blob/main/LICENSE",
     "examples/ha-3node.yml": "/docs/keycloak/example-ha-3node/",
     "examples/single-node.yml": "/docs/keycloak/example-single-node/",
+    # Directory link with no site page — it resolved to /docs/keycloak/upgrades/lts/.
+    "lts/": f"{REPO_URL}/tree/main/lts",
 }
 
 
