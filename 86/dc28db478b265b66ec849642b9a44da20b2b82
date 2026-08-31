@@ -1,0 +1,19 @@
+scripts/sync_docs.py
+  s_7f1adbc2d0d553::t_986a1f54a04cec 28-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "86dc28db478b265b66ec849642b9a44da20b2b82",
+  "prompts": {},
+  "sessions": {
+    "s_7f1adbc2d0d553": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a20a60e4-0754-4f6e-a3f8-fc3350fea603",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
