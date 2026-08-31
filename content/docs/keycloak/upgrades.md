@@ -4,27 +4,30 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "dedb67d"
+source_sha = "f86d62b"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@dedb67d (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@f86d62b (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
-Every path listed here has been executed end-to-end by our verification suite:
-install the source version on a 3-node HA cluster, create realms/users/sessions,
-run `./upgrade`, and assert that logged-in sessions survive — see "What the
-session drill proves" below for the exact assertions behind that claim.
+Every path listed here has been executed end-to-end: install the source version,
+create realms/users/sessions, run `./upgrade`, and assert that logged-in sessions
+survive — see "What the session drill proves" below for the exact assertions
+behind that claim.
 
 **We do not list an upgrade path we have not run.**
 
-Every listed path also runs nightly in CI on a clean single-node install
+Every listed path runs nightly in CI on a clean single-node install
 ([upgrade matrix](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml)):
 install the source version, log in, upgrade, and assert the pre-upgrade session
-still refreshes on the target version.
+still refreshes on the target version. Some paths have additionally been drilled
+on a 3-node HA cluster — the Notes column says which.
 
 | From | To | Strategy | Sessions survive | Verified on | Notes |
 |---|---|---|---|---|---|
-| 26.6.0 | 26.6.2 | rolling | ✅ | 2026-08-25 | 156/156 probes OK during upgrade — zero downtime ([probe log](https://keelinfra.io/blog/zero-downtime-keycloak-upgrades/)) |
-| 26.6.2 | 26.7.0 | stop-start | ✅ | 2026-08-25 | ~16s service window measured (staged artifacts, stop → cut over → start); sessions persisted in PostgreSQL across the restart. **Do not stop here** — see "Do not land on 26.7.0–26.7.2" below |
+| 26.6.0 | 26.6.2 | rolling | ✅ | 2026-08-25 | **3-node HA drilled.** 156/156 probes OK during upgrade — zero downtime ([probe log](https://keelinfra.io/blog/zero-downtime-keycloak-upgrades/)) |
+| 26.6.2 | 26.7.0 | stop-start | ✅ | 2026-08-25 | **3-node HA drilled.** ~16s service window measured (staged artifacts, stop → cut over → start); sessions persisted in PostgreSQL across the restart. **Do not stop here** — see "Do not land on 26.7.0–26.7.2" below |
+| 26.6.2 | 26.7.3 | stop-start | ✅ | 2026-08-31 | **Single-node CI only** — the 3-node HA drill has not run against this target yet. Same stop-start path as the 26.7.0 row above, which was HA drilled |
+| 26.7.0 | 26.7.3 | rolling | ✅ | 2026-08-31 | **Single-node CI only** — the 3-node HA drill has not run yet. This is the way off 26.7.0–26.7.2 |
 
 ## Do not land on 26.7.0–26.7.2
 
@@ -44,28 +47,30 @@ fixes 20 CVEs and six weaknesses, and repairs regressions introduced inside the
 The 26.6.2 → 26.7.0 row above records a run we actually did, so it stays. It is
 not the version you should be running.
 
-## Pending verification
-
-These paths are in the [upgrade matrix](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml)
-but have not yet completed a run. **They are not supported paths.** They move
-into the table above, with a date, once CI proves them — not before.
-
-| From | To | Strategy | Status |
-|---|---|---|---|
-| 26.6.2 | 26.7.3 | stop-start | first CI run pending |
-| 26.7.0 | 26.7.3 | rolling | first CI run pending |
-
 ## KeelInfra LTS builds
 
-Upstream cuts patch tags on maintenance branches (e.g. `26.2.6..26.2.16`)
-without publishing community artifacts — fixes on those tags ship only in
-Red Hat's commercial build. We build the tags ourselves and publish them as
+Upstream cuts patch tags on maintenance branches without publishing community
+artifacts — fixes on those tags ship only in Red Hat's commercial build. Two
+streams are in that state:
+
+| Stream | Community artifacts stop at | Tags continue to | Built and published |
+|---|---|---|---|
+| 26.2 | 26.2.5 | 26.2.16 | `kc-26.2.16-keel1` |
+| 26.6 | 26.6.4 | 26.6.6 | `kc-26.6.5-keel1`, `kc-26.6.6-keel1` |
+
+The 26.6 stream matters more than its size suggests: 26.6.4 → 26.6.6 carries
+**12 CVE fixes** in 69 commits, and a cluster left on 26.6.4 has no community
+route to any of them. Details and build evidence:
+[VERIFICATION-26.6.6.md](https://github.com/keelinfra/keycloak/blob/main/lts/VERIFICATION-26.6.6.md).
+
+We build the tags ourselves and publish them as
 [`kc-<version>-keel<rev>` releases](https://github.com/keelinfra/keycloak/releases)
 (see [lts/](https://github.com/keelinfra/keycloak/tree/main/lts)); `./upgrade --dist-url <release url>` installs them.
 
 | From | To | Strategy | Sessions survive | Verified on | Notes |
 |---|---|---|---|---|---|
 | 26.2.5 | 26.2.16 ([kc-26.2.16-keel1](https://github.com/keelinfra/keycloak/releases/tag/kc-26.2.16-keel1)) | rolling | ✅ | 2026-08-28 | Single-node CI drill, runs nightly in the matrix: install the last community release, upgrade via `--dist-url`, pre-upgrade session refreshes, full session drill passes. The 3-node HA drill has **not** yet run for this path — Infinispan was upgraded within the 26.2 branch (15.0.16), so a multi-node rolling upgrade briefly mixes Infinispan versions; run the HA drill before relying on rolling there. |
+| 26.6.4 | 26.6.6 ([kc-26.6.6-keel1](https://github.com/keelinfra/keycloak/releases/tag/kc-26.6.6-keel1)) | rolling | ✅ | 2026-08-31 | Single-node CI drill, runs nightly in the matrix: install the last community release (26.6.4), upgrade via `--dist-url`, pre-upgrade session refreshes, full session drill passes. The 3-node HA drill has **not** yet run for this path — Infinispan was upgraded within the 26.6 branch (16.0.8 → 16.0.14), so a multi-node rolling upgrade briefly mixes Infinispan versions; run the HA drill before relying on rolling there. |
 
 ## Strategies
 
