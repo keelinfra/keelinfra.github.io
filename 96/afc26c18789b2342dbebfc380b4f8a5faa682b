@@ -1,0 +1,31 @@
+content/docs/keycloak/example-single-node.md
+  s_7f1adbc2d0d553::t_557bc8b4e3bf20 7,10
+  s_7f1adbc2d0d553::t_664e24e3ed2cc7 41
+content/docs/keycloak/security.md
+  s_7f1adbc2d0d553::t_557bc8b4e3bf20 7,10
+content/docs/keycloak/example-ha-3node.md
+  s_7f1adbc2d0d553::t_5ec923c3a48eb5 44
+  s_7f1adbc2d0d553::t_557bc8b4e3bf20 7,10
+content/docs/keycloak/upgrades.md
+  s_7f1adbc2d0d553::t_557bc8b4e3bf20 7,10
+  s_7f1adbc2d0d553::t_a6ef2534f7b78c 29-56,79-92
+  s_7f1adbc2d0d553::t_09c879bce0dc8f 14-15,27
+  s_7f1adbc2d0d553::t_82b15884fb3367 64
+  s_7f1adbc2d0d553::t_8be62d21ffedbc 28,93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "96afc26c18789b2342dbebfc380b4f8a5faa682b",
+  "prompts": {},
+  "sessions": {
+    "s_7f1adbc2d0d553": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a20a60e4-0754-4f6e-a3f8-fc3350fea603",
+        "model": "claude-opus-5"
+      },
+      "human_author": "shenxianpeng <xianpeng.shen@gmail.com>"
+    }
+  }
+}
