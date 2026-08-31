@@ -4,10 +4,10 @@ description = "How to report vulnerabilities privately, what is in scope, and ho
 weight = 7
 [extra]
 source_repo_path = "SECURITY.md"
-source_sha = "dedb67d"
+source_sha = "f86d62b"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@dedb67d (SECURITY.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@f86d62b (SECURITY.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 ## Reporting a vulnerability
 
@@ -31,7 +31,7 @@ This repository is a distribution: the playbooks, roles, and defaults that deplo
 
 **Out of scope**
 
-- Vulnerabilities in upstream Keycloak, PostgreSQL, HAProxy, etc. — report those to the upstream project. When a fixed upstream CVE affects deployments made by this distribution, we ship the version bump and document any required operator action in [UPGRADES.md](/docs/keycloak/upgrades/).
+- Vulnerabilities in upstream Keycloak, PostgreSQL, HAProxy, etc. — report those to the upstream project. When a fixed upstream CVE affects deployments made by this distribution, we ship the version bump and document any required operator action in [UPGRADES.md](/docs/keycloak/upgrades/). How we triage upstream CVEs, and what we do and do not commit to doing about them, is in [CVE-POLICY.md](/docs/keycloak/cve-policy/).
 
 ## Supported versions
 
