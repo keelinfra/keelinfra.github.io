@@ -22,6 +22,7 @@ REPO_URL = "https://github.com/keelinfra/keycloak"
 LINK_MAP = {
     "UPGRADES.md": "/docs/keycloak/upgrades/",
     "SECURITY.md": "/docs/keycloak/security/",
+    "CVE-POLICY.md": "/docs/keycloak/cve-policy/",
     "LICENSE": f"{REPO_URL}/blob/main/LICENSE",
     "examples/ha-3node.yml": "/docs/keycloak/example-ha-3node/",
     "examples/single-node.yml": "/docs/keycloak/example-single-node/",
@@ -77,6 +78,10 @@ def generate(src_dir, sha):
         "upgrades.md": gen_markdown_page(
             src_dir, "UPGRADES.md", "Upgrades", 5,
             "Supported upgrade paths, strategies, and measured service windows — every path is executed end-to-end before it is listed, and re-proven nightly in CI.",
+            sha),
+        "cve-policy.md": gen_markdown_page(
+            src_dir, "CVE-POLICY.md", "Upstream CVEs", 6,
+            "What we commit to when upstream ships a CVE and what we deliberately do not, plus how to work out which ones actually reach your cluster — done twice on real releases.",
             sha),
         "security.md": gen_markdown_page(
             src_dir, "SECURITY.md", "Security policy", 7,
