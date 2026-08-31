@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a single-node install."
 weight = 9
 [extra]
 source_repo_path = "examples/single-node.yml"
-source_sha = "f987cb1"
+source_sha = "dedb67d"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@f987cb1 (examples/single-node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@dedb67d (examples/single-node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a single-node install (no HA — evaluation, dev, or small internal setups). Run `./configure -c examples/single-node.yml` against it.
 
@@ -38,7 +38,7 @@ domain: sso.example.com
 vip: ""
 
 # Keycloak version to install. Upgrades are driven by ./upgrade, not by editing this.
-keycloak_version: "26.6.0"
+keycloak_version: "26.7.3"
 
 # TLS: "selfsigned" generates a local CA and certs (good for eval/intranet).
 # Set to "custom" and drop your cert/key at files/tls/<domain>.crt|.key for production.
