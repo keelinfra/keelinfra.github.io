@@ -200,4 +200,4 @@ footer{border-top:1px solid var(--line);padding:36px 0 48px;font-size:13.5px;col
 footer .f-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}
 footer a{color:var(--muted)}
 footer a:hover{color:var(--ink)}
-footer .legal{max-width:78ch;line-height:1.6}
+footer .legal{max-width:84ch;line-height:1.6}
