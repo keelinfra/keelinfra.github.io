@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "f86d62b"
+source_sha = "8fe72c9"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@f86d62b (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@8fe72c9 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end: install the source version,
 create realms/users/sessions, run `./upgrade`, and assert that logged-in sessions
@@ -71,6 +71,17 @@ We build the tags ourselves and publish them as
 |---|---|---|---|---|---|
 | 26.2.5 | 26.2.16 ([kc-26.2.16-keel1](https://github.com/keelinfra/keycloak/releases/tag/kc-26.2.16-keel1)) | rolling | ✅ | 2026-08-28 | Single-node CI drill, runs nightly in the matrix: install the last community release, upgrade via `--dist-url`, pre-upgrade session refreshes, full session drill passes. The 3-node HA drill has **not** yet run for this path — Infinispan was upgraded within the 26.2 branch (15.0.16), so a multi-node rolling upgrade briefly mixes Infinispan versions; run the HA drill before relying on rolling there. |
 | 26.6.4 | 26.6.6 ([kc-26.6.6-keel1](https://github.com/keelinfra/keycloak/releases/tag/kc-26.6.6-keel1)) | rolling | ✅ | 2026-08-31 | Single-node CI drill, runs nightly in the matrix: install the last community release (26.6.4), upgrade via `--dist-url`, pre-upgrade session refreshes, full session drill passes. The 3-node HA drill has **not** yet run for this path — Infinispan was upgraded within the 26.6 branch (16.0.8 → 16.0.14), so a multi-node rolling upgrade briefly mixes Infinispan versions; run the HA drill before relying on rolling there. |
+
+### 26.2: the branch head still has a critical unpatched CVE
+
+The 26.2 row moves you to the head of the branch, not off it — and the head is
+still exposed to **CVE-2026-18963** (critical, CVSS 9.1, unauthenticated account
+takeover via the reset-credentials flow). Upstream's first patched version for
+the 26.0–26.4 range is 26.4.15; there is no patched 26.2 release, so no build of
+a 26.2 tag — `kc-26.2.16-keel1` included — can carry the fix. The only route to
+a fixed version is a minor upgrade off 26.2 (to 26.6.6 or 26.7.3), which we have
+not drilled yet. Impact analysis and interim mitigation:
+[CVE-POLICY.md](/docs/keycloak/cve-policy/).
 
 ## Strategies
 
