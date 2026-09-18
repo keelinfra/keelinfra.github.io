@@ -1,0 +1,19 @@
+content/blog/keycloak-critical-fix-no-release.md
+  s_e7c3d701c012d2::t_c16dfec1dc46c9 1-167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "06f743721c3802a29e79db0a543f8ba11a99da64",
+  "prompts": {},
+  "sessions": {
+    "s_e7c3d701c012d2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "06022fd1-a4a8-410b-addb-f0e9c9c51290",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
