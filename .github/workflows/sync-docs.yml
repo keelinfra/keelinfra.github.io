@@ -1,8 +1,13 @@
 ---
 name: sync docs
 # Nightly: re-sync content/docs/keycloak/ from keelinfra/keycloak and commit if
-# anything changed (the push triggers deploy.yml). Keeps the site's docs never
-# more than ~24h behind the product repo, with a reviewable commit trail.
+# anything changed, then dispatch deploy.yml. Keeps the site's docs never more
+# than ~24h behind the product repo, with a reviewable commit trail.
+#
+# The dispatch is not optional: a push made with GITHUB_TOKEN does not fire
+# deploy.yml's `on: push` (GitHub suppresses workflow runs caused by the token,
+# except workflow_dispatch and repository_dispatch). Without it, synced docs sat
+# on main undeployed until the next human push — six days, in one case.
 on:
   schedule:
     - cron: "45 4 * * *"
@@ -10,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   sync:
@@ -26,9 +32,13 @@ jobs:
             echo "docs already in sync"
             exit 0
           fi
-          sha=$(git diff -U0 -- content/docs | grep -oE 'keelinfra/keycloak@[0-9a-f]+' | head -1 | cut -d@ -f2)
+          # Read the stamp from an added line: the removed line carries the *previous* sha.
+          sha=$(git diff -U0 -- content/docs | grep '^+' | grep -oE 'keelinfra/keycloak@[0-9a-f]+' | head -1 | cut -d@ -f2)
           git config user.name "keelinfra-bot"
           git config user.email "hello@keelinfra.io"
           git add content/docs
           git commit -m "docs: sync from keelinfra/keycloak@${sha:-main}"
           git push
+          gh workflow run deploy.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
