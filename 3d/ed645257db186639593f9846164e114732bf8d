@@ -1,0 +1,20 @@
+.github/workflows/sync-docs.yml
+  s_e7c3d701c012d2::t_17db35608edeb2 35-36,42-44
+  s_e7c3d701c012d2::t_420d1d6ceb76af 4-10,18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3ded645257db186639593f9846164e114732bf8d",
+  "prompts": {},
+  "sessions": {
+    "s_e7c3d701c012d2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "06022fd1-a4a8-410b-addb-f0e9c9c51290",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
