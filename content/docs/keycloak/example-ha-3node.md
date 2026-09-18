@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a 3-node HA install."
 weight = 8
 [extra]
 source_repo_path = "examples/ha-3node.yml"
-source_sha = "b4d2e91"
+source_sha = "348b8ef"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@b4d2e91 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@348b8ef (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a production 3-node HA install — this is the only file you edit. Run `./configure -c examples/ha-3node.yml` against it.
 

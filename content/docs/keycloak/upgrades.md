@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "b4d2e91"
+source_sha = "348b8ef"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@b4d2e91 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@348b8ef (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end: install the source version,
 create realms/users/sessions, run `./upgrade`, and assert that logged-in sessions
@@ -21,6 +21,12 @@ Every listed path runs nightly in CI on a clean single-node install
 install the source version, log in, upgrade, and assert the pre-upgrade session
 still refreshes on the target version. Some paths have additionally been drilled
 on a 3-node HA cluster — the Notes column says which.
+
+**Don't see your path?**
+[Request it](https://github.com/keelinfra/keycloak/issues/new?template=upgrade_path_request.yml).
+We drill it in CI first, and list it only if it passes; if it fails, we publish
+what broke. Paths *off* a stream with no community artifacts — 26.2 in
+particular — are the ones we most want to hear about.
 
 | From | To | Strategy | Sessions survive | Verified on | Notes |
 |---|---|---|---|---|---|
