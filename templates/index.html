@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ get_url(path='css/demo.css', cachebust=true) }}">
+{%- endblock %}
+
 {% block content %}
 <header class="hero">
   <div class="wrap">
@@ -13,10 +17,12 @@
       <a class="btn btn-ghost" href="/docs/keycloak/">Read the docs</a>
       <a class="textlink" href="/evidence/">Watch tonight's proof →</a>
     </div>
-<pre class="term"><span class="c"># three commands on clean Linux nodes — nothing pre-installed</span>
-<span class="p">$</span> git clone https://github.com/keelinfra/keycloak &amp;&amp; cd keycloak
-<span class="p">$</span> ./configure -c examples/ha-3node.yml
-<span class="p">$</span> ./install        <span class="c"># ~10 minutes later: HA cluster + backups + monitoring</span></pre>
+    <figure class="hero-demo">
+      {% include "partials/demo_keelinfra.html" %}
+      <figcaption>Three commands on clean Linux nodes, nothing pre-installed:
+      <code>git clone https://github.com/keelinfra/keycloak</code>, then <code>./configure</code>
+      and <code>./install</code>. About ten minutes later: HA cluster, backups, monitoring.</figcaption>
+    </figure>
   </div>
 </header>
 
