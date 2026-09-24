@@ -75,7 +75,7 @@ pre.term .p{color:#e8a33d}
 
 /* proof bar */
 .proof{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
-.proof-in{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:26px 0}
+.proof-in{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding-top:26px;padding-bottom:26px}
 .proof-item{padding:6px 22px;border-left:1px solid var(--line);text-decoration:none;display:block}
 .proof-item:first-child{border-left:none;padding-left:0}
 .proof-item .n{font-size:24px;font-weight:700;letter-spacing:-.02em}
