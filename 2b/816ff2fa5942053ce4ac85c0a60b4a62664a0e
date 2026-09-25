@@ -1,0 +1,21 @@
+content/privacy.md
+  s_fb9a2b74d1e9dc::t_ac13ad6222de51 1-50
+templates/base.html
+  s_fb9a2b74d1e9dc::t_c9742a95304049 114
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2b816ff2fa5942053ce4ac85c0a60b4a62664a0e",
+  "prompts": {},
+  "sessions": {
+    "s_fb9a2b74d1e9dc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c7234209-6abf-43ab-99a6-e68dabc8c7f4",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Xianpeng Shen <xianpeng.shen@gmail.com>"
+    }
+  }
+}
