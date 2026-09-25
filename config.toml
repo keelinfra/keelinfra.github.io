@@ -16,3 +16,6 @@ smart_punctuation = false
 github = "https://github.com/keelinfra/keycloak"
 email = "hello@keelinfra.io"
 og_image_default = "/assets/social-preview.png"
+# Google Analytics 4 measurement ID (property "keelinfra.io"). Empty disables
+# the tag.
+ga_measurement_id = "G-1MWBKHTZMP"
