@@ -10,6 +10,21 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '{{ config.extra.ga_measurement_id }}');
+  // Every quote, early-access and contact button is a mailto: link, and GA's
+  // enhanced measurement does not record those, so the site's leads were
+  // invisible. Report each one as GA's recommended generate_lead event; the
+  // subject line says which offer it was ("Migration / upgrade", ...).
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="mailto:"]');
+    if (!a) return;
+    var subject = new URLSearchParams(a.href.split('?')[1] || '').get('subject') || '';
+    gtag('event', 'generate_lead', {
+      method: 'email',
+      email_subject: subject,
+      link_text: a.textContent.trim(),
+      page_path: location.pathname
+    });
+  });
 </script>
 {%- endif %}
 {%- if page %}
