@@ -5,8 +5,9 @@
 2. Fragments: every internal link with #fragment points at an existing id.
 3. Inbound contract: every URL in tests/inbound-urls.txt exists (paths other
    repos, READMEs and mailtos depend on — breaking one breaks links in the wild).
-4. External budget: no external stylesheets/scripts/fonts anywhere. External
-   images are allowed only from github.com (live CI badges are evidence).
+4. External budget: no external stylesheets/scripts/fonts anywhere, except
+   the Google Analytics tag (disclosed on /privacy/). External images are
+   allowed only from github.com (live CI badges are evidence).
 
 Usage: scripts/check_site.py [public_dir]
 """
@@ -18,6 +19,9 @@ PUBLIC = sys.argv[1] if len(sys.argv) > 1 else os.path.join(SITE, "public")
 CONTRACT = os.path.join(SITE, "tests", "inbound-urls.txt")
 OWN_HOSTS = ("https://keelinfra.io", "http://keelinfra.io")
 IMG_ALLOWED_EXTERNAL = ("https://github.com/",)
+# The one third-party script the site loads, on purpose: Google Analytics,
+# disclosed on /privacy/. Anything else is still a budget violation.
+SCRIPT_ALLOWED_EXTERNAL = ("https://www.googletagmanager.com/gtag/js?id=",)
 
 
 class Scan(HTMLParser):
@@ -47,6 +51,8 @@ class Scan(HTMLParser):
                         v = v[len(h):] or "/"
                         break
             if v.startswith("http://") or v.startswith("https://"):
+                if tag == "script" and v.startswith(SCRIPT_ALLOWED_EXTERNAL):
+                    continue
                 if tag in ("link", "script"):
                     self.external.append((tag, v))
                 elif tag == "img" and not v.startswith(IMG_ALLOWED_EXTERNAL):
@@ -122,7 +128,7 @@ def main():
         for e in sorted(errors):
             print("  -", e)
         sys.exit(1)
-    print(f"check_site: OK ({len(pages)} pages, contract intact, no external requests)")
+    print(f"check_site: OK ({len(pages)} pages, contract intact, no external requests beyond analytics)")
 
 
 if __name__ == "__main__":
