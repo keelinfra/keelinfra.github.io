@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a 3-node HA install."
 weight = 8
 [extra]
 source_repo_path = "examples/ha-3node.yml"
-source_sha = "348b8ef"
+source_sha = "8984ff4"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@348b8ef (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@8984ff4 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a production 3-node HA install — this is the only file you edit. Run `./configure -c examples/ha-3node.yml` against it.
 
@@ -41,7 +41,7 @@ domain: sso.example.com
 vip: ""
 
 # Keycloak version to install. Upgrades are driven by ./upgrade, not by editing this.
-keycloak_version: "26.7.3"
+keycloak_version: "26.8.0"
 
 # TLS: "selfsigned" generates a local CA and certs (good for eval/intranet).
 # Set to "custom" and drop your cert/key at files/tls/<domain>.crt|.key for production.
