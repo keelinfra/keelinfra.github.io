@@ -4,10 +4,10 @@ description = "Supported upgrade paths, strategies, and measured service windows
 weight = 5
 [extra]
 source_repo_path = "UPGRADES.md"
-source_sha = "8984ff4"
+source_sha = "4710a95"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@8984ff4 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@4710a95 (UPGRADES.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 Every path listed here has been executed end-to-end: install the source version,
 create realms/users/sessions, run `./upgrade`, and assert that logged-in sessions
@@ -16,11 +16,31 @@ behind that claim.
 
 **We do not list an upgrade path we have not run.**
 
-Every listed path runs nightly in CI on a clean single-node install
-([upgrade matrix](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml)):
-install the source version, log in, upgrade, and assert the pre-upgrade session
-still refreshes on the target version. Some paths have additionally been drilled
-on a 3-node HA cluster — the Notes column says which.
+Every listed path runs nightly in CI, twice:
+
+- **single-node** ([upgrade matrix](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml)):
+  a clean install of the source version on the CI runner itself, log in,
+  `./upgrade`, assert the pre-upgrade session still refreshes on the target.
+- **3-node HA, containers** ([HA matrix](https://github.com/keelinfra/keycloak/actions/workflows/ha-matrix.yml)):
+  the same path on three privileged systemd containers standing in for VMs
+  (`dev/containers/`): install on three nodes, probe every node's load
+  balancer once a second throughout the upgrade, assert all three nodes run
+  the target and every balancer sees every node UP, refresh the pre-upgrade
+  session, then the failover, restore and session drills. Each run leaves a
+  receipt — probe tallies, tarball checksums, phase timings — as its job
+  summary.
+
+The Notes column says what each row has passed so far. "3-node HA drilled
+(VMs)" rows were run by hand on Multipass VMs; "3-node HA drilled (containers,
+nightly CI)" rows link to the run. A row stays "single-node CI only" until a
+green HA-matrix run of it is on record, whatever the matrix file lists.
+
+What the container rig does not prove: its nodes share the runner's kernel —
+no kernel parameters, no chrony, no keepalived VIP — so a sysctl, firewall or
+boot-time problem shows only on the single-node VM run or on real machines;
+and the service windows it measures describe three containers on a 4-vCPU
+runner, not a production topology. `dev/containers/README.md` has the full
+list.
 
 **Don't see your path?**
 [Request it](https://github.com/keelinfra/keycloak/issues/new?template=upgrade_path_request.yml).
@@ -143,6 +163,30 @@ not drilled yet. Impact analysis and interim mitigation:
   the database is backed up, the first node runs schema migrations, then all nodes
   return on the new version. Sessions are persisted in PostgreSQL and survive the
   restart; users are not logged out. Expect a short (~1–2 min) service window.
+
+## Recovering a half-finished upgrade
+
+`./upgrade` refuses to start while the nodes disagree on the version they
+run (`readlink /opt/keycloak/current` on each node shows which). That is
+what an interrupted rolling upgrade leaves behind once the first node has
+moved, and what a stop-start upgrade leaves when only some nodes were
+restarted.
+
+- **Same minor version** (a rolling upgrade; both releases share the
+  database schema): on each node that has moved, point
+  `/opt/keycloak/current` back at the previous release
+  (`ln -sfn /opt/keycloak/keycloak-<old> /opt/keycloak/current`), restart
+  `keycloak`, wait for `https://<node>:9000/health/ready`, then run
+  `./upgrade --to <target>` again from the start.
+- **Different minor version** (stop-start): once the first node has started
+  on the new release the schema is migrated and the old release will not
+  start against it. Finish going forward: on each remaining node point the
+  symlink at the new release, `systemctl restart keycloak`, wait for
+  readiness. A final `./upgrade --to <target>` is then a no-op that confirms
+  every node reports the target.
+
+Afterwards update `keycloak_version` in your cluster definition, as after
+any upgrade.
 
 ## What the session drill proves
 
