@@ -7,6 +7,8 @@
 /#status
 /keycloak/
 /pricing/
+/pricing/#services
+/upgrade-drill/
 /docs/keycloak/
 /docs/keycloak/upgrades/
 /evidence/

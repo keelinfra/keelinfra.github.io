@@ -112,12 +112,14 @@ thead th{border-top:none;font-size:12.5px;text-transform:uppercase;letter-spacin
 .table-scroll table{border:none;margin:0}
 
 /* services */
-.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:32px}
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr));gap:14px;margin-top:32px}
 .svc .card{display:flex;flex-direction:column}
 .svc .price{font-size:22px;font-weight:700;margin:10px 0 2px}
 .svc .price small{font-size:13px;font-weight:500;color:var(--muted)}
 .svc ul{margin:12px 0 18px 18px;font-size:14px;color:var(--muted)}
 .svc li{margin:5px 0}
+.svc .more{font-size:14px;margin:-6px 0 18px}
+.svc .more a{color:var(--accent)}
 .svc .btn{margin-top:auto;text-align:center}
 .note{font-size:13.5px;color:var(--muted);margin-top:18px;max-width:70ch}
 
