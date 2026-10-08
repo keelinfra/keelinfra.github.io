@@ -44,6 +44,7 @@
         <ul>
           {% for b in s.bullets %}<li>{{ b }}</li>{% endfor %}
         </ul>
+        {% if s.details %}<p class="more"><a href="{{ s.details }}">How it works, and what it does not prove →</a></p>{% endif %}
         <a class="btn btn-ghost" href="{{ s.mailto }}">{{ s.cta }}</a>
       </div>
       {% endfor %}

@@ -7,6 +7,21 @@ template = "pricing.html"
 subscription_price = 1500
 
 [[extra.services]]
+name = "Upgrade drill"
+price = 4000
+price_label = "$4,000"
+price_note = "per path, fixed price"
+mailto = "mailto:hello@keelinfra.io?subject=Upgrade%20drill"
+cta = "Ask for a drill"
+details = "/upgrade-drill/"
+bullets = [
+  "Your upgrade, run on a 3-node cluster with your realm configuration",
+  "Every node probed once a second; the service window measured",
+  "Written report: what broke, why, and what got past it",
+  "A runbook and an executed rollback for your own window",
+]
+
+[[extra.services]]
 name = "Deployment & HA hardening"
 price = 3000
 price_label = "from $3,000"
