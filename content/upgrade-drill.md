@@ -55,7 +55,8 @@ tell you what is yours, and run it again.
 - **A runbook for your window.** The commands in order, what to check after each one, and
   the point after which you roll back instead of forward.
 - **A rollback procedure that was executed,** not only written down.
-- **A call to walk through it** with the people who will do the upgrade.
+- **A walkthrough** for the people who will do the upgrade: a call or in writing, your
+  choice.
 
 ## What it does not prove
 
