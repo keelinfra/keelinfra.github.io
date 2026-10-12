@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="prose">
+  <h1>{{ page.title }}</h1>
+  {% if page.extra.subtitle %}<p class="meta">{{ page.extra.subtitle }}</p>{% endif %}
+  {{ page.content | safe }}
+
+  <h2 id="request">Request an assessment</h2>
+  {#- There is no backend: the form only composes an email in the visitor's own
+      mail program, addressed to config.extra.email. Nothing is stored or sent
+      until they press send there. #}
+  <form class="lead-form" id="assessment-form" data-to="{{ config.extra.email }}"
+        data-subject="Jenkins legacy build host assessment">
+    <label for="f-jenkins">Jenkins version you run today</label>
+    <input id="f-jenkins" name="Jenkins version today" type="text" placeholder="e.g. 2.346.3" required>
+
+    <label for="f-controller">Controller OS and Java version</label>
+    <input id="f-controller" name="Controller OS and Java" type="text" placeholder="e.g. RHEL 8, Java 8">
+
+    <label for="f-hosts">Build hosts that block the upgrade</label>
+    <textarea id="f-hosts" name="Build hosts" rows="5" required
+      placeholder="One line per kind of host: OS and version, how many, what it builds.&#10;e.g. AIX 7.1 TL5, 2 hosts, C/C++ release builds for AIX customers&#10;e.g. RHEL 6.10, 4 hosts, gcc 4.4 builds of the Linux agent"></textarea>
+
+    <label for="f-processor">AIX only: POWER generation</label>
+    <input id="f-processor" name="AIX POWER generation" type="text" placeholder="e.g. POWER8">
+
+    <label for="f-deadline">Is there a deadline?</label>
+    <input id="f-deadline" name="Deadline" type="text" placeholder="e.g. audit finding due in Q1">
+
+    <label for="f-notes">Anything else we should know</label>
+    <textarea id="f-notes" name="Notes" rows="3"
+      placeholder="What you have tried, what must not change, NFS available or not, etc."></textarea>
+
+    <p class="form-note">Pressing the button opens an email to {{ config.extra.email }} in your mail
+    program, with these answers filled in. Nothing is sent until you send it, and this page
+    stores nothing.</p>
+    <button class="btn btn-primary" type="submit">Write the email</button>
+  </form>
+  <p class="form-note">Prefer to write it yourself? Email
+  <a href="mailto:{{ config.extra.email }}?subject=Jenkins%20legacy%20build%20host%20assessment">{{ config.extra.email }}</a>
+  with your Jenkins version and the OS versions of the hosts that hold it back.</p>
+</article>
+<script>
+(function () {
+  var form = document.getElementById('assessment-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var lines = [];
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (!el.name || !el.value.trim()) return;
+      lines.push(el.name + ':\n' + el.value.trim() + '\n');
+    });
+    var subject = form.dataset.subject;
+    // Same lead event base.html reports for mailto: links, which this
+    // navigation bypasses.
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        method: 'email_form',
+        email_subject: subject,
+        page_path: location.pathname
+      });
+    }
+    location.href = 'mailto:' + form.dataset.to +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(lines.join('\n'));
+  });
+})();
+</script>
+{% endblock %}
