@@ -157,15 +157,18 @@ Known gaps:
   the host, and that jar does not run on Java 8.
 - Jenkins could add a hard check on the agent's Java version in a future release.
 
-## Get your build fleet assessed
+## Try it, or get help
 
-If a few build hosts are holding your Jenkins back, send us the list. For each host, we tell
-you the highest Java it can run, which path above fits it, and what we have and have not
-verified for that platform. If every host you have can run a normal Java 21 agent, that is
-what we will tell you.
+agent8 is free and open source. If you can try it yourself, start with the
+[README](https://github.com/keelinfra/agent8), and report anything that breaks as a
+[GitHub issue](https://github.com/keelinfra/agent8/issues).
 
-The assessment is free, and you get the answer in writing.
-[Request an assessment →](/jenkins-assessment/)
+Write to us instead if your hosts run AIX, Solaris or HP-UX, where agent8 has not been verified
+yet, if you need to know whether the plugins your builds use work on a Java 8 agent, or if you
+want the rollout done with you rather than by you. The first answer is free: for each host, the
+highest Java it can run, which path above fits it, and what has and has not been verified for
+that platform.
+[Tell us about your build hosts →](/jenkins-assessment/)
 
 ---
 

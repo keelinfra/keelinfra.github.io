@@ -5,7 +5,7 @@
   {% if page.extra.subtitle %}<p class="meta">{{ page.extra.subtitle }}</p>{% endif %}
   {{ page.content | safe }}
 
-  <h2 id="request">Request an assessment</h2>
+  <h2 id="request">Tell us about your build hosts</h2>
   {#- There is no backend: the form only composes an email in the visitor's own
       mail program, addressed to config.extra.email. Nothing is stored or sent
       until they press send there. #}
@@ -26,6 +26,9 @@
 
     <label for="f-deadline">Is there a deadline?</label>
     <input id="f-deadline" name="Deadline" type="text" placeholder="e.g. audit finding due in Q1">
+
+    <label for="f-plugins">Plugins your builds use on these hosts</label>
+    <input id="f-plugins" name="Plugins used on these hosts" type="text" placeholder="e.g. git, Maven, credentials binding">
 
     <label for="f-notes">Anything else we should know</label>
     <textarea id="f-notes" name="Notes" rows="3"
