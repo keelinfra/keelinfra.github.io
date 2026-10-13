@@ -33,4 +33,4 @@ the work. For the buyer we serve, that's not a limitation; it's the point:
 ## Contact
 
 [hello@keelinfra.io](mailto:hello@keelinfra.io) · EU business hours · invoices with VAT ·
-response within one business day · [Services and pricing →](/pricing/)
+response within one business day · [Services and pricing →](/keycloak/pricing/)

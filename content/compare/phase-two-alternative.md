@@ -47,12 +47,12 @@ monitoring, and tested upgrades are [Apache-2.0 open source](https://github.com/
 with [public docs](/docs/keycloak/) — and the upgrade claims are
 [re-proven nightly in public CI](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml).
 Nothing phones home ([grep the source](/security/)). Support is
-[$1,500 per node per year](/pricing/), not $3,500 per month.
+[$1,500 per node per year](/keycloak/pricing/), not $3,500 per month.
 
 What Phase Two has that we don't: SOC 2/ISO certificates, a managed cloud, and their extension
 ecosystem. If those decide it, choose them — [the full comparison table](/compare/managed-keycloak/)
 keeps the score honestly.
 
-**Leaving a managed vendor?** Our [migration service](/pricing/) rehearses the cutover on a
+**Leaving a managed vendor?** Our [migration service](/keycloak/pricing/) rehearses the cutover on a
 staging copy before touching production — session and realm integrity verified, rollback plan
 included.

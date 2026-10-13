@@ -51,5 +51,5 @@ What Skycloak has that we don't: they carry the pager, they hold the compliance 
 their trial is a button while ours is three VMs.
 [The full comparison table](/compare/managed-keycloak/) keeps the score honestly.
 
-**Considering the move?** The [migration service](/pricing/) takes you managed-vendor →
+**Considering the move?** The [migration service](/keycloak/pricing/) takes you managed-vendor →
 self-hosted with the cutover rehearsed on a staging copy first.

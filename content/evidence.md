@@ -28,7 +28,7 @@ subtitle = "Every claim we make, and where its proof lives. If you find a claim 
 
 ## Claims we do not make (yet)
 
-- **Air-gapped installs.** The offline bundle is planned and will ship with the [subscription](/pricing/). Until it exists, we don't sell it.
+- **Air-gapped installs.** The offline bundle is planned and will ship with the [subscription](/keycloak/pricing/). Until it exists, we don't sell it.
 - **A single-node-to-HA growth path.** Growing from one node to three today means a fresh 3-node install plus a realm import. Documented, not hidden.
 - **An SLA.** We publish measurements, not promises. An uptime number without a public probe log is marketing.
 - **SOC 2 / ISO certification.** Certifications attest to how a vendor handles your data. Your data never reaches us — the code is auditable and the drills are runnable instead.

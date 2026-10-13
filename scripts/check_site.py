@@ -5,6 +5,8 @@
 2. Fragments: every internal link with #fragment points at an existing id.
 3. Inbound contract: every URL in tests/inbound-urls.txt exists (paths other
    repos, READMEs and mailtos depend on — breaking one breaks links in the wild).
+   A moved page counts when its alias redirects to a page that has the
+   fragment (templates/internal/alias.html carries the fragment over).
 4. External budget: no external stylesheets/scripts/fonts anywhere, except
    the Google Analytics tag (disclosed on /privacy/). External images are
    allowed only from github.com (live CI badges are evidence).
@@ -30,9 +32,17 @@ class Scan(HTMLParser):
         self.ids = set()
         self.links = []      # (attr, value)
         self.external = []   # (tag, url)
+        self.redirect = None # target path of a Zola alias page
+
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
+        if tag == "meta" and (a.get("http-equiv") or "").lower() == "refresh":
+            url = (a.get("content") or "").split("url=", 1)[-1]
+            for h in OWN_HOSTS:
+                if url.startswith(h):
+                    self.redirect = url[len(h):] or "/"
+            return
         if "id" in a:
             self.ids.add(a["id"])
         if tag == "a" and a.get("name"):
@@ -71,6 +81,16 @@ def path_to_file(path):
     return p
 
 
+def follow(pages, tf):
+    """The page a built file finally shows: alias pages resolve to their target."""
+    for _ in range(5):
+        s = pages.get(tf)
+        if s is None or s.redirect is None:
+            return tf
+        tf = path_to_file(s.redirect)
+    return tf
+
+
 def main():
     pages = {}
     for root, _, files in os.walk(PUBLIC):
@@ -105,7 +125,7 @@ def main():
                 errors.append(f"{rel}: broken internal link: {link}")
                 continue
             if frag:
-                tscan = pages.get(tf)
+                tscan = pages.get(follow(pages, tf))
                 if tscan and frag not in tscan.ids:
                     errors.append(f"{rel}: link {link} — no id '{frag}' in target")
 
@@ -119,7 +139,7 @@ def main():
             if not os.path.isfile(tf):
                 errors.append(f"CONTRACT: {line} — file missing ({os.path.relpath(tf, PUBLIC)})")
             elif frag:
-                s = pages.get(tf)
+                s = pages.get(follow(pages, tf))
                 if s is None or frag not in s.ids:
                     errors.append(f"CONTRACT: {line} — id '{frag}' missing")
 

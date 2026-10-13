@@ -1,68 +1,48 @@
 {% extends "base.html" %}
 
-{% block head %}
-<link rel="stylesheet" href="{{ get_url(path='css/demo.css', cachebust=true) }}">
-{%- endblock %}
-
 {% block content %}
 <header class="hero">
   <div class="wrap">
-    <h1>Production-grade self-hosted <em>Keycloak</em>. Proven nightly, in public.</h1>
-    <p class="sub">keelinfra is an open-source (Apache-2.0) distribution that installs an HA Keycloak
-    cluster — PostgreSQL with automatic failover, encrypted backups with PITR, monitoring, and tested
-    upgrades — on your own VMs in ~10 minutes. Every supported upgrade path re-proves itself in public
-    CI every night. Your data never leaves.</p>
+    <h1>Self-hosted infrastructure, <em>proven</em> in public.</h1>
+    <p class="sub">keelinfra builds open-source distributions of the infrastructure teams have to
+    run on their own machines — because of regulation, data residency, air gaps, or hardware that
+    isn't going anywhere — and sells fixed-scope help running it. Every claim links to a public CI
+    run, a probe log, or a drill you can repeat.</p>
     <div class="hero-cta">
-      <a class="btn btn-primary" href="https://github.com/keelinfra/keycloak">View on GitHub</a>
-      <a class="btn btn-ghost" href="/docs/keycloak/">Read the docs</a>
-      <a class="textlink" href="/evidence/">Watch tonight's proof →</a>
+      <a class="btn btn-primary" href="#product">See the products</a>
+      <a class="btn btn-ghost" href="/evidence/">Read the evidence</a>
     </div>
-    <figure class="hero-demo">
-      {% include "partials/demo_keelinfra.html" %}
-      <figcaption>Three commands on clean Linux nodes, nothing pre-installed:
-      <code>git clone https://github.com/keelinfra/keycloak</code>, then <code>./configure</code>
-      and <code>./install</code>. About ten minutes later: HA cluster, backups, monitoring.</figcaption>
-    </figure>
   </div>
 </header>
 
-<div class="proof">
-  <div class="wrap proof-in">
-    <a class="proof-item" href="/blog/zero-downtime-keycloak-upgrades/">
-      <div class="n"><span>156/156</span> probes OK</div>
-      <div class="d">rolling patch upgrade, measured — zero downtime, sessions intact. Read the probe log →</div>
-    </a>
-    <a class="proof-item" href="/docs/keycloak/upgrades/">
-      <div class="n"><span>~16 s</span> window</div>
-      <div class="d">measured for a minor version upgrade — logged-in sessions survive. See the table →</div>
-    </a>
-    <a class="proof-item" href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">
-      <div class="n"><span>Nightly</span> matrix</div>
-      <div class="d">every supported upgrade path re-proves itself in public CI. Watch it run →</div>
-    </a>
-    <a class="proof-item" href="/docs/keycloak/verify/">
-      <div class="n"><span>1 command</span> drills</div>
-      <div class="d">failover, backup-restore and session-survival drills ship with the distribution →</div>
-    </a>
-  </div>
-</div>
-
 <section id="product">
   <div class="wrap">
-    <div class="kicker">The distribution</div>
-    <h2>Everything Keycloak needs to survive production</h2>
-    <p class="lead">Managed Keycloak vendors solve production by hosting your identity data on their
-    cloud. If you can't or won't do that — regulated industry, data residency, air-gapped — the usual
-    answer is "build it yourself." keelinfra is the third option: a distribution you run on your own
-    machines, free and Apache-2.0, with the ops knowledge open instead of paywalled.
-    <a href="/compare/managed-keycloak/">How we compare →</a></p>
-    <div class="grid">
-      <div class="card"><h3>HA Keycloak cluster</h3><p>Multi-node, DB-persisted sessions, load-balanced, TLS everywhere. A node can die without logging anyone out.</p></div>
-      <div class="card"><h3>PostgreSQL HA</h3><p>Patroni-managed with automatic failover — writes keep flowing when the leader goes down.</p></div>
-      <div class="card"><h3>Backups &amp; PITR</h3><p>pgBackRest, encrypted, scheduled — and restore-tested, because a backup you never restored is a rumor.</p></div>
-      <div class="card"><h3>Tested upgrades</h3><p>Rolling for patches, stop-start for minors. Every supported path re-runs nightly in public CI: install the old version, log in, upgrade — the pre-upgrade session must still refresh.</p></div>
-      <div class="card"><h3>Observability</h3><p>Prometheus + Grafana wired in, with alert rules for the things that actually page you.</p></div>
-      <div class="card"><h3>Config as code</h3><p>Realms, clients and roles managed declaratively via keycloak-config-cli. Git is the source of truth.</p></div>
+    <div class="kicker">Products</div>
+    <h2>What we build</h2>
+    <div class="svc">
+      <div class="card">
+        <h3>Keycloak distribution</h3>
+        <div class="price">Available <small>· Apache-2.0</small></div>
+        <p>An HA Keycloak cluster with PostgreSQL failover, encrypted backups with PITR, monitoring
+        and tested upgrades, installed on your own VMs in about ten minutes. Every supported upgrade
+        path re-proves itself in public CI every night.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/keycloak/">Product →</a>
+          <a class="btn btn-ghost" href="/docs/keycloak/">Docs</a>
+          <a class="btn btn-ghost" href="/keycloak/pricing/">Pricing</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Jenkins on legacy build hosts</h3>
+        <div class="price">In testing <small>· MIT</small></div>
+        <p>Jenkins now requires Java 21 on its agents, and AIX 7.1 or RHEL 6 build machines can't run
+        it. Legacy Build Host is a Jenkins plugin that keeps those machines in your pipelines without
+        a Java upgrade on the box. Being tested on real Linux and AIX hosts now.</p>
+        <div class="hero-cta">
+          <a class="btn btn-ghost" href="https://github.com/shenxianpeng/legacy-build-host-plugin">View on GitHub</a>
+          <a class="btn btn-ghost" href="mailto:hello@keelinfra.io?subject=Jenkins%20legacy%20build%20hosts">Tell us about your hosts</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -71,8 +51,9 @@
   <div class="wrap">
     <div class="kicker">Verify it yourself</div>
     <h2>Don't take our word for it</h2>
-    <p class="lead">Every claim on this page is a public CI run, a published probe log, or a drill you
-    can run against your own cluster. <a href="/evidence/">The full ledger →</a></p>
+    <p class="lead">Take the Keycloak distribution: every claim about it is a public CI run, a
+    published probe log, or a drill you can run against your own cluster.
+    <a href="/evidence/">The full ledger →</a></p>
 <pre class="term"><span class="p">$</span> ./verify                     <span class="c"># health of every component</span>
 <span class="p">$</span> ./verify --drill failover    <span class="c"># switch the PostgreSQL leader over, write through it</span>
 <span class="p">$</span> ./verify --drill restore     <span class="c"># restore the latest backup to a scratch directory</span>
@@ -100,19 +81,19 @@
         <h3>Deployment &amp; HA hardening</h3>
         <div class="price">from $3,000 <small>fixed scope</small></div>
         <p>Production HA deployment on your VMs or bare metal, drills run with your team, handover runbook.</p>
-        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
       </div>
       <div class="card">
         <h3>Migration &amp; upgrades</h3>
         <div class="price">from $5,000 <small>fixed scope</small></div>
         <p>Legacy / RH-SSO / managed-vendor → self-hosted, rehearsed on a staging copy before cutover.</p>
-        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
       </div>
       <div class="card">
         <h3>Emergency &amp; expert help</h3>
         <div class="price">$200<small>/hour</small></div>
         <p>Production down, upgrade gone wrong, split-brain. Root-cause analysis with a written post-mortem.</p>
-        <a class="btn btn-ghost" href="/pricing/">Details →</a>
+        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
       </div>
     </div>
     <p class="note">Based in the EU · invoices with VAT · response within one business day.
@@ -126,7 +107,7 @@
         <p>Offline/air-gapped install bundles, CVE tracking with operator actions, tested upgrade
         runbooks, and direct access to the engineers who build keelinfra. Priced per node, not per
         user. Subscriptions open when the air-gapped bundle ships — joining the early-access list
-        locks this price. <a href="/pricing/">Full pricing →</a></p>
+        locks this price. <a href="/keycloak/pricing/">Full pricing →</a></p>
       </div>
       <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
     </div>

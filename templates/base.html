@@ -34,7 +34,7 @@
   {%- set m_og = page.extra.og_image | default(value=config.extra.og_image_default) %}
 {%- elif section %}
   {%- if section.path == "/" %}
-    {%- set m_title = "keelinfra — Production-grade self-hosted Keycloak, proven nightly" %}
+    {%- set m_title = "keelinfra — Self-hosted infrastructure, proven in public" %}
   {%- else %}
     {%- set m_title = section.title ~ " — keelinfra" %}
   {%- endif %}
@@ -81,9 +81,9 @@
       keelinfra
     </a>
     <div class="nav-links">
-      <a href="/keycloak/"{% if current is starting_with(pat="/keycloak/") %} aria-current="page"{% endif %}>Keycloak</a>
+      <a href="/keycloak/"{% if current is starting_with(pat="/keycloak/") and not current is starting_with(pat="/keycloak/pricing/") %} aria-current="page"{% endif %}>Keycloak</a>
       <a href="/docs/keycloak/"{% if current is starting_with(pat="/docs/") %} aria-current="page"{% endif %}>Docs</a>
-      <a href="/pricing/"{% if current is starting_with(pat="/pricing/") %} aria-current="page"{% endif %}>Pricing</a>
+      <a href="/keycloak/pricing/"{% if current is starting_with(pat="/keycloak/pricing/") %} aria-current="page"{% endif %}>Pricing</a>
       <a href="/evidence/"{% if current is starting_with(pat="/evidence/") %} aria-current="page"{% endif %}>Evidence</a>
       <a href="/blog/"{% if current is starting_with(pat="/blog/") %} aria-current="page"{% endif %}>Blog</a>
       <a class="gh" href="{{ config.extra.github }}">GitHub ↗</a>
@@ -93,7 +93,7 @@
       <div class="nav-menu">
         <a href="/keycloak/">Keycloak</a>
         <a href="/docs/keycloak/">Docs</a>
-        <a href="/pricing/">Pricing</a>
+        <a href="/keycloak/pricing/">Pricing</a>
         <a href="/evidence/">Evidence</a>
         <a href="/blog/">Blog</a>
         <a href="{{ config.extra.github }}">GitHub ↗</a>
@@ -112,7 +112,7 @@
       <a href="/compare/managed-keycloak/">Compare</a>
       <a href="/security/">Security</a>
       <a href="/privacy/">Privacy</a>
-      <a href="/pricing/">Pricing</a>
+      <a href="/keycloak/pricing/">Pricing</a>
       <a href="/upgrade-drill/">Upgrade drill</a>
       <a href="/blog/">Blog</a>
       <a href="{{ config.extra.github }}">GitHub</a>

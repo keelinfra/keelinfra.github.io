@@ -39,7 +39,7 @@ version bump and document the operator actions in
 
 The distribution makes **no network calls to keelinfra** — no telemetry, no license checks, no
 registry pulls from our infrastructure. Artifacts are fetched from upstream project sources at
-install time (and the upcoming [air-gapped bundle](/pricing/) removes even that).
+install time (and the upcoming [air-gapped bundle](/keycloak/pricing/) removes even that).
 
 Verify it: `grep -r "keelinfra.io" roles/ playbooks/` in the
 [source](https://github.com/keelinfra/keycloak). It's not there.
