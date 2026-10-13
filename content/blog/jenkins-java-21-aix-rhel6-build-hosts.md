@@ -86,21 +86,30 @@ that runs on Java 8 and connects to a current controller on Java 21 or 25. The l
 stays an ordinary node: labels, executors, `sh`, file steps, `junit`, `stash`, aborts and the
 script console work as on any other agent.
 
-It is built from your controller's own `agent.jar`, so the remoting versions match:
+It replaces the `agent.jar` the host already runs. On the build host, with its existing Java 8:
 
 ```bash
-curl -fsSO https://jenkins.example.com/jnlpJars/agent.jar
-./build.sh agent.jar        # produces dist/agent8.jar and dist/jvmdg.jar
+curl -fsSLO https://raw.githubusercontent.com/keelinfra/agent8/main/install.sh
+sh install.sh --url https://jenkins.example.com/ --replace /path/to/agent.jar
 ```
 
-On the legacy host, start an inbound agent with the two jars:
+The script asks the controller for its remoting version, downloads the matching agent8 build
+for the host's Java, checks that it starts there, and swaps it in. The old jar is kept as
+`agent.jar.before-agent8`. Then restart the agent with the command it already uses:
 
 ```bash
-java -javaagent:agent8.jar -javaagent:jvmdg.jar -jar agent8.jar \
-     -url https://jenkins.example.com/ -secret <secret> -name <node> -workDir /srv/jenkins
+java -jar /path/to/agent.jar -url https://jenkins.example.com/ -secret <secret> -name <node> -workDir /srv/jenkins
 ```
 
-Rebuild `agent8.jar` whenever the controller is upgraded.
+The script is plain `sh`, written for RHEL 6, AIX, Solaris and HP-UX. Hosts without internet
+access can be given the jars from the
+[releases](https://github.com/keelinfra/agent8/releases) with `--from DIR`. For many hosts,
+an [Ansible playbook](https://github.com/keelinfra/agent8/tree/main/ansible) runs the same
+script and needs no Python on the hosts. Run it again after each controller upgrade, so the
+agent's remoting version keeps matching the controller's.
+
+Java 8 is the main target. The same build also makes jars for hosts that stop at Java 11, such
+as Solaris, and at Java 17; the script picks the right one from the host's Java.
 
 ### How it works
 
@@ -112,7 +121,8 @@ three steps:
 1. **Remoting is downgraded ahead of time.** [JvmDowngrader](https://github.com/unimined/JvmDowngrader)
    rewrites `agent.jar` to Java 8 bytecode and adds stand-ins for newer JDK APIs. The one call
    it cannot handle is patched in the remoting source.
-2. **Classes from the controller are downgraded as they load,** by JvmDowngrader's Java agent.
+2. **Classes from the controller are downgraded as they load,** by JvmDowngrader's Java agent,
+   which the agent8 jar starts for itself, so the start command does not change.
 3. **Serialization stays compatible with the controller.** Downgrading adds synthetic members,
    which changes the default `serialVersionUID` of classes that do not declare one, and the
    controller would reject every call. agent8 pins the UID the controller computes. It also adds
@@ -120,17 +130,22 @@ three steps:
 
 ### What has been verified, and what has not
 
-agent8 is experimental. Its CI runs weekly against the current Jenkins LTS and weekly release,
-with the agent on Temurin 8 in a CentOS 6.10 container:
+agent8 is experimental. Its CI tests every change, and runs weekly, against the current Jenkins
+LTS and weekly release. Each run installs agent8 with `install.sh` over a stock `agent.jar` on
+an old Java, starts it with the usual command, and checks:
 
 - objects written on Java 21 are read correctly on Java 8;
-- Pipeline builds run on the Java 8 agent;
+- Pipeline builds run on the agent;
 - aborting a build stops it on the agent;
-- restarting the agent in the middle of a build;
-- the script console.
+- the build survives a restart of the agent in the middle of it;
+- the script console works.
 
-Not yet verified: **AIX with IBM Java 8, Solaris, and HP-UX.** The JVM is what matters most
-here, and IBM's J9 is not HotSpot, so AIX needs its own testing. We will publish those results
+The Java 8 runs use Temurin 8 on CentOS 6.10, and OpenJ9 8 (IBM Semeru) on Linux, which is
+the JVM family of IBM Java 8 on AIX. Java 11 is tested on Linux against the current LTS; the
+Java 17 build is not tested yet.
+
+Not yet verified: **AIX with IBM Java 8, Solaris, and HP-UX.** OpenJ9 on Linux covers the JVM
+that AIX uses, but not AIX itself. We will publish those results
 when we have them. Until then, treat agent8 as working on Linux with Java 8, not as proven on
 your platform.
 
@@ -138,8 +153,8 @@ Known gaps:
 
 - A newer JDK API that JvmDowngrader cannot stub fails only when that code runs. Plugins that
   run code on agents, such as git, Maven, Docker and credentials binding, still need testing.
-- Use an inbound agent for now. The SSH launcher copies the controller's own `remoting.jar`
-  to the agent, which does not run on Java 8.
+- Use an inbound agent for now. The SSH Build Agents plugin copies its own `remoting.jar` to
+  the host, and that jar does not run on Java 8.
 - Jenkins could add a hard check on the agent's Java version in a future release.
 
 ## Get your build fleet assessed
