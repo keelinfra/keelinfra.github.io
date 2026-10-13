@@ -1,5 +1,5 @@
 +++
 title = "keelinfra"
-description = "Production-grade self-hosted Keycloak distribution: HA cluster, Postgres auto-failover, backups with PITR, monitoring, and upgrade paths re-proven nightly in public CI."
+description = "Open-source tools for infrastructure you have to run yourself: a self-hosted, highly available Keycloak distribution, and Agent8, which runs Jenkins agents on build hosts stuck on Java 8, 11 or 17. Every claim links to public CI."
 template = "index.html"
 +++
