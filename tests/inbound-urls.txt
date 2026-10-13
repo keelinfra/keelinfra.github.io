@@ -8,6 +8,8 @@
 /keycloak/
 /pricing/
 /pricing/#services
+/keycloak/pricing/
+/keycloak/pricing/#services
 /upgrade-drill/
 /docs/keycloak/
 /docs/keycloak/upgrades/

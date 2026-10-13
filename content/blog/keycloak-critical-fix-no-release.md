@@ -161,7 +161,7 @@ think; this one is the exception — is in our [CVE policy](/docs/keycloak/cve-p
 Patroni-managed PostgreSQL, pgBackRest backups, monitoring, and upgrade paths re-proven
 nightly in public CI. If you know Pigsty: that, for Keycloak. A subscription adds CVE
 notification for the version you actually run and upgrade help along a path we have already
-drilled: [keelinfra.io/pricing](https://keelinfra.io/pricing) · hello@keelinfra.io.*
+drilled: [keelinfra.io/keycloak/pricing](https://keelinfra.io/keycloak/pricing/) · hello@keelinfra.io.*
 
 *Keycloak is a trademark of The Linux Foundation. keelinfra is an independent project, not
 affiliated with or endorsed by The Linux Foundation or the Keycloak project.*

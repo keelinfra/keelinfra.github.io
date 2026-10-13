@@ -64,7 +64,7 @@ The drill cluster is three containers standing in for VMs. They share one kernel
 sysctl, firewall, time-sync or virtual-IP problem on your machines will not show up there,
 and the service window we measure describes that cluster, not your hardware. The report says
 this again next to the numbers. If you want the same drill on a staging environment of your
-own, that is the [migration engagement](/pricing/#services), and we quote it after the drill
+own, that is the [migration engagement](/keycloak/pricing/#services), and we quote it after the drill
 has shown how much work it is.
 
 ## What we need from you
@@ -83,7 +83,7 @@ that is our problem, not your invoice.
 
 A drill that passes may be all you need: your team runs the window with the runbook. If you
 want us on the call during the window, or the upgrade is part of a move off RH-SSO or a
-managed vendor, that is [Migration & upgrades](/pricing/#services), from $5,000.
+managed vendor, that is [Migration & upgrades](/keycloak/pricing/#services), from $5,000.
 
 ## The free version
 

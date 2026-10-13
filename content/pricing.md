@@ -1,7 +1,9 @@
 +++
-title = "Pricing"
+title = "Keycloak pricing"
 description = "The distribution is free and Apache-2.0. Fixed-scope services from $3,000, emergency help at $200/hour, and a self-hosted subscription at $1,500 per node per year."
 template = "pricing.html"
+path = "keycloak/pricing"
+aliases = ["/pricing/"]
 
 [extra]
 subscription_price = 1500

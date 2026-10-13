@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ get_url(path='css/demo.css', cachebust=true) }}">
+{%- endblock %}
 {% block jsonld %}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"keelinfra/keycloak","applicationCategory":"DeveloperApplication","operatingSystem":"Linux","url":"https://keelinfra.io/keycloak/","license":"https://www.apache.org/licenses/LICENSE-2.0","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 {% endblock %}
@@ -13,12 +16,39 @@
     <div class="hero-cta">
       <a class="btn btn-primary" href="/docs/keycloak/">Read the docs</a>
       <a class="btn btn-ghost" href="https://github.com/keelinfra/keycloak">View on GitHub</a>
-      <a class="textlink" href="/pricing/">Need it deployed by us? →</a>
+      <a class="textlink" href="/keycloak/pricing/">Need it deployed by us? →</a>
     </div>
+    <figure class="hero-demo">
+      {% include "partials/demo_keelinfra.html" %}
+      <figcaption>Three commands on clean Linux nodes, nothing pre-installed:
+      <code>git clone https://github.com/keelinfra/keycloak</code>, then <code>./configure</code>
+      and <code>./install</code>. About ten minutes later: HA cluster, backups, monitoring.</figcaption>
+    </figure>
   </div>
 </header>
 
-<section id="why" style="padding-top:0">
+<div class="proof">
+  <div class="wrap proof-in">
+    <a class="proof-item" href="/blog/zero-downtime-keycloak-upgrades/">
+      <div class="n"><span>156/156</span> probes OK</div>
+      <div class="d">rolling patch upgrade, measured — zero downtime, sessions intact. Read the probe log →</div>
+    </a>
+    <a class="proof-item" href="/docs/keycloak/upgrades/">
+      <div class="n"><span>~16 s</span> window</div>
+      <div class="d">measured for a minor version upgrade — logged-in sessions survive. See the table →</div>
+    </a>
+    <a class="proof-item" href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">
+      <div class="n"><span>Nightly</span> matrix</div>
+      <div class="d">every supported upgrade path re-proves itself in public CI. Watch it run →</div>
+    </a>
+    <a class="proof-item" href="/docs/keycloak/verify/">
+      <div class="n"><span>1 command</span> drills</div>
+      <div class="d">failover, backup-restore and session-survival drills ship with the distribution →</div>
+    </a>
+  </div>
+</div>
+
+<section id="why">
   <div class="wrap">
     <div class="kicker">Why this exists</div>
     <h2>Keycloak is powerful. Running it in production is not.</h2>
@@ -99,7 +129,7 @@
     <div class="kicker">Honesty</div>
     <h2>What it doesn't do (yet)</h2>
     <div class="grid">
-      <div class="card"><h3>Air-gapped bundle</h3><p>Planned — offline install bundles with all artifacts are part of the upcoming <a href="/pricing/">per-node subscription</a>. Today the installer downloads artifacts at deploy time.</p></div>
+      <div class="card"><h3>Air-gapped bundle</h3><p>Planned — offline install bundles with all artifacts are part of the upcoming <a href="/keycloak/pricing/">per-node subscription</a>. Today the installer downloads artifacts at deploy time.</p></div>
       <div class="card"><h3>Single node → HA growth</h3><p>Growing from a single node to a 3-node cluster means a fresh 3-node install plus a realm import. Start with <code>ha-3node.yml</code> if HA is where you're headed.</p></div>
     </div>
     <p class="note">Everything else we claim is on <a href="/evidence/">the evidence ledger</a>, with receipts.</p>

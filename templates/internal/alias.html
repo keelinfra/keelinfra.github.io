@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moved — keelinfra</title>
+<link rel="canonical" href="{{ url | safe }}">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={{ url | safe }}">
+<script>
+  // Moved pages are linked from READMEs and sent emails with #fragments
+  // (/pricing/#services). A meta refresh drops the fragment; carry it over.
+  location.replace({{ url | json_encode | safe }} + location.hash);
+</script>
+</head>
+<body>
+<p>This page moved to <a href="{{ url | safe }}">{{ url }}</a>.</p>
+</body>
+</html>
