@@ -24,3 +24,4 @@
 /jenkins-assessment/#request
 /compare/managed-keycloak/
 /sitemap.xml
+/jenkins/

@@ -3,11 +3,11 @@
 {% block content %}
 <header class="hero">
   <div class="wrap">
-    <h1>Self-hosted infrastructure, <em>proven</em> in public.</h1>
-    <p class="sub">keelinfra builds open-source distributions of the infrastructure teams have to
-    run on their own machines — because of regulation, data residency, air gaps, or hardware that
-    isn't going anywhere — and sells fixed-scope help running it. Every claim links to a public CI
-    run, a probe log, or a drill you can repeat.</p>
+    <div class="eyebrow">open source · proven in public CI · help when you need it</div>
+    <h1 style="margin-top:18px;max-width:18ch">Infrastructure you have to run yourself, kept <em>current</em>.</h1>
+    <p class="sub">Regulation, air gaps and hardware that isn't going anywhere keep a lot of systems
+    off the cloud and off the upgrade path. keelinfra builds open-source tools that keep them
+    supported, and every claim links to a CI run you can check yourself.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#product">See the products</a>
       <a class="btn btn-ghost" href="/evidence/">Read the evidence</a>
@@ -15,122 +15,133 @@
   </div>
 </header>
 
-<section id="product">
+<section id="product" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker">Products</div>
-    <h2>What we build</h2>
-    <div class="svc">
-      <div class="card">
-        <h3>Keycloak distribution</h3>
-        <div class="price">Available <small>· Apache-2.0</small></div>
-        <p>An HA Keycloak cluster with PostgreSQL failover, encrypted backups with PITR, monitoring
-        and tested upgrades, installed on your own VMs in about ten minutes. Every supported upgrade
-        path re-proves itself in public CI every night.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="/keycloak/">Product →</a>
+    <div class="section-head">
+      <h2>Products</h2>
+      <span class="aside">2 products · both free and open source</span>
+    </div>
+    <div class="products">
+      <article class="product">
+        <div class="product-id">
+          <div class="tile"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#e8a33d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 20 3M16 7l3 3M14 9l2 2"/></svg></div>
+          <div>
+            <h3>Keycloak distribution</h3>
+            <div class="repo">keelinfra/keycloak · Apache-2.0</div>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip ok">Available</span>
+          <span class="chip">Paid support available</span>
+        </div>
+        <p class="pitch">A highly available Keycloak cluster on your own VMs, with every supported
+        upgrade path re-proven in public CI each night.</p>
+        <ul class="checks">
+          <li>3-node cluster with PostgreSQL failover</li>
+          <li>Encrypted backups with point-in-time restore</li>
+          <li>Rolling upgrades, measured and repeatable</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="/keycloak/">Explore Keycloak</a>
           <a class="btn btn-ghost" href="/docs/keycloak/">Docs</a>
           <a class="btn btn-ghost" href="/keycloak/pricing/">Pricing</a>
         </div>
-      </div>
-      <div class="card">
-        <h3>Agent8 for Jenkins</h3>
-        <div class="price">Available <small>· MIT</small></div>
-        <p>Jenkins requires Java 21 on every agent, and RHEL 6 or AIX 7.1 build hosts can't run it.
-        Agent8 is a Jenkins agent built for Java 8: the controller runs Java 21 or 25, the old host
-        keeps its Java 8 and stays an ordinary node. Tested in CI on Linux, including RHEL/CentOS 6;
-        AIX, Solaris and HP-UX are experimental.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="https://github.com/keelinfra/agent8">View on GitHub</a>
-          <a class="btn btn-ghost" href="/blog/jenkins-java-21-aix-rhel6-build-hosts/">Why it exists</a>
+      </article>
+      <article class="product">
+        <div class="product-id">
+          <div class="tile" aria-hidden="true">8</div>
+          <div>
+            <h3>Agent8 for Jenkins</h3>
+            <div class="repo">keelinfra/agent8 · MIT</div>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip ok">Available</span>
+          <span class="chip">Free</span>
+          <span class="chip exp">AIX · Solaris · HP-UX experimental</span>
+        </div>
+        <p class="pitch">Run Jenkins agents on hosts stuck on Java 8, 11 or 17, while the controller
+        moves to Java 21 or 25.</p>
+        <ul class="checks">
+          <li>The old host keeps its Java and stays an ordinary node</li>
+          <li>Tested in CI on Linux, including RHEL/CentOS 6</li>
+          <li>One release per Jenkins version, one install script</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="/jenkins/">Explore Agent8</a>
+          <a class="btn btn-ghost" href="https://github.com/keelinfra/agent8">GitHub</a>
           <a class="btn btn-ghost" href="/jenkins-assessment/">Get help</a>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
 
-<section id="status">
+<section id="status" class="band">
   <div class="wrap">
-    <div class="kicker">Verify it yourself</div>
-    <h2>Don't take our word for it</h2>
-    <p class="lead">Take the Keycloak distribution: every claim about it is a public CI run, a
-    published probe log, or a drill you can run against your own cluster.
-    <a href="/evidence/">The full ledger →</a></p>
-<pre class="term"><span class="p">$</span> ./verify                     <span class="c"># health of every component</span>
-<span class="p">$</span> ./verify --drill failover    <span class="c"># switch the PostgreSQL leader over, write through it</span>
-<span class="p">$</span> ./verify --drill restore     <span class="c"># restore the latest backup to a scratch directory</span>
-<span class="p">$</span> ./verify --drill session     <span class="c"># rolling-restart every node; logins must survive</span></pre>
-    <p class="note">CI runs a clean install plus the session drill on every commit, and the
-    <a href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">upgrade matrix</a>
-    re-proves every supported upgrade path nightly.</p>
+    <h2 style="margin-top:0;max-width:24ch">How every keelinfra product works</h2>
+    <div class="grid3">
+      <div>
+        <div class="num">01</div>
+        <h3>Open source first</h3>
+        <p>The code, install scripts and tests are public. You can run everything without talking
+        to us.</p>
+      </div>
+      <div>
+        <div class="num">02</div>
+        <h3>Proven in public CI</h3>
+        <p>Each claim on this site links to a CI run, a probe log or a drill you can repeat on your
+        own machines. <a href="/evidence/">The evidence ledger →</a></p>
+      </div>
+      <div>
+        <div class="num">03</div>
+        <h3>Paid help when you want it</h3>
+        <p>Fixed-scope engagements and support from the people who build the tools, each ending
+        with a written runbook.</p>
+      </div>
+    </div>
+<pre class="term" style="margin-top:44px"><span class="p">$</span> ./verify --drill failover   <span class="c"># keycloak: switch the PostgreSQL leader, write through it</span>
+<span class="p">$</span> sh install.sh --url https://jenkins.example.com/ --replace agent.jar   <span class="c"># agent8</span></pre>
   </div>
 </section>
 
 <section id="services">
   <div class="wrap">
-    <div class="kicker">Services</div>
-    <h2>Get Keycloak expertise on your side</h2>
-    <p class="lead">Fixed-scope engagements on your infrastructure, delivered by the people who build
-    the distribution. Every engagement ends with a written runbook your team keeps.</p>
-    <div class="svc">
-      <div class="card">
-        <h3>Upgrade drill</h3>
-        <div class="price">$4,000 <small>per path, fixed price</small></div>
-        <p>Your upgrade, run on a 3-node cluster with your realm configuration before the maintenance window. Written report and runbook.</p>
-        <a class="btn btn-ghost" href="/upgrade-drill/">How it works →</a>
+    <div class="help-cards" id="pricing">
+      <div class="help-card">
+        <div class="kicker">Keycloak services</div>
+        <h3>Upgrade drills, HA hardening, migrations</h3>
+        <p>Fixed-scope engagements from $3,000, and a self-hosted subscription in early access at
+        $1,500 per node per year.</p>
+        <a class="textlink" href="/keycloak/pricing/">Keycloak pricing →</a>
       </div>
-      <div class="card">
-        <h3>Deployment &amp; HA hardening</h3>
-        <div class="price">from $3,000 <small>fixed scope</small></div>
-        <p>Production HA deployment on your VMs or bare metal, drills run with your team, handover runbook.</p>
-        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
+      <div class="help-card">
+        <div class="kicker">Agent8 help</div>
+        <h3>AIX, Solaris and HP-UX pilots, plugin checks, fleets</h3>
+        <p>Tell us about your build hosts. The first answer is free and in writing, within two
+        business days.</p>
+        <a class="textlink" href="/jenkins-assessment/">Ask about your hosts →</a>
       </div>
-      <div class="card">
-        <h3>Migration &amp; upgrades</h3>
-        <div class="price">from $5,000 <small>fixed scope</small></div>
-        <p>Legacy / RH-SSO / managed-vendor → self-hosted, rehearsed on a staging copy before cutover.</p>
-        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
-      </div>
-      <div class="card">
-        <h3>Emergency &amp; expert help</h3>
-        <div class="price">$200<small>/hour</small></div>
-        <p>Production down, upgrade gone wrong, split-brain. Root-cause analysis with a written post-mortem.</p>
-        <a class="btn btn-ghost" href="/keycloak/pricing/">Details →</a>
-      </div>
-    </div>
-    <p class="note">Based in the EU · invoices with VAT · response within one business day.
-    Not sure which fits? Describe your situation at
-    <a href="mailto:hello@keelinfra.io">hello@keelinfra.io</a> and you'll get an honest answer —
-    including "you don't need us" when you don't.</p>
-
-    <div class="teaser" id="pricing">
-      <div class="t-main">
-        <h3>Self-hosted subscription — $1,500 per node, per year <small style="font-weight:500;color:var(--muted)">· early access</small></h3>
-        <p>Offline/air-gapped install bundles, CVE tracking with operator actions, tested upgrade
-        runbooks, and direct access to the engineers who build keelinfra. Priced per node, not per
-        user. Subscriptions open when the air-gapped bundle ships — joining the early-access list
-        locks this price. <a href="/keycloak/pricing/">Full pricing →</a></p>
-      </div>
-      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
     </div>
   </div>
 </section>
 
 {% set blog = get_section(path="blog/_index.md") %}
 {% if blog.pages | length > 0 %}
-<section id="writing">
+<section id="writing" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker">From the blog</div>
-    <h2>Measured, not promised</h2>
-    <ul class="post-list">
+    <div class="section-head">
+      <h2>From the blog</h2>
+      <a href="/blog/">All posts →</a>
+    </div>
+    <div class="post-cards">
       {% for post in blog.pages %}{% if loop.index <= 3 %}
-      <li>
-        <div class="date">{{ post.date | date(format="%Y-%m-%d") }}</div>
-        <h3><a href="{{ post.permalink | safe }}">{{ post.title }}</a></h3>
-        {% if post.description %}<p>{{ post.description }}</p>{% endif %}
-      </li>
+      <a href="{{ post.permalink | safe }}">
+        <div class="meta">{% if post.title is containing(pat="Jenkins") %}<span class="tag agent8">Agent8</span>{% elif post.title is containing(pat="Keycloak") %}<span class="tag">Keycloak</span>{% endif %}{{ post.date | date(format="%Y-%m-%d") }}</div>
+        <h3>{{ post.title }}</h3>
+      </a>
       {% endif %}{% endfor %}
-    </ul>
+    </div>
   </div>
 </section>
 {% endif %}

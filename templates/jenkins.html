@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Agent8 for Jenkins","applicationCategory":"DeveloperApplication","operatingSystem":"Linux, AIX, Solaris, HP-UX","url":"https://keelinfra.io/jenkins/","codeRepository":"https://github.com/keelinfra/agent8","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+{% endblock %}
+{% block content %}
+<header class="hero">
+  <div class="wrap hero-split">
+    <div>
+      <div class="product-id">
+        <div class="tile sm" aria-hidden="true">8</div>
+        <span class="repo">keelinfra / agent8</span>
+      </div>
+      <h1 style="margin-top:20px">Agent8 for Jenkins</h1>
+      <p class="tagline">Run Jenkins agents on hosts stuck on Java 8, 11 or 17.</p>
+      <p class="sub" style="margin-top:14px;font-size:17px">Jenkins now requires Java 21 on the
+      controller and on every agent. With Agent8 the controller moves on, and the old build host
+      keeps its Java and stays an ordinary node.</p>
+      <div class="chips">
+        <span class="chip ok">Available</span>
+        <span class="chip">Free · MIT</span>
+        <span class="chip">Linux tested in CI</span>
+        <span class="chip exp">AIX · Solaris · HP-UX experimental</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#install">Install Agent8</a>
+        <a class="btn btn-ghost" href="https://github.com/keelinfra/agent8">View on GitHub</a>
+      </div>
+    </div>
+    <div class="window">
+      <div class="bar"><i></i><i></i><i></i><span>build host · Java 8</span></div>
+<pre class="term"><span class="c"># 1. fetch the installer</span>
+<span class="p">$</span> curl -fsSLO https://raw.githubusercontent.com/\
+    keelinfra/agent8/main/install.sh
+
+<span class="c"># 2. match the controller, swap the jar</span>
+<span class="p">$</span> sh install.sh --url https://jenkins.example.com/ \
+    --replace /path/to/agent.jar
+
+<span class="c"># 3. restart with the same command as before</span>
+<span class="p">$</span> java -jar /path/to/agent.jar -url ... -name aix71</pre>
+    </div>
+  </div>
+</header>
+
+<div class="proof">
+  <div class="wrap proof-in">
+    <a class="proof-item" href="https://github.com/keelinfra/agent8/releases">
+      <div class="n">Java 8 · 11 · 17</div>
+      <div class="d">one jar per host Java, in every release →</div>
+    </a>
+    <a class="proof-item" href="https://github.com/keelinfra/agent8/actions/workflows/ci.yml">
+      <div class="n">CentOS 6.10</div>
+      <div class="d">tested in CI on every change →</div>
+    </a>
+    <a class="proof-item" href="https://github.com/keelinfra/agent8/actions/workflows/ci.yml">
+      <div class="n">LTS + weekly</div>
+      <div class="d">tested against both Jenkins lines every week →</div>
+    </a>
+    <a class="proof-item" href="#install">
+      <div class="n">Same command</div>
+      <div class="d">java -jar agent.jar, unchanged →</div>
+    </a>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2 style="max-width:26ch">The controller upgrades. The build host doesn't have to.</h2>
+    <div class="flow">
+      <div class="node">
+        <div class="role">Controller</div>
+        <div class="what">Current Jenkins LTS</div>
+        <span class="tag">Java 21 / 25</span>
+        <p>Upgraded on schedule, with its security fixes.</p>
+      </div>
+      <div class="link"><span>remoting</span><span class="below">same protocol</span></div>
+      <div class="node main">
+        <div class="role">Agent8 jar</div>
+        <div class="what">The Jenkins agent, built for old Java</div>
+        <span class="tag">one release per Jenkins version</span>
+        <p>Starts the Java agents it needs itself.</p>
+      </div>
+      <div class="link short"></div>
+      <div class="node">
+        <div class="role">Build host</div>
+        <div class="what">AIX 7.1, RHEL 6, Solaris</div>
+        <span class="tag agent8">Java 8 / 11 / 17</span>
+        <p>Keeps its OS, its toolchain and its Java.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:56px;font-size:20px">What keeps working on the old host</h3>
+    <ul class="checks check-grid">
+      <li>Labels and executors</li>
+      <li><span><code>sh</code> and file steps</span></li>
+      <li><span><code>junit</code> and <code>stash</code></span></li>
+      <li>Pipeline, Git checkout and credentials</li>
+      <li>Aborts and agent restarts mid-build</li>
+      <li>The script console</li>
+    </ul>
+  </div>
+</section>
+
+<section id="support" style="background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="kicker">Support</div>
+    <h2>Where it runs today</h2>
+    <p class="lead">Linux is tested in CI on every change. AIX, Solaris and HP-UX are experimental
+    until they have run on real hardware; <a class="textlink" href="/jenkins-assessment/">tell us if
+    you can help verify one</a>.</p>
+    <div class="table-scroll">
+    <table class="status-table">
+      <thead><tr><th>Build host</th><th>Java</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Linux, including RHEL/CentOS 6</td><td class="mono">HotSpot 8</td><td><span class="chip ok">Tested in CI</span></td></tr>
+        <tr><td>Linux, IBM Semeru (OpenJ9, the JVM family of IBM Java 8)</td><td class="mono">OpenJ9 8</td><td><span class="chip ok">Tested in CI</span></td></tr>
+        <tr><td>Linux</td><td class="mono">HotSpot 11, 17</td><td><span class="chip ok">Tested in CI</span></td></tr>
+        <tr><td>AIX 7.1 / 7.2</td><td class="mono">IBM Java 8</td><td><span class="chip exp">Experimental</span></td></tr>
+        <tr><td>Solaris, HP-UX</td><td class="mono">Java 8, 11</td><td><span class="chip exp">Experimental</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="kicker">Install</div>
+    <h2>One script, plain <code>sh</code>, any old Unix</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>It asks your controller</h3>
+        <p><code>install.sh</code> asks the controller which agent it ships and downloads the
+        agent8 release for that Jenkins version, built for the host's Java.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>It checks before it swaps</h3>
+        <p>Downloads are checked against <code>sha256sums.txt</code> and test-started on the local
+        Java. The old jar is kept, and <code>--restore</code> puts it back.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>You restart as usual</h3>
+        <p>Same <code>java -jar</code> command, same service script. Offline hosts use
+        <code>--from DIR</code>; fleets use the Ansible playbook.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <span class="tag">jenkins-2.580.1</span>
+      <p>Releases are named after the Jenkins version they match. Your version is at the bottom
+      right of every Jenkins page.</p>
+      <a class="textlink" href="https://github.com/keelinfra/agent8/releases">All releases →</a>
+    </div>
+    <p class="note">Full options, the Ansible playbook and troubleshooting are in the
+    <a class="textlink" href="https://github.com/keelinfra/agent8#install">README</a>. Background:
+    <a class="textlink" href="/blog/jenkins-java-21-aix-rhel6-build-hosts/">Jenkins requires Java 21.
+    What happens to your AIX 7.1 and RHEL 6 build hosts?</a></p>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap">
+    <h2>Questions teams ask first</h2>
+    <div class="faq">
+      <div>
+        <h3>Is this an official Jenkins project?</h3>
+        <p>No. Agent8 is independent and not endorsed or supported by the Jenkins project. Report
+        problems on its <a href="https://github.com/keelinfra/agent8/issues">GitHub issues</a>, not
+        the Jenkins tracker.</p>
+      </div>
+      <div>
+        <h3>Why not run the build in a container?</h3>
+        <p>That works for many RHEL 6 builds. It can't cover builds that must run natively on AIX,
+        Solaris or HP-UX hardware.</p>
+      </div>
+      <div>
+        <h3>Which launch methods work?</h3>
+        <p>Inbound agents, started with <code>java -jar agent.jar</code>. The SSH Build Agents
+        launcher copies its own jar to the host and isn't supported yet.</p>
+      </div>
+      <div>
+        <h3>What is the license?</h3>
+        <p>MIT. The jars include JvmDowngrader classes under LGPL-2.1.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="help" style="padding-top:0">
+  <div class="wrap">
+    <div class="help-band">
+      <div>
+        <div class="kicker">Get help</div>
+        <h2>Rolling out to AIX, Solaris or HP-UX, or a whole fleet?</h2>
+        <p>Pilots on your platform, plugin compatibility checks and support you can put in a
+        contract. The first answer is free and in writing, within two business days.</p>
+      </div>
+      <a class="btn btn-amber" href="/jenkins-assessment/">Describe your build hosts</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

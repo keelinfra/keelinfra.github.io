@@ -111,8 +111,8 @@ curl -fsSLO https://raw.githubusercontent.com/keelinfra/agent8/main/install.sh
 sh install.sh --url https://jenkins.example.com/ --replace /path/to/agent.jar
 ```
 
-The script asks the controller for its remoting version, downloads the matching agent8 build
-for the host's Java, checks it against the release's `sha256sums.txt`, test-starts it on the
+The script asks the controller which agent it ships, downloads the agent8 release for that
+Jenkins version, built for the host's Java, checks it against the release's `sha256sums.txt`, test-starts it on the
 host's Java, and swaps it in. The old jar is kept as `agent.jar.before-agent8`, and
 `--restore` puts it back. Then restart the agent with the command it already uses:
 
@@ -125,7 +125,7 @@ access can be given the jars from the
 [releases](https://github.com/keelinfra/agent8/releases) with `--from DIR`. For many hosts,
 an [Ansible playbook](https://github.com/keelinfra/agent8/tree/main/ansible) runs the same
 script and needs no Python on the hosts. Run it again after each controller upgrade, so the
-agent's remoting version keeps matching the controller's.
+agent keeps matching the controller's Jenkins version.
 
 One controller setting matters. If the Versions Node Monitors plugin is installed, its
 *JVM Version* monitor takes every agent whose Java is older than the controller's offline
