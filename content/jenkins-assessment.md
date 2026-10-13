@@ -1,6 +1,6 @@
 +++
 title = "Jenkins legacy build host assessment"
-description = "Free, written assessment for teams held back on old Jenkins versions by AIX, RHEL/CentOS 6, HP-UX or Solaris build hosts: which hosts can run a Java 21 agent, which can move into a container, and which need a bridge."
+description = "Free, written assessment for teams held back on old Jenkins versions by AIX, RHEL/CentOS 6, HP-UX or Solaris build hosts: the highest Java each host can run, and whether it needs a Java 21 agent, a container or agent8."
 template = "assessment.html"
 
 [extra]
@@ -10,9 +10,9 @@ subtitle = "Free · answered in writing · within two business days"
 Jenkins now needs Java 21 on the controller and on every agent. If a few build hosts are the
 reason you are still on an old Jenkins, tell us what they are. For each one, you get back:
 
-- **Which group it is in**: it can run a normal Java 21 agent, its build can move into a
-  container on a current Linux agent, or it needs a bridge because no Java 21 exists for it.
-- **The way forward for that host**, with what has to change on it and what stays as it is.
+- **The highest Java it can run**, with the vendor source for it.
+- **The way forward for that host**: a normal Java 21 agent, a container on a current Linux
+  agent, or [agent8](https://github.com/keelinfra/agent8), the Jenkins agent that runs on Java 8.
 - **What we have not verified** for your platform, said plainly, so you can test it before you
   rely on it.
 

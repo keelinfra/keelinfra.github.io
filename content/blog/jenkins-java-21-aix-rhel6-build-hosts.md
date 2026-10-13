@@ -1,175 +1,153 @@
 +++
 title = "Jenkins requires Java 21. What happens to your AIX 7.1 and RHEL 6 build hosts?"
-date = 2026-10-12
-description = "Jenkins dropped Java 17 with LTS 2.541.3 in March 2026, and the Java requirement covers every agent, not only the controller. Most legacy build hosts have a supported way forward. AIX 7.1, HP-UX and Solaris do not. How to sort your build fleet, and what to do with the hosts that cannot run Java 21."
+date = 2026-10-13
+description = "Jenkins needs Java 21 on the controller and on every agent. AIX 7.1, RHEL 6, Solaris and HP-UX cannot run it, so their teams stay on Jenkins 2.346.3. Where each Jenkins version is locked, the highest Java each legacy platform can run, with sources, and agent8: a Jenkins agent that runs on Java 8."
 +++
 
 Since LTS 2.541.3 in March 2026, Jenkins no longer supports Java 17. Current releases run on
-Java 21 or Java 25, and Java 21 itself is planned to reach end of support in September 2027
-([Jenkins Java support policy](https://www.jenkins.io/doc/book/platform-information/support-policy-java/)).
+Java 21 or Java 25 ([Jenkins Java support policy](https://www.jenkins.io/doc/book/platform-information/support-policy-java/)).
 
 The part that hurts is one sentence on that page: the requirement applies to *all components
 of the Jenkins system*, agents included. Moving the controller to a new VM is an afternoon.
 The build hosts are the problem: the AIX 7.1 LPAR that produces the release your oldest
-customers install, the RHEL 6 box with the compiler nobody dares to touch. They cannot run
-Java 21, so they cannot run a current `agent.jar`.
+customers install, the RHEL 6 box with the compiler nobody dares to touch, the Solaris and
+HP-UX machines that still ship product. None of them can run Java 21, so none of them can
+run a current `agent.jar`.
 
-The usual answer is to stop upgrading Jenkins. If your controller still runs on Java 8, it is
-on 2.346.3 or older, released in August 2022 and without security fixes since. Every
-plugin update since then is out of reach too.
+## Where Jenkins gets stuck
 
-| Java | Last Jenkins LTS that supports it |
-|---|---|
-| Java 8 | 2.346.3 (August 2022) |
-| Java 11 | 2.462.3 (October 2024) |
-| Java 17 | 2.541.3 (March 2026) |
-| Java 21 | current; planned end of support September 2027 |
-| Java 25 | current; planned end of support September 2029 |
+Each Java version Jenkins drops leaves a last release behind. If your oldest build host can
+only run Java 8, the newest Jenkins it can join is 2.346.3, released in August 2022. It has had
+no security fixes since, and neither have the plugin versions that still install on it.
 
-(From the [Jenkins Java support policy](https://www.jenkins.io/doc/book/platform-information/support-policy-java/),
-checked 2026-10-12.)
+| Highest Java on your oldest agent | Last Jenkins LTS | Last weekly |
+|---|---|---|
+| Java 8 | 2.346.3 (August 2022) | 2.356 |
+| Java 11 | 2.462.3 (October 2024) | 2.462 |
+| Java 17 | 2.541.3 (March 2026) | 2.544 |
+| Java 21 | current; planned end of support September 2027 | current |
+| Java 25 | current; planned end of support September 2029 | current |
 
-Freezing is not the only option. Most legacy hosts have a supported way forward; only a few
-platforms really have none. The first step is to find out which of your hosts are which.
+Source: [Jenkins Java support policy](https://www.jenkins.io/doc/book/platform-information/support-policy-java/),
+checked 2026-10-13.
 
-## Sort your build hosts first
+## The highest Java each legacy platform can run
+
+This is the table we could not find in one place. "Vendor" means the operating system vendor's
+own Java or the Java its vendor certifies for it.
+
+| Platform | Java 8 | Java 11 | Java 17 / 21 | Sources |
+|---|---|---|---|---|
+| RHEL 5 | Oracle JDK 8 only; certified for 5.5+, now listed as no longer supported. Red Hat's own OpenJDK stops at 7 | no | no | [Oracle JDK 8 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk8-jre8-certconfig.html), [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
+| RHEL / CentOS 6 | yes. Red Hat's OpenJDK 8 (from 6.6) is retired, last update 1.8.0_275, and not part of ELS; Temurin 8 runs on CentOS 6.10 | Oracle JDK 11 was certified, now no longer supported | no | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html) |
+| RHEL 7 | yes (Red Hat, 7.1+) | yes (Red Hat, 7.6+) | not from Red Hat | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
+| AIX 7.1 | yes: IBM SDK, Java Technology Edition 8, on 7100-03 or later | no | no | [IBM Java for AIX](https://www.ibm.com/support/pages/java-sdk-aix), [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
+| AIX 7.2 TL5+, AIX 7.3 TL2+ (POWER8 or later) | yes | yes | **yes: IBM Semeru 17 and 21** | [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
+| Solaris 10 / 11, SPARC and x64 | yes: Oracle JDK 8 (Solaris 10 Update 9+, Solaris 11) | Oracle JDK 11 on Solaris 11.3+ SPARC | no: OpenJDK removed the Solaris ports in JDK 15 | [Oracle JDK 8 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk8-jre8-certconfig.html), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), [JEP 381](https://openjdk.org/jeps/381) |
+| HP-UX 11i v3, Integrity (Itanium) | yes: HPE JDK 8 | not established | no | [HPE community: Java versions for HP-UX](https://community.hpe.com/t5/operating-system-hp-ux/may-i-know-which-is-the-latest-version-of-java-hp-ux-supportable/m-p/7045100/highlight/true) |
+| HP-UX, PA-RISC | no: the last PA-RISC build in HPE's list is JDK 7 | no | no | same |
+
+Checked 2026-10-13. Two things stand out.
+
+**Java 8 runs almost everywhere. Java 21 runs on almost none of them.** AIX 7.1 is a common
+example: it is often described as unable to run modern Java, but IBM's Java 8 supports it. What
+it cannot run is anything newer. The same is true of RHEL 6, Solaris and HP-UX on Itanium.
+
+**A few hosts are worse off.** On RHEL 5, the only Java 8 is Oracle JDK 8, no longer supported
+there, and Oracle JDK 8 updates need an Oracle subscription for commercial use. HP-UX on
+PA-RISC stops at Java 7. Those hosts are outside what anything below can fix.
+
+## Sort your build hosts
 
 Run this on each build host:
 
 ```bash
 uname -s
-oslevel -s 2>/dev/null                    # AIX: technology level and service pack
-cat /etc/redhat-release 2>/dev/null       # RHEL / CentOS
+oslevel -s 2>/dev/null                        # AIX: technology level and service pack
 prtconf 2>/dev/null | grep 'Processor Type'   # AIX: POWER generation
+cat /etc/redhat-release 2>/dev/null           # RHEL / CentOS
+java -version 2>&1 | head -1                  # what is installed today
 ```
 
-Each host falls into one of three groups.
+Then each host takes one of these paths:
 
-### 1. AIX 7.2 TL5 or later, and AIX 7.3: run a normal agent
+- **AIX 7.2 TL5+ or 7.3 TL2+ on POWER8 or later:** install IBM Semeru 21 and run a normal
+  agent. It needs the XL C++ Runtime 16.1.0.10 or later. Nothing else is required.
+- **RHEL / CentOS 6, if what you need is the old glibc and toolchain:** you can build in a
+  container image of that userland on a current Linux agent instead. This keeps the old
+  binaries compatible without keeping the old machine.
+- **AIX 7.1, RHEL 6 hosts you have to keep, Solaris, HP-UX on Itanium:** these can run Java 8
+  and nothing newer. That is the gap agent8 is for.
 
-IBM ships Semeru Runtime 21 for AIX 7.2 TL5 and AIX 7.3 TL2, on POWER8 or later. It needs
-the XL C++ Runtime 16.1.0.10 or later, and on AIX 7.2 a Power10 or Power11 machine has to
-run in Power9 compatibility mode
-([IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203)).
+## agent8: a Jenkins agent that runs on Java 8
 
-On those hosts, install Semeru 21 and run a regular agent. Nothing else is needed. Note that
-older technology levels are not on IBM's list, so an AIX 7.2 host below TL5 has to be
-updated first.
+[agent8](https://github.com/keelinfra/agent8) is an open-source (MIT) build of the Jenkins agent
+that runs on Java 8 and connects to a current controller on Java 21 or 25. The legacy host
+stays an ordinary node: labels, executors, `sh`, file steps, `junit`, `stash`, aborts and the
+script console work as on any other agent.
 
-### 2. RHEL and CentOS 6: move the build into a container
+It is built from your controller's own `agent.jar`, so the remoting versions match:
 
-A RHEL 6 build host is usually kept for one reason: its glibc and its toolchain, so that the
-binaries still run on your customers' old systems. Neither needs the old kernel or Java. Put
-the userland in an image and build inside it, on a current Linux agent that runs Java 21:
-
-```groovy
-node('linux') {
-    checkout scm
-    docker.image('registry.example.com/build/rhel6-toolchain:2026-10').inside {
-        sh 'make all && make test'      // glibc 2.12, your old gcc, no Java
-    }
-    junit '**/TEST-*.xml'
-}
+```bash
+curl -fsSO https://jenkins.example.com/jnlpJars/agent.jar
+./build.sh agent.jar        # produces dist/agent8.jar and dist/jvmdg.jar
 ```
 
-Build the image from your own toolchain and mirror; `centos:6` from Docker Hub is a starting
-point, but its repositories are archived and it receives no updates. On some recent host
-kernels, binaries this old crash at start with exit code 139: the kernel has the legacy
-`vsyscall` page disabled, and booting the host with `vsyscall=emulate` brings it back.
+On the legacy host, start an inbound agent with the two jars:
 
-### 3. AIX 7.1, HP-UX and Solaris: no Java 21
-
-These platforms have no Java 21 runtime, and none is coming. This is the group that keeps
-people on Jenkins 2.346.
-
-Before solving it, check how much of your build really has to run there. AIX keeps binary
-compatibility upward: a program built on 7.1 runs on 7.2 and 7.3. In many shops the 7.1 host
-does one job, building and testing the release that 7.1 customers install. That one step is
-what needs a bridge, not the whole pipeline.
-
-## Options for hosts that cannot run Java 21
-
-| Option | What you keep | What it costs |
-|---|---|---|
-| Freeze Jenkins on 2.346.3 | Everything works as before | No security fixes since 2022, no plugin updates |
-| Run commands over SSH from a pipeline step | `sh`, with your own scripting | The host is not a node: no labels, no `node('aix71')`, `junit` and `stash` do not run there, abort leaves remote processes behind unless you handle it |
-| Patch `agent.jar` to run on Java 8 | A real agent | The controller sends Java 17+ bytecode to the agent; every Jenkins and plugin release can break a downgraded agent |
-| A Java 21 proxy agent that runs processes on the legacy host | `node('aix71')`, `sh`, file steps, abort, durable builds | A shared workspace (NFS) between the proxy and the legacy host |
-
-The last row is the approach we are building, as an open-source Jenkins plugin:
-[Legacy Build Host](https://github.com/shenxianpeng/legacy-build-host-plugin) (MIT).
-
-## How the proxy agent works
-
-A Jenkins agent does two different kinds of work. Some of it is Java code the controller
-sends over: file operations, `junit`, `stash`, `archiveArtifacts`, `readFile`. The rest is
-starting native processes, such as Pipeline `sh`. Only the second kind has to happen on the
-legacy host.
-
-So each legacy host gets a Linux agent with Java 21, named after it. The plugin wraps that
-agent's process launcher (a `LauncherDecorator`, a public Jenkins extension point), so every
-process Jenkins starts there runs on the legacy host over SSH instead. The workspace is
-mounted on the legacy host at the same path, so both sides see the same files:
-
-```
-controller (Java 21) ── agent "aix71" (Linux, Java 21) ── ssh ──> AIX 7.1 (sshd + sh, no Java)
-                                  └──── same workspace path over NFS ────┘
+```bash
+java -javaagent:agent8.jar -javaagent:jvmdg.jar -jar agent8.jar \
+     -url https://jenkins.example.com/ -secret <secret> -name <node> -workDir /srv/jenkins
 ```
 
-The pipeline is an ordinary pipeline:
+Rebuild `agent8.jar` whenever the controller is upgraded.
 
-```groovy
-node('aix71') {
-    checkout scm                  // runs on the proxy
-    sh 'make all && make test'    // runs on AIX 7.1
-    junit '**/TEST-*.xml'         // reads the shared workspace
-    archiveArtifacts 'dist/**'
-}
-```
+### How it works
 
-Pipeline `sh` keeps its durable behaviour. The step runs detached on the legacy host and
-writes its log and exit code into the shared workspace, and the agent polls those files. That
-protocol needs no Java on the machine running the script, so a build survives a restart of
-the proxy agent. When a build is aborted, the plugin kills the step's whole process group on
-the legacy host.
+A Jenkins agent runs two kinds of Java code: remoting itself, and classes the controller sends
+while builds run, such as core and plugin code for file operations, `junit`, `stash` and
+launching processes. All of it is compiled for Java 17 or 21. agent8 makes it run on Java 8 in
+three steps:
 
-## What has been verified, and what has not
+1. **Remoting is downgraded ahead of time.** [JvmDowngrader](https://github.com/unimined/JvmDowngrader)
+   rewrites `agent.jar` to Java 8 bytecode and adds stand-ins for newer JDK APIs. The one call
+   it cannot handle is patched in the remoting source.
+2. **Classes from the controller are downgraded as they load,** by JvmDowngrader's Java agent.
+3. **Serialization stays compatible with the controller.** Downgrading adds synthetic members,
+   which changes the default `serialVersionUID` of classes that do not declare one, and the
+   controller would reject every call. agent8 pins the UID the controller computes. It also adds
+   the serial form of `List.of`, `Set.of` and `Map.of`, which Java 8 does not have.
 
-On Jenkins 2.580.1 (Java 21), with a CentOS 6.10 container (glibc 2.12, no Java) as the
-legacy host behind a proxy agent:
+### What has been verified, and what has not
 
-- `sh` ran on the CentOS 6 host; `junit`, `stash`, `archiveArtifacts`, `readFile`, `dir`,
-  `withEnv`, `returnStdout` and `returnStatus` worked on the shared workspace.
-- Aborting a running build marked it ABORTED within about a second, and no process from the
-  step was left on the legacy host.
-- Killing the proxy agent in the middle of a build and starting it again: the remote step kept
-  running, and the build finished with SUCCESS.
-- The plugin's 20 tests pass in its public CI, running real pipelines against a fake SSH host.
+agent8 is experimental. Its CI runs weekly against the current Jenkins LTS and weekly release,
+with the agent on Temurin 8 in a CentOS 6.10 container:
 
-Not yet verified: **a real AIX 7.1 host, and a real NFS mount.** The CentOS 6 tests used a
-local mount, so NFS attribute caching and uid mapping have not been exercised, and AIX's
-process-group handling still has to be confirmed. We will publish those results when we have
-them. Until then, treat this as a design that works on Linux, not as something proven on AIX.
+- objects written on Java 21 are read correctly on Java 8;
+- Pipeline builds run on the Java 8 agent;
+- aborting a build stops it on the agent;
+- restarting the agent in the middle of a build;
+- the script console.
 
-Known limitations, also listed in the plugin's
-[design notes](https://github.com/shenxianpeng/legacy-build-host-plugin/blob/main/docs/DESIGN.md):
+Not yet verified: **AIX with IBM Java 8, Solaris, and HP-UX.** The JVM is what matters most
+here, and IBM's J9 is not HotSpot, so AIX needs its own testing. We will publish those results
+when we have them. Until then, treat agent8 as working on Linux with Java 8, not as proven on
+your platform.
 
-- The workspace has to be shared at the same path with the same uid on both sides, and heavy
-  build I/O over NFS is slower than local disk.
-- One proxy agent per legacy host, though many proxies can run on one Linux machine.
-- Java code still runs on the proxy, so tool installers install Linux tools. Build tools have
-  to be installed on the legacy host itself.
-- The legacy host uses its own login environment, so `withEnv(['PATH+X=…'])` does not change
-  its `PATH` yet.
-- Killing remote processes on abort covers Pipeline `sh`, not freestyle *Execute shell* yet.
-- POSIX hosts only, and SSH keys without a passphrase only, for now.
+Known gaps:
+
+- A newer JDK API that JvmDowngrader cannot stub fails only when that code runs. Plugins that
+  run code on agents, such as git, Maven, Docker and credentials binding, still need testing.
+- Use an inbound agent for now. The SSH launcher copies the controller's own `remoting.jar`
+  to the agent, which does not run on Java 8.
+- Jenkins could add a hard check on the agent's Java version in a future release.
 
 ## Get your build fleet assessed
 
-If you are holding Jenkins back because of a few build hosts, send us the list. For each
-host, we tell you which group it falls in and what the supported way forward is: a native
-Java 21 agent, a container, or a bridge, and what moving it involves. If every host you have
-can run a normal agent, that is what we will tell you.
+If a few build hosts are holding your Jenkins back, send us the list. For each host, we tell
+you the highest Java it can run, which path above fits it, and what we have and have not
+verified for that platform. If every host you have can run a normal Java 21 agent, that is
+what we will tell you.
 
 The assessment is free, and you get the answer in writing.
 [Request an assessment →](/jenkins-assessment/)
