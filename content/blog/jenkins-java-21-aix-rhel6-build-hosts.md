@@ -4,10 +4,10 @@ date = 2026-10-13
 description = "Jenkins needs Java 21 on the controller and on every agent. AIX 7.1, RHEL 6, Solaris and HP-UX cannot run it, so their teams stay on Jenkins 2.346.3. Where each Jenkins version is locked, the highest Java each legacy platform can run, with sources, and agent8: a Jenkins agent that runs on Java 8."
 +++
 
-At work, our product ships on a long tail of platforms. Besides mainstream Linux there is AIX,
-HP-UX, Solaris, and a set of RHEL 6 machines, with one or two RHEL 5 boxes in a corner. They
-have built releases for years, nobody wants to touch them, and they are Jenkins agents: every
-platform build of the product comes from them.
+Plenty of companies ship software on a long tail of platforms. Besides mainstream Linux there is
+AIX, HP-UX, Solaris, and a set of RHEL 6 machines, often with a RHEL 5 box or two in a corner.
+These hosts have built releases for years, nobody wants to touch them, and they are Jenkins
+agents: every platform build of the product comes from them.
 
 On those systems, Java stops at 8. Jenkins, meanwhile, keeps raising its Java baseline: Java 11
 from 2.361.1 LTS in 2022, Java 17 from 2.479.1 LTS in 2024, and today Java 21 or 25
@@ -16,7 +16,7 @@ The sentence on that page that hurts is that the requirement applies to *all com
 Jenkins system*, agents included.
 
 Then the security scan arrives. An old controller is a list of CVEs, and IT does not negotiate.
-So you pick one:
+So the team has to pick one:
 
 - **Upgrade the controller.** The audit passes, and every AIX, HP-UX, Solaris and old RHEL
   agent can no longer connect.
@@ -24,14 +24,13 @@ So you pick one:
   nobody patches, with an exception request every audit cycle.
 
 What teams usually end up doing is keeping a second, old Jenkins just for those platforms, which
-means two systems to run and two sets of CVEs, or building those platforms by hand. I also tried
-driving the old hosts over SSH from a modern agent with an SSH plugin. It works on paper, but
-logs, aborts, workspaces and artifacts are all yours to wire up, and the host never behaves like
-a real node.
+means two systems to run and two sets of CVEs, or building those platforms by hand. Some drive
+the old hosts over SSH from a modern agent with an SSH plugin. That works on paper, but logs,
+aborts, workspaces and artifacts are all theirs to wire up, and the host never behaves like a
+real node.
 
-I hit this at work and wanted a real fix. This post is what I found: where Jenkins gets locked,
-which Java each of these platforms can actually run, with sources, and agent8, the open-source
-Jenkins agent I built that runs on Java 8.
+This post covers where Jenkins gets locked, which Java each of these platforms can actually run,
+with sources, and agent8, an open-source Jenkins agent that runs on Java 8.
 
 ## Where Jenkins gets stuck
 
