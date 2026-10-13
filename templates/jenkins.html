@@ -78,7 +78,7 @@
       <div class="node main">
         <div class="role">Agent8 jar</div>
         <div class="what">The Jenkins agent, built for old Java</div>
-        <span class="tag">matches your remoting version</span>
+        <span class="tag">one release per Jenkins version</span>
         <p>Starts the Java agents it needs itself.</p>
       </div>
       <div class="link short"></div>
@@ -131,8 +131,8 @@
       <div class="step">
         <div class="n">1</div>
         <h3>It asks your controller</h3>
-        <p><code>install.sh</code> reads the controller's remoting version and picks the matching
-        release for the host's Java.</p>
+        <p><code>install.sh</code> asks the controller which agent it ships and downloads the
+        agent8 release for that Jenkins version, built for the host's Java.</p>
       </div>
       <div class="step">
         <div class="n">2</div>
