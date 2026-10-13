@@ -154,7 +154,8 @@ three steps:
 
 ### What has been verified, and what has not
 
-agent8 is experimental. Its CI tests every change, and runs weekly, against the current Jenkins
+agent8 is released and free to use; support for AIX, Solaris and HP-UX is still experimental.
+Its CI tests every change, and runs weekly, against the current Jenkins
 LTS and weekly release. Each run installs agent8 with `install.sh` over a stock `agent.jar` on
 an old Java, starts it with the usual command, and checks:
 
@@ -168,8 +169,7 @@ an old Java, starts it with the usual command, and checks:
 - `--replace` and `--restore` swap the jar in and back out.
 
 The Java 8 runs use Temurin 8 on CentOS 6.10, and OpenJ9 8 (IBM Semeru) on Linux, which is
-the JVM family of IBM Java 8 on AIX. Java 11 is tested on Linux against the current LTS; the
-Java 17 build is not tested yet.
+the JVM family of IBM Java 8 on AIX. Java 11 and Java 17 builds are tested on Linux against the current LTS.
 
 Not yet verified: **AIX with IBM Java 8, Solaris, and HP-UX.** OpenJ9 on Linux covers the JVM
 that AIX uses, but not AIX itself. We will publish those results
