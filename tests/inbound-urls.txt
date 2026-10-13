@@ -19,5 +19,8 @@
 /blog/
 /blog/atom.xml
 /blog/zero-downtime-keycloak-upgrades/
+/blog/jenkins-java-21-aix-rhel6-build-hosts/
+/jenkins-assessment/
+/jenkins-assessment/#request
 /compare/managed-keycloak/
 /sitemap.xml

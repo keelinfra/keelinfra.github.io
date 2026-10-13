@@ -203,3 +203,11 @@ footer .f-links{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:18px}
 footer a{color:var(--muted)}
 footer a:hover{color:var(--ink)}
 footer .legal{max-width:84ch;line-height:1.6}
+.lead-form{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px 22px 24px;display:flex;flex-direction:column}
+.lead-form label{font-weight:600;font-size:15px;margin-top:16px}
+.lead-form label:first-child{margin-top:0}
+.lead-form input,.lead-form textarea{margin-top:6px;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;width:100%}
+.lead-form textarea{resize:vertical}
+.lead-form input:focus,.lead-form textarea:focus{border-color:var(--accent-bright);outline:none}
+.lead-form .btn{align-self:flex-start;margin-top:16px;cursor:pointer;font:inherit;font-weight:600}
+.prose .form-note{font-size:13.5px;color:var(--muted)}
