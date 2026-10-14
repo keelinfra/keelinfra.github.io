@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">[
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Agent8 for Jenkins","url":"https://keelinfra.io/jenkins/","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{%- for s in page.extra.services -%}
+,{"@context":"https://schema.org","@type":"Service","name":{{ s.name | json_encode | safe }},"provider":{"@type":"Organization","name":"keelinfra"},"offers":{"@type":"Offer","price":"{{ s.price }}","priceCurrency":"USD"}}
+{%- endfor -%}
+{%- for s in page.extra.plans -%}
+,{"@context":"https://schema.org","@type":"Service","name":{{ s.name | json_encode | safe }},"provider":{"@type":"Organization","name":"keelinfra"},"offers":{"@type":"Offer","price":"{{ s.price }}","priceCurrency":"USD"}}
+{%- endfor -%}
+]</script>
+{% endblock %}
+{% block content %}
+<header class="hero" style="padding-bottom:24px">
+  <div class="wrap">
+    <h1>Agent8 is free.<br>You pay for someone on the hook.</h1>
+    <p class="sub">The code is MIT and stays that way. What you pay for is what code alone does not
+    give you: a build tested for every Jenkins release, checks on your real platform, and people
+    who answer when a controller upgrade leaves your build hosts offline.</p>
+  </div>
+</header>
+
+<section id="oss" style="padding-top:24px">
+  <div class="wrap">
+    <div class="teaser">
+      <div class="t-main">
+        <h3>Open source, $0</h3>
+        <p>The install script, the Ansible playbook and a Release for every Jenkins version.
+        Bugs go to <a href="https://github.com/keelinfra/agent8/issues">GitHub issues</a>.
+        <a href="/jenkins/">How Agent8 works →</a></p>
+      </div>
+      <a class="btn btn-ghost" href="https://github.com/keelinfra/agent8">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">One-off</div>
+    <h2>Find out before you roll out</h2>
+    <p class="lead">Fixed scope, agreed before work starts. Not sure what you need? The
+    <a class="textlink" href="/jenkins-assessment/">first answer is free</a>.</p>
+    <div class="svc">
+      {% for s in page.extra.services %}
+      <div class="card">
+        <h3>{{ s.name }}</h3>
+        <div class="price">{{ s.price_label }} <small>{{ s.price_note }}</small></div>
+        <ul>
+          {% for b in s.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+        <a class="btn btn-ghost" href="{{ s.mailto }}">{{ s.cta }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="support" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">Yearly support</div>
+    <h2>Keep up with every controller upgrade</h2>
+    <p class="lead">Jenkins raises the oldest agent it accepts over time, so an agent8 jar that
+    works today is refused a few releases later. Support means a tested build is ready before
+    you upgrade.</p>
+    <div class="svc">
+      {% for s in page.extra.plans %}
+      <div class="card">
+        <h3>{{ s.name }}</h3>
+        <div class="price">{{ s.price_label }} <small>{{ s.price_note }}</small></div>
+        <ul>
+          {% for b in s.bullets %}<li>{{ b }}</li>{% endfor %}
+        </ul>
+        <a class="btn btn-ghost" href="{{ s.mailto }}">{{ s.cta }}</a>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="note">Support is new: the first customers set it up with us, and the price they
+    start at stays theirs. Agent8 is independent and not endorsed or supported by the Jenkins
+    project.</p>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:24px">
+  <div class="wrap">
+    <div class="kicker">FAQ</div>
+    <h2>Straight answers</h2>
+    <div class="grid">
+      <div class="card"><h3>Do I need to pay to use Agent8?</h3><p>No. Everything in the repository is free, with no gated features. Paying adds checks on your platform, builds ready ahead of your upgrades, and people.</p></div>
+      <div class="card"><h3>Could we build this ourselves?</h3><p>Yes, and the code is open if you want to. The work is in keeping up: a new Jenkins release every week, a rising minimum agent version, and platforms CI cannot rent. For most teams, support costs less than an engineer's time spent on that.</p></div>
+      <div class="card"><h3>What does a pilot not cover?</h3><p>Plugins and job types outside the jobs we run with you. The report lists what was and was not exercised, so you know what is still unverified.</p></div>
+      <div class="card"><h3>What are your support hours?</h3><p>EU business hours. We do not sell a 24/7 SLA we cannot staff honestly.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

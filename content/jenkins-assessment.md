@@ -27,5 +27,8 @@ vendor source for it, the path that fits, and what we have not verified for your
 every host you have can run a normal agent, that is what we will tell you. The background is in
 [Jenkins requires Java 21. What happens to your AIX 7.1 and RHEL 6 build hosts?](/blog/jenkins-java-21-aix-rhel6-build-hosts/)
 
+Pilots, plugin checks and yearly support have fixed prices, listed on the
+[pricing page](/jenkins/pricing/).
+
 Leave out hostnames, IP addresses, credentials and anything else you would not put in an
 email to a stranger. Operating system versions and what each host builds are enough.
