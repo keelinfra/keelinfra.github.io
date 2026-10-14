@@ -32,5 +32,5 @@ the work. For the buyer we serve, that's not a limitation; it's the point:
 
 ## Contact
 
-[hello@keelinfra.io](mailto:hello@keelinfra.io) · EU business hours · invoices with VAT ·
+[hello@keelinfra.io](mailto:hello@keelinfra.io) · EU business hours · invoices on request ·
 response within one business day · [Services and pricing →](/keycloak/pricing/)
