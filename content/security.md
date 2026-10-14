@@ -6,9 +6,11 @@ template = "page.html"
 
 ## Report a vulnerability
 
-Report privately via GitHub:
+For the Keycloak distribution, report privately via GitHub:
 [**Report a vulnerability**](https://github.com/keelinfra/keycloak/security/advisories/new)
-(Security tab → Report a vulnerability). Please don't open public issues for security reports.
+(Security tab → Report a vulnerability). For Agent8, email
+[hello@keelinfra.io](mailto:hello@keelinfra.io?subject=Agent8%20security%20report). Please don't
+open public issues for security reports.
 
 You'll get an acknowledgment within 3 business days. We keep you informed while we validate and
 fix, coordinate disclosure with you, and credit you in the advisory unless you prefer otherwise.
@@ -27,11 +29,14 @@ version bump and document the operator actions in
 
 ## Secure by default
 
-- **TLS everywhere.** `tls_mode: selfsigned` generates a local CA for eval and intranet use; drop
-  your own certs in for production. Nodes talk to each other over TLS either way.
+- **TLS to Keycloak.** `tls_mode: selfsigned` generates a local CA and per-node certificates;
+  bring-your-own certificates are planned. Traffic between the nodes (etcd, PostgreSQL
+  replication, the Patroni API) is not encrypted yet, so keep the node network private.
 - **Secrets stay encrypted.** Generated credentials live in an ansible-vault; nothing sensitive is
   written in plain text to the inventory.
 - **No password SSH.** Key or agent-based authentication only.
+- **Change the drill realm.** Every install creates the `demo` realm the session drill uses
+  (user `demo`, password `demo12345`). Change or remove it before go-live.
 - **Your database, your sessions.** Identity data, sessions and audit events live in the
   PostgreSQL cluster the distribution installs on your machines — nowhere else.
 
@@ -39,7 +44,9 @@ version bump and document the operator actions in
 
 The distribution makes **no network calls to keelinfra** — no telemetry, no license checks, no
 registry pulls from our infrastructure. Artifacts are fetched from upstream project sources at
-install time (and the upcoming [air-gapped bundle](/keycloak/pricing/) removes even that).
+install time (and the planned [air-gapped bundle](/keycloak/pricing/) would remove even that).
+Grafana, installed from its upstream packages, keeps its default usage reporting; set
+`reporting_enabled = false` in `grafana.ini` if you want it off.
 
 Verify it: `grep -r "keelinfra.io" roles/ playbooks/` in the
 [source](https://github.com/keelinfra/keycloak). It's not there.

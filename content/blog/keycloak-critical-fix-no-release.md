@@ -6,6 +6,12 @@ description = "CVE-2026-18963 (CVSS 9.1) is fixed in 26.4.15, 26.6.6 and 26.7.2.
 og_image = "/assets/social-preview-keycloak.png"
 +++
 
+> **Update 2026-10-14:** 26.7.3 is no longer where to land. 26.7.5 is the last community
+> release on 26.7, and 26.8.1 is current. The tested paths are now 26.6.2 → 26.7.5,
+> 26.7.0 → 26.7.5 and 26.7.5 → 26.8.1, all drilled nightly on 3 nodes; see
+> [the upgrade table](/docs/keycloak/upgrades/). To rerun the commands below on a fresh clone,
+> set `keycloak_version` in your definition file to the starting version first.
+
 In August, upstream Keycloak fixed **CVE-2026-18963** on three branches: 26.4.15 and
 26.6.6 were tagged on 2026-08-11, and 26.7.2 was released on 2026-08-19. It is about as
 bad as an identity-provider bug gets: an unauthenticated attacker could drive the

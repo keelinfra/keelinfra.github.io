@@ -15,7 +15,7 @@
   <div class="wrap">
     <h1>Agent8 is free.<br>You pay for someone on the hook.</h1>
     <p class="sub">The code is MIT and stays that way. What you pay for is what code alone does not
-    give you: a build tested for every Jenkins release, checks on your real platform, and people
+    give you: a tested build for each Jenkins LTS, checks on your real platform, and people
     who answer when a controller upgrade leaves your build hosts offline.</p>
   </div>
 </header>
@@ -25,7 +25,8 @@
     <div class="teaser">
       <div class="t-main">
         <h3>Open source, $0</h3>
-        <p>The install script, the Ansible playbook and a Release for every Jenkins version.
+        <p>The install script, the Ansible playbook, and releases for the current Jenkins LTS and
+        weekly, each named after the Jenkins version it was tested with.
         Bugs go to <a href="https://github.com/keelinfra/agent8/issues">GitHub issues</a>.
         <a href="/jenkins/">How Agent8 works →</a></p>
       </div>
@@ -59,8 +60,8 @@
   <div class="wrap">
     <div class="kicker">Yearly support</div>
     <h2>Keep up with every controller upgrade</h2>
-    <p class="lead">Jenkins raises the oldest agent it accepts over time, so an agent8 jar that
-    works today is refused a few releases later. Support means a tested build is ready before
+    <p class="lead">Jenkins raises the oldest agent it accepts over time, so an Agent8 jar that
+    works today is eventually refused: Jenkins 2.586 already refuses the build for 2.462.3. Support means a tested build is ready before
     you upgrade.</p>
     <div class="svc">
       {% for s in page.extra.plans %}

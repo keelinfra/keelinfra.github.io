@@ -19,19 +19,27 @@ git clone https://github.com/keelinfra/keycloak && cd keycloak
 ```
 
 `./configure` writes a generated inventory under `inventory/` (secrets go into an ansible-vault).
-`./install` runs the playbooks: PostgreSQL + Patroni + etcd first, then Keycloak, HAProxy, TLS,
-backups, and monitoring.
+`./install` runs the playbooks in this order: common setup, etcd, PostgreSQL + Patroni,
+HAProxy, pgBackRest backups, TLS, Keycloak, realm configuration, the VIP (if set), and
+monitoring.
 
 ## 3. First login
 
-Open `https://<your-domain>/admin`. The bootstrap admin credentials are printed at the end of the
-install (and stored in the vault).
+Open `https://<your-domain>/admin` and log in as `admin`. The password is
+`vault_keycloak_admin_password` in the vault:
+
+```bash
+ANSIBLE_VAULT_PASSWORD_FILE=inventory/.vault_pass ansible-vault view inventory/group_vars/all/vault.yml
+```
+
+Every install also creates the `demo` realm that the session drill uses (user `demo`, password
+`demo12345`). Change or remove it before go-live.
 
 ## 4. Point DNS
 
 Point your domain at the keepalived VIP (if you set `vip:`), at any node, or at your external
-load balancer. With `tls_mode: selfsigned`, trust the generated local CA in your browser or
-switch to your own certificates — see [TLS configuration](/docs/keycloak/configuration/#tls-mode).
+load balancer. With `tls_mode: selfsigned`, trust the generated local CA in your browser — see
+[TLS configuration](/docs/keycloak/configuration/#tls-mode).
 
 ## 5. Prove it
 

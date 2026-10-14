@@ -1,6 +1,6 @@
 +++
 title = "Verify & drills"
-description = "One-command drills that prove failover, backup restore, and session survival on your own cluster — the same checks CI runs on every commit."
+description = "One-command drills that prove failover, backup restore, and session survival on your own cluster — the same checks CI runs on every commit and every night."
 weight = 6
 +++
 
@@ -35,7 +35,12 @@ doing their job: no user gets logged out by a restart.
 ## What CI runs
 
 - **Every commit** ([smoke](https://github.com/keelinfra/keycloak/actions/workflows/smoke.yml)):
-  clean single-node install + health checks + the session drill.
+  clean single-node install + health checks + the session and restore drills.
+- **Every change to the roles** ([HA smoke](https://github.com/keelinfra/keycloak/actions/workflows/ha-smoke.yml)):
+  a clean 3-node install + all drills, failover included.
+- **Every night, on 3 nodes** ([HA matrix](https://github.com/keelinfra/keycloak/actions/workflows/ha-matrix.yml)):
+  every supported upgrade path under load-balancer probes, then the failover, restore and
+  session drills.
 - **Every night** ([upgrade matrix](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml)):
   for every supported upgrade path — install the old version, log in, upgrade, and the
   pre-upgrade session must still refresh on the new version.

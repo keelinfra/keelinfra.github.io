@@ -1,6 +1,7 @@
 base_url = "https://keelinfra.io"
 title = "keelinfra"
-description = "Production-grade self-hosted Keycloak distribution: HA cluster, Postgres auto-failover, backups with PITR, monitoring, and upgrade paths re-proven nightly in public CI. Apache-2.0."
+description = "Self-hosted infrastructure, proven in public CI: a production-grade Keycloak distribution (Apache-2.0) and Agent8, which keeps Jenkins build hosts on Java 8, 11 or 17 connected (MIT)."
+author = "keelinfra"
 default_language = "en"
 compile_sass = false
 build_search_index = false

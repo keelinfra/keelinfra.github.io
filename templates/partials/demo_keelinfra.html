@@ -17,7 +17,7 @@
 #}
 {%- set plays = ["Prepare all nodes", "Deploy etcd cluster", "Deploy PostgreSQL HA (Patroni)", "Deploy HAProxy", "Deploy pgBackRest", "Deploy TLS material", "Deploy Keycloak cluster", "Apply realm configuration", "Deploy VIP (only when a vip is configured)", "Deploy monitoring"] -%}
 {#- from to strategy, one row of the matrix each -#}
-{%- set paths = ["26.6.0 26.6.2 rolling", "26.6.2 26.7.3 stop-start", "26.7.0 26.7.3 rolling", "26.2.5 26.2.16 rolling", "26.6.4 26.6.6 rolling"] -%}
+{%- set paths = ["26.6.0 26.6.2 rolling", "26.8.0 26.8.1 rolling", "26.7.5 26.8.1 stop-start", "26.7.0 26.7.5 rolling", "26.6.6 26.6.7 rolling"] -%}
 {%- set pending = '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#3d444d" stroke-width="1.6"/></svg>' -%}
 {%- set running = '<svg class="ki-demo-spin" width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#d29922" stroke-width="2" stroke-dasharray="26 12"/></svg>' -%}
 {%- set done = '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="#238636"/><path d="M4.8 8.2l2.1 2.1 4.3-4.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' -%}

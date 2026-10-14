@@ -79,7 +79,7 @@
       <li>Labels and executors</li>
       <li><span><code>sh</code> and file steps</span></li>
       <li><span><code>junit</code> and <code>stash</code></span></li>
-      <li>Pipeline, Git checkout and credentials</li>
+      <li>Pipeline, Git checkout (JGit) and credentials</li>
       <li>Aborts and agent restarts mid-build</li>
       <li>The script console</li>
     </ul>
@@ -98,13 +98,17 @@
       <thead><tr><th>Build host</th><th>Java</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>Linux, including RHEL/CentOS 6</td><td class="mono">HotSpot 8</td><td><span class="chip ok">Tested in CI</span></td></tr>
-        <tr><td>Linux, IBM Semeru (OpenJ9, the JVM family of IBM Java 8)</td><td class="mono">OpenJ9 8</td><td><span class="chip ok">Tested in CI</span></td></tr>
-        <tr><td>Linux</td><td class="mono">HotSpot 11, 17</td><td><span class="chip ok">Tested in CI</span></td></tr>
+        <tr><td>Linux, IBM Semeru (OpenJ9, the JVM family of IBM Java 8)</td><td class="mono">OpenJ9 8</td><td><span class="chip ok">Tested in CI · best effort</span></td></tr>
+        <tr><td>Linux</td><td class="mono">HotSpot 11, 17</td><td><span class="chip ok">Tested in CI (LTS)</span></td></tr>
         <tr><td>AIX 7.1 / 7.2</td><td class="mono">IBM Java 8</td><td><span class="chip exp">Experimental</span></td></tr>
-        <tr><td>Solaris, HP-UX</td><td class="mono">Java 8, 11</td><td><span class="chip exp">Experimental</span></td></tr>
+        <tr><td>Solaris</td><td class="mono">Java 8, 11</td><td><span class="chip exp">Experimental</span></td></tr>
+        <tr><td>HP-UX</td><td class="mono">Java 8</td><td><span class="chip exp">Experimental</span></td></tr>
       </tbody>
     </table>
     </div>
+    <p class="note">OpenJ9 and IBM Java (J9) are outside Jenkins' own support. Agent8 tests OpenJ9 8
+    in CI and fixes the J9 problems it finds, best effort; report them on
+    <a class="textlink" href="https://github.com/keelinfra/agent8/issues">Agent8's issues</a>.</p>
   </div>
 </section>
 
@@ -116,8 +120,9 @@
       <div class="step">
         <div class="n">1</div>
         <h3>It asks your controller</h3>
-        <p><code>install.sh</code> asks the controller which agent it ships and downloads the
-        agent8 release for that Jenkins version, built for the host's Java.</p>
+        <p><code>install.sh</code> reads the remoting version of the controller's
+        <code>agent.jar</code> and downloads the Agent8 release built for it, in the build for the
+        host's Java. If there is none yet, it says so and uses the latest release.</p>
       </div>
       <div class="step">
         <div class="n">2</div>
@@ -128,14 +133,15 @@
       <div class="step">
         <div class="n">3</div>
         <h3>You restart as usual</h3>
-        <p>Same <code>java -jar</code> command, same service script. Offline hosts use
-        <code>--from DIR</code>; fleets use the Ansible playbook.</p>
+        <p>Same <code>java -jar</code> command, same service script. Offline hosts copy the
+        jars and <code>sha256sums.txt</code> and use <code>--from DIR</code>; fleets use the
+        Ansible playbook.</p>
       </div>
     </div>
     <div class="callout">
       <span class="tag">jenkins-2.580.1</span>
-      <p>Releases are named after the Jenkins version they match. Your version is at the bottom
-      right of every Jenkins page.</p>
+      <p>Releases are named after the Jenkins version they were tested with. Your version is at
+      the bottom right of every Jenkins page.</p>
       <a class="textlink" href="https://github.com/keelinfra/agent8/releases">All releases →</a>
     </div>
     <p class="note">Full options, the Ansible playbook and troubleshooting are in the
@@ -161,13 +167,36 @@
         Solaris or HP-UX hardware.</p>
       </div>
       <div>
+        <h3>Does any controller setting matter?</h3>
+        <p>Only if the Versions Node Monitors plugin (<code>versioncolumn</code>) is installed. Its
+        JVM Version monitor takes Agent8 nodes offline seconds after they connect, so set it not to
+        disconnect. Its Remoting Version monitor does the same when the agent's build differs from
+        the controller's. The <a href="https://github.com/keelinfra/agent8#install">README</a> has
+        the configuration-as-code snippet.</p>
+      </div>
+      <div>
+        <h3>What happens when we upgrade the controller?</h3>
+        <p>Rerun <code>install.sh</code> (or the playbook) and restart the agent. Jenkins refuses
+        agents older than a minimum remoting version that it raises over time: Jenkins 2.586
+        already refuses the Agent8 build for 2.462.3.</p>
+      </div>
+      <div>
+        <h3>What hasn't been tested yet?</h3>
+        <p>Real AIX, Solaris and HP-UX hosts; plugins that run their own code on the agent beyond
+        Git checkout (JGit) and credentials, such as Maven or Docker; and the Maven project type.
+        The <a href="https://github.com/keelinfra/agent8#known-gaps">README</a> keeps the
+        list.</p>
+      </div>
+      <div>
         <h3>Which launch methods work?</h3>
         <p>Inbound agents, started with <code>java -jar agent.jar</code>. The SSH Build Agents
         launcher copies its own jar to the host and isn't supported yet.</p>
       </div>
       <div>
         <h3>What is the license?</h3>
-        <p>MIT. The jars include JvmDowngrader classes under LGPL-2.1.</p>
+        <p>Agent8's own code is MIT. Its jars also contain Jenkins remoting (MIT), ASM (BSD-3-Clause)
+        and JvmDowngrader classes (LGPL-2.1), and each release ships JvmDowngrader itself as
+        <code>jvmdg.jar</code> (LGPL-2.1, unmodified).</p>
       </div>
     </div>
   </div>

@@ -168,6 +168,7 @@ loop talks to every proxy's runtime socket before touching the node.
 
 ```bash
 git clone https://github.com/keelinfra/keycloak && cd keycloak
+# set keycloak_version: 26.6.0 in examples/ha-3node.yml first (it defaults to the current release)
 ./configure -c examples/ha-3node.yml   # 3 clean Ubuntu 24.04 hosts + SSH
 ./install                              # ≈12 min: HA KC + PG HA + backups + monitoring
 ./verify --drill session               # login → rolling restart → session must survive

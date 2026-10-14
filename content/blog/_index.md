@@ -1,6 +1,6 @@
 +++
 title = "Blog"
-description = "Measured, not promised: probe logs, drills, and the numbers behind running Keycloak in production."
+description = "Measured, not promised: probe logs, drills, and the numbers behind running Keycloak and Jenkins build hosts in production."
 sort_by = "date"
 template = "blog.html"
 page_template = "blog-page.html"

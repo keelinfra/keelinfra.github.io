@@ -1,22 +1,23 @@
 +++
 title = "Help moving legacy build hosts to current Jenkins"
-description = "agent8 is free and open source. Write to us for help rolling it out: AIX, Solaris and HP-UX pilots, plugin compatibility on a Java 8 agent, and a free first look at which path each build host needs."
+description = "Agent8 is free and open source. Write to us for help rolling it out: AIX, Solaris and HP-UX pilots, plugin compatibility on a Java 8 agent, and a free first look at which path each build host needs."
 template = "assessment.html"
 
 [extra]
 subtitle = "First answer free · in writing · within two business days"
 +++
 
-[agent8](https://github.com/keelinfra/agent8) is free and open source, and you can roll it out
+[Agent8](https://github.com/keelinfra/agent8) is free and open source, and you can roll it out
 yourself: the README has the install script and an Ansible playbook, and
 [GitHub issues](https://github.com/keelinfra/agent8/issues) are the place for bugs.
 
 Write to us when that is not enough:
 
-- **Your hosts run AIX, Solaris or HP-UX.** agent8 has not been verified there yet. We run it
+- **Your hosts run AIX, Solaris or HP-UX.** Agent8 has not been verified there yet. We run it
   with you on your platform as a pilot, and fix what breaks.
-- **You need to know whether your plugins work.** Plugins that run code on agents, such as
-  git, Maven or credentials binding, are the main open risk on a Java 8 agent. We check the
+- **You need to know whether your plugins work.** Plugins that run their own code on agents
+  are the main open risk on a Java 8 agent. CI tests Git checkout (JGit) and credentials
+  binding; others, such as Maven, Docker or command-line git, still need testing. We check the
   ones your builds use.
 - **You have many hosts, or you need support you can put in a contract.**
 - **You are not sure which path each host needs.** Some can run a normal Java 21 agent, some
