@@ -67,28 +67,13 @@
   <div class="wrap">
     <div class="kicker">How it works</div>
     <h2 style="max-width:26ch">The controller upgrades. The build host doesn't have to.</h2>
-    <div class="flow">
-      <div class="node">
-        <div class="role">Controller</div>
-        <div class="what">Current Jenkins LTS</div>
-        <span class="tag">Java 21 / 25</span>
-        <p>Upgraded on schedule, with its security fixes.</p>
-      </div>
-      <div class="link"><span>remoting</span><span class="below">same protocol</span></div>
-      <div class="node main">
-        <div class="role">Agent8 jar</div>
-        <div class="what">The Jenkins agent, built for old Java</div>
-        <span class="tag">one release per Jenkins version</span>
-        <p>Starts the Java agents it needs itself.</p>
-      </div>
-      <div class="link short"></div>
-      <div class="node">
-        <div class="role">Build host</div>
-        <div class="what">AIX 7.1, RHEL 6, Solaris</div>
-        <span class="tag agent8">Java 8 / 11 / 17</span>
-        <p>Keeps its OS, its toolchain and its Java.</p>
-      </div>
-    </div>
+    <figure class="how-anim">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="/assets/agent8-how-it-works-dark.svg">
+        <img src="/assets/agent8-how-it-works-light.svg" width="960" height="400"
+             alt="Without Agent8, Jenkins' agent.jar needs Java 21 and a Java 8 build host cannot connect. install.sh asks the controller which agent it ships, downloads the matching Agent8 jar, checks its sha256 and swaps it in. The host runs the same java -jar agent.jar on Java 8, connects and runs builds.">
+      </picture>
+    </figure>
     <h3 style="margin-top:56px;font-size:20px">What keeps working on the old host</h3>
     <ul class="checks check-grid">
       <li>Labels and executors</li>

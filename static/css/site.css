@@ -352,3 +352,5 @@ footer .legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
 .checks.check-grid{display:grid;gap:12px}
 #support .lead .textlink{font-size:inherit}
 .hero .sub code,.step code,.faq code,h2 code{font-size:.92em}
+.how-anim{margin-top:36px}
+.how-anim img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
