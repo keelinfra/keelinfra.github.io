@@ -57,7 +57,7 @@ own Java or the Java its vendor certifies for it.
 | Platform | Java 8 | Java 11 | Java 17 / 21 | Sources |
 |---|---|---|---|---|
 | RHEL 5 | Oracle JDK 8 only; certified for 5.5+, now listed as no longer supported. Red Hat's own OpenJDK stops at 7 | no | no | [Oracle JDK 8 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk8-jre8-certconfig.html), [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
-| RHEL / CentOS 6 | yes. Red Hat's OpenJDK 8 (from 6.6) is retired, last update 1.8.0_275, and not part of ELS; Temurin 8 runs on CentOS 6.10 | Oracle JDK 11 was certified, now no longer supported | **x86_64: yes, Amazon Corretto 17 and 21** (Corretto 25 needs RHEL 7+) | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), [Amazon Corretto FAQ](https://aws.amazon.com/corretto/faqs/) |
+| RHEL / CentOS 6 | yes. Red Hat's OpenJDK 8 (from 6.6) is retired, last update 1.8.0_275, and not part of ELS; Temurin 8 runs on CentOS 6.10 | Oracle JDK 11 was certified, now no longer supported | **x86_64: yes, Amazon Corretto 21 and Azul Zulu 21** (tested on CentOS 6.10); Temurin 21 does not start (glibc 2.14), Corretto 25 needs RHEL 7+ | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), [Amazon Corretto FAQ](https://aws.amazon.com/corretto/faqs/) |
 | RHEL 7 | yes (Red Hat, 7.1+) | yes (Red Hat, 7.6+) | not from Red Hat | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
 | AIX 7.1 | yes: IBM SDK, Java Technology Edition 8, on 7100-03 or later | no | no | [IBM Java for AIX](https://www.ibm.com/support/pages/java-sdk-aix), [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
 | AIX 7.2 TL5+, AIX 7.3 TL2+ (POWER8 or later) | yes | yes | **yes: IBM Semeru 17 and 21** | [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
@@ -91,9 +91,10 @@ Then each host takes one of these paths:
 
 - **AIX 7.2 TL5+ or 7.3 TL2+ on POWER8 or later:** install IBM Semeru 21 and run a normal
   agent. It needs the XL C++ Runtime 16.1.0.10 or later. Nothing else is required.
-- **RHEL / CentOS 6 x86_64:** install Amazon Corretto 21 and run a normal agent. Corretto 17
-  and 21 list RHEL 6+ as supported; Corretto 25 needs RHEL 7+, so this lasts until Jenkins
-  requires Java 25.
+- **RHEL / CentOS 6 x86_64:** install Amazon Corretto 21 or Azul Zulu 21 and run a normal
+  agent. The OS repositories stop at OpenJDK 8, and Temurin 21 does not start on CentOS 6,
+  but these two do: the stock agent connected to the current LTS and ran a build from
+  CentOS 6.10. Corretto 25 needs RHEL 7+, so this lasts until Jenkins requires Java 25.
 - **RHEL / CentOS 6, if what you need is the old glibc and toolchain:** you can build in a
   container image of that userland on a current Linux agent instead. This keeps the old
   binaries compatible without keeping the old machine.
