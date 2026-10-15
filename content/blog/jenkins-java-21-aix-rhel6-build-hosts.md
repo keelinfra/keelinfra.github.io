@@ -1,7 +1,7 @@
 +++
 title = "Jenkins requires Java 21. What happens to your AIX 7.1 and RHEL 6 build hosts?"
 date = 2026-10-13
-description = "Jenkins needs Java 21 on the controller and on every agent. AIX 7.1, RHEL 6, Solaris and HP-UX cannot run it, so their teams stay on Jenkins 2.346.3. Where each Jenkins version is locked, the highest Java each legacy platform can run, with sources, and Agent8: a Jenkins agent that runs on Java 8."
+description = "Jenkins needs Java 21 on the controller and on every agent. AIX 7.1, Solaris and HP-UX cannot run it, so their teams stay on Jenkins 2.346.3. Where each Jenkins version is locked, the highest Java each legacy platform can run, with sources, and Agent8: a Jenkins agent that runs on Java 8."
 +++
 
 Plenty of companies ship software on a long tail of platforms. Besides mainstream Linux there is
@@ -57,7 +57,7 @@ own Java or the Java its vendor certifies for it.
 | Platform | Java 8 | Java 11 | Java 17 / 21 | Sources |
 |---|---|---|---|---|
 | RHEL 5 | Oracle JDK 8 only; certified for 5.5+, now listed as no longer supported. Red Hat's own OpenJDK stops at 7 | no | no | [Oracle JDK 8 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk8-jre8-certconfig.html), [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
-| RHEL / CentOS 6 | yes. Red Hat's OpenJDK 8 (from 6.6) is retired, last update 1.8.0_275, and not part of ELS; Temurin 8 runs on CentOS 6.10 | Oracle JDK 11 was certified, now no longer supported | no | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html) |
+| RHEL / CentOS 6 | yes. Red Hat's OpenJDK 8 (from 6.6) is retired, last update 1.8.0_275, and not part of ELS; Temurin 8 runs on CentOS 6.10 | Oracle JDK 11 was certified, now no longer supported | **x86_64: yes, Amazon Corretto 17 and 21** (Corretto 25 needs RHEL 7+) | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013), [Oracle JDK 11 certified systems](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), [Amazon Corretto FAQ](https://aws.amazon.com/corretto/faqs/) |
 | RHEL 7 | yes (Red Hat, 7.1+) | yes (Red Hat, 7.6+) | not from Red Hat | [Red Hat OpenJDK lifecycle](https://access.redhat.com/articles/1299013) |
 | AIX 7.1 | yes: IBM SDK, Java Technology Edition 8, on 7100-03 or later | no | no | [IBM Java for AIX](https://www.ibm.com/support/pages/java-sdk-aix), [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
 | AIX 7.2 TL5+, AIX 7.3 TL2+ (POWER8 or later) | yes | yes | **yes: IBM Semeru 17 and 21** | [IBM Semeru supported environments](https://www.ibm.com/support/pages/node/6451203) |
@@ -65,11 +65,11 @@ own Java or the Java its vendor certifies for it.
 | HP-UX 11i v3, Integrity (Itanium) | yes: HPE JDK 8 | not established | no | [HPE community: Java versions for HP-UX](https://community.hpe.com/t5/operating-system-hp-ux/may-i-know-which-is-the-latest-version-of-java-hp-ux-supportable/m-p/7045100/highlight/true) |
 | HP-UX, PA-RISC | no: the last PA-RISC build in HPE's list is JDK 7 | no | no | same |
 
-Checked 2026-10-13. Two things stand out.
+Checked 2026-10-13; RHEL 6 row corrected 2026-10-15. Two things stand out.
 
-**Java 8 runs almost everywhere. Java 21 runs on almost none of them.** AIX 7.1 is a common
+**Java 8 runs almost everywhere. Java 21 runs on few of them.** AIX 7.1 is a common
 example: it is often described as unable to run modern Java, but IBM's Java 8 supports it. What
-it cannot run is anything newer. The same is true of RHEL 6, Solaris and HP-UX on Itanium.
+it cannot run is anything newer. The same is true of Solaris and HP-UX on Itanium.
 
 **A few hosts are worse off.** On RHEL 5, the only Java 8 is Oracle JDK 8, no longer supported
 there, and Oracle JDK 8 updates need an Oracle subscription for commercial use. HP-UX on
@@ -91,11 +91,14 @@ Then each host takes one of these paths:
 
 - **AIX 7.2 TL5+ or 7.3 TL2+ on POWER8 or later:** install IBM Semeru 21 and run a normal
   agent. It needs the XL C++ Runtime 16.1.0.10 or later. Nothing else is required.
+- **RHEL / CentOS 6 x86_64:** install Amazon Corretto 21 and run a normal agent. Corretto 17
+  and 21 list RHEL 6+ as supported; Corretto 25 needs RHEL 7+, so this lasts until Jenkins
+  requires Java 25.
 - **RHEL / CentOS 6, if what you need is the old glibc and toolchain:** you can build in a
   container image of that userland on a current Linux agent instead. This keeps the old
   binaries compatible without keeping the old machine.
-- **AIX 7.1, RHEL 6 hosts you have to keep, Solaris, HP-UX on Itanium:** these can run Java 8
-  and nothing newer. That is the gap Agent8 is for.
+- **AIX 7.1, Solaris, HP-UX on Itanium:** these can run Java 8 and nothing newer. RHEL 6
+  hosts whose installed JDK must not change are in the same place. That is the gap Agent8 is for.
 
 ## Agent8: a Jenkins agent that runs on Java 8
 
