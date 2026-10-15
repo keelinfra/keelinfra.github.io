@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a 3-node HA install."
 weight = 8
 [extra]
 source_repo_path = "examples/ha-3node.yml"
-source_sha = "eb8819b"
+source_sha = "88206d8"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@eb8819b (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@88206d8 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a production 3-node HA install — this is the only file you edit. Run `./configure -c examples/ha-3node.yml` against it.
 
@@ -51,4 +51,31 @@ tls_mode: selfsigned
 # tls_cert_file: tls/sso.example.com.crt   # PEM: server certificate, then intermediates
 # tls_key_file: tls/sso.example.com.key    # PEM private key, no passphrase
 # tls_ca_file: tls/internal-ca.crt         # optional: private CA to trust on the nodes
+
+# Off-site backup copy (optional, recommended for production). Without it,
+# backups live only on the first node: lose that node's disk and you lose
+# them too. With it, pgBackRest also keeps an encrypted copy in any
+# S3-compatible bucket (AWS S3, or a self-hosted store). The access key is
+# read from the environment when you run ./configure, never from this file:
+#   KEELINFRA_S3_ACCESS_KEY=... KEELINFRA_S3_SECRET_KEY=... ./configure -c <this file>
+# backup_s3:
+#   endpoint: s3.eu-central-1.amazonaws.com   # host or host:port
+#   region: eu-central-1
+#   bucket: acme-keycloak-backups
+#   uri_style: host          # "path" for most self-hosted stores
+#   # path: /keycloak-prod   # optional, defaults to /<cluster_name>
+#   # retention_full: 4      # optional, weekly full backups kept in the bucket
+#   # ca_file: tls/s3-ca.crt # optional: private CA of a self-hosted store
+
+# Where alerts go (optional). Without it, alerts are visible in Alertmanager
+# and Grafana on the first node, but nobody is notified. Check delivery with
+# ./verify --drill alert. The SMTP password, if any, comes from
+# KEELINFRA_SMTP_PASSWORD when you run ./configure.
+# alerting:
+#   webhook_url: https://hooks.example.com/keycloak   # Alertmanager webhook JSON
+#   email:
+#     to: oncall@example.com
+#     from: keycloak-alerts@example.com
+#     smarthost: smtp.example.com:587
+#     username: keycloak-alerts@example.com
 ```
