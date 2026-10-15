@@ -14,7 +14,8 @@ long the service window is and whether logged-in users survive it, while there i
 to do something about it.
 
 It is the same drill this distribution runs on
-[every upgrade path it lists](/docs/keycloak/upgrades/), every night, in public CI. The
+[every upgrade path it lists](/docs/keycloak/upgrades/) (all but one, kept as a record), every
+night, in public CI. The
 difference is that this one carries your realm instead of a test realm.
 
 ## When it is worth paying for
@@ -22,7 +23,8 @@ difference is that this one carries your realm instead of a test realm.
 - You are on 26.7 or earlier.
   [26.8.0](https://github.com/keycloak/keycloak/releases/tag/26.8.0) shipped on 2026-10-01
   and upstream supports one release at a time, so the fixes now land ahead of you.
-- You are on a stream with no community artifacts (26.2, 26.4, 26.6), and the way to a
+- You are on a stream with no community artifacts (26.2, 26.4, 26.6, and now 26.7 after
+  26.7.5), and the way to a
   patched version is a minor upgrade nobody on your team has run.
 - Your realm is not a default one: custom providers, custom authentication flows or themes,
   LDAP or Active Directory federation, SAML or OIDC brokering.

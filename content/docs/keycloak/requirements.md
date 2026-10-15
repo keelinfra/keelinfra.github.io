@@ -8,8 +8,9 @@ weight = 1
 
 - **1 or 3 Linux nodes.** Three for production HA; one for evaluation, dev, or small internal
   setups (no HA — see [the growth caveat](/docs/keycloak/install-single-node/)).
-- **Supported OS:** Ubuntu 22.04 / 24.04, RHEL/Rocky 9, Debian 12.
-- **SSH access with sudo** from your control node (key or agent based — password auth is not
+- **Supported OS:** Ubuntu 24.04, tested in CI. Ubuntu 22.04 and Debian 12 are untested. RHEL
+  and Rocky are not supported yet: the roles install packages with apt.
+- **SSH access with passwordless sudo** from your control node (key or agent based — password auth is not
   supported).
 - That's it. Ansible runs from the control node; **nothing is pre-installed on the targets.**
 
@@ -24,7 +25,7 @@ Any machine with `ansible-core` and SSH access to the targets — your laptop wo
 - Users reach `https://<domain>/` on any node, the optional keepalived VIP, or your external
   load balancer.
 - Outbound internet access at install time to fetch upstream artifacts (the planned
-  [air-gapped bundle](/pricing/) removes this).
+  [air-gapped bundle](/keycloak/pricing/#subscription) would remove this).
 
 ## Sizing
 

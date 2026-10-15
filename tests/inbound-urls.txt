@@ -25,3 +25,6 @@
 /compare/managed-keycloak/
 /sitemap.xml
 /jenkins/
+/jenkins/pricing/
+/blog/keycloak-critical-fix-no-release/
+/blog/keycloak-26-7-3-cve-triage/

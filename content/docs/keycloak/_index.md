@@ -16,9 +16,9 @@ features. Source: [github.com/keelinfra/keycloak](https://github.com/keelinfra/k
 |---|---|
 | **Keycloak** | Official upstream release under systemd; `jdbc-ping` clustering; DB-persisted sessions |
 | **PostgreSQL + Patroni + etcd** | Database HA with automatic leader failover |
-| **HAProxy** (+ optional keepalived VIP) | Load balancing and TLS on every node |
-| **pgBackRest** | Encrypted scheduled backups, WAL archiving, point-in-time recovery |
-| **Prometheus + Grafana** | Metrics, dashboards, and alert rules |
+| **HAProxy** (+ optional keepalived VIP) | Load balancing with TLS passthrough on every node |
+| **pgBackRest** | Encrypted scheduled backups, with WAL archiving for point-in-time recovery |
+| **Prometheus + Grafana** | Metrics and alert rules; Grafana comes with the Prometheus data source, no dashboards yet |
 | **keycloak-config-cli** | Realms, clients, roles as declarative config |
 
 No containers, no operator, no Kubernetes. Ansible runs from your control node; nothing is
