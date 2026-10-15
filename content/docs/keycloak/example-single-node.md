@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a single-node install."
 weight = 9
 [extra]
 source_repo_path = "examples/single-node.yml"
-source_sha = "45fb25b"
+source_sha = "eb8819b"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@45fb25b (examples/single-node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@eb8819b (examples/single-node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a single-node install (no HA — evaluation, dev, or small internal setups). Run `./configure -c examples/single-node.yml` against it.
 
@@ -41,6 +41,11 @@ vip: ""
 keycloak_version: "26.8.1"
 
 # TLS: "selfsigned" generates a local CA and certs (good for eval/intranet).
-# Set to "custom" and drop your cert/key at files/tls/<domain>.crt|.key for production.
+# "custom" uses your own certificate for <domain>; ./configure checks that it
+# is not expired, lists the domain, and matches the key. Paths are relative to
+# this file. Traffic between the nodes is not encrypted yet.
 tls_mode: selfsigned
+# tls_cert_file: tls/sso.example.com.crt   # PEM: server certificate, then intermediates
+# tls_key_file: tls/sso.example.com.key    # PEM private key, no passphrase
+# tls_ca_file: tls/internal-ca.crt         # optional: private CA to trust on the nodes
 ```
