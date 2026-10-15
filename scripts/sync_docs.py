@@ -21,6 +21,7 @@ REPO_URL = "https://github.com/keelinfra/keycloak"
 # Relative links inside repo markdown → site or GitHub targets.
 LINK_MAP = {
     "UPGRADES.md": "/docs/keycloak/upgrades/",
+    "DEPLOYMENT.md": "/docs/keycloak/deployment/",
     "SECURITY.md": "/docs/keycloak/security/",
     "CVE-POLICY.md": "/docs/keycloak/cve-policy/",
     "LICENSE": f"{REPO_URL}/blob/main/LICENSE",
@@ -75,6 +76,10 @@ def gen_example_page(src_dir, rel, title, weight, description, intro, sha):
 
 def generate(src_dir, sha):
     return {
+        "deployment.md": gen_markdown_page(
+            src_dir, "DEPLOYMENT.md", "Deployment guide", 4,
+            "Putting a 3-node cluster into production: what runs where, the ports to open, off-site backups, alert routing, the drills that prove each piece, and the known gaps.",
+            sha),
         "upgrades.md": gen_markdown_page(
             src_dir, "UPGRADES.md", "Upgrades", 5,
             "Supported upgrade paths, strategies, and measured service windows — every path is executed end-to-end before it is listed, and re-proven nightly in CI.",

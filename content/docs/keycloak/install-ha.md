@@ -49,4 +49,5 @@ load balancer. With `tls_mode: selfsigned`, trust the generated local CA in your
 ```
 
 Run the [full drill set](/docs/keycloak/verify/) before you put traffic on it — that's what it's
-for.
+for. For production, the [deployment guide](/docs/keycloak/deployment/) covers the ports to open,
+the off-site backup copy, alert routing, and the known gaps.
