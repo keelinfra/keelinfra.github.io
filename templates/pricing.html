@@ -13,7 +13,7 @@
     <h1>The distribution is free.<br>You pay for people and guarantees.</h1>
     <p class="sub">Everything the distribution does is open source, Apache-2.0, with no gated
     features and no open-core split. Money changes hands when you want our hands: deployment,
-    migration, emergencies — or the per-node subscription.</p>
+    migration, emergencies — or the per-cluster subscription.</p>
   </div>
 </header>
 
@@ -59,23 +59,44 @@
 <section id="subscription" style="padding-top:24px">
   <div class="wrap">
     <div class="kicker">Subscription</div>
-    <h2>Self-hosted subscription — $1,500 per node, per year</h2>
+    <h2>Self-hosted subscription — $4,500 per production cluster, per year</h2>
     <p class="lead">For teams that run the distribution themselves and want someone on the hook for
-    the boring, critical parts:</p>
-    <div class="grid">
-      <div class="card"><h3>Offline / air-gapped bundles</h3><p>All install and upgrade artifacts packaged for environments with no internet at deploy time.</p></div>
-      <div class="card"><h3>CVE notification and analysis</h3><p>A note when a release lands that affects the version you run, analysis of which fixes reach your configuration, and help upgrading along a drilled path. No backported patches; see the <a href="/docs/keycloak/cve-policy/">CVE policy</a>.</p></div>
-      <div class="card"><h3>Tested upgrade runbooks</h3><p>Step-by-step runbooks for every supported path — the same ones our nightly CI matrix executes.</p></div>
-      <div class="card"><h3>Direct access</h3><p>You talk to the engineers who build keelinfra, not an account manager. EU business hours.</p></div>
+    the boring, critical parts. Priced per cluster, not per user: growth costs you nothing.</p>
+    <div class="svc">
+      <div class="card">
+        <h3>Standard</h3>
+        <div class="price">$4,500 <small>per production cluster, per year</small></div>
+        <ul>
+          <li>Up to 3 Keycloak nodes; each extra Keycloak node $1,500/year</li>
+          <li>Database nodes, staging and test clusters are not counted</li>
+          <li>CVE notification and analysis for the version you run (<a href="/docs/keycloak/cve-policy/">CVE policy</a>; no backported patches)</li>
+          <li>Tested upgrade runbooks: the same paths our nightly CI executes</li>
+          <li>Offline / air-gapped bundles, included as soon as they ship</li>
+          <li>Email the engineers who build it, EU business hours</li>
+        </ul>
+        <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Standard%20subscription">Subscribe</a>
+      </div>
+      <div class="card">
+        <h3>Enterprise</h3>
+        <div class="price">from $12,000 <small>per production cluster, per year</small></div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>One <a href="/upgrade-drill/">upgrade drill</a> a year on your realm configuration ($4,000 on its own)</li>
+          <li>A named engineer and a yearly architecture review</li>
+          <li>A reply by the next EU business day</li>
+          <li>Help with security questionnaires and compliance paperwork</li>
+        </ul>
+        <a class="btn btn-ghost" href="mailto:hello@keelinfra.io?subject=Enterprise%20subscription">Talk to us</a>
+      </div>
     </div>
     <div class="teaser">
       <div class="t-main">
-        <h3>Early access</h3>
-        <p>Priced per node, not per user — a 3-node HA cluster is <strong>$4,500/year</strong> no
-        matter how many people log in. Subscriptions open when the air-gapped bundle ships; joining
-        the early-access list locks this price.</p>
+        <h3>Founding customers</h3>
+        <p>Subscriptions are open now. The first five customers keep this price for as long as they
+        renew. The offline bundle is still being built; it joins both tiers at no extra cost
+        when it ships.</p>
       </div>
-      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription%20early%20access">Join the list</a>
+      <a class="btn btn-primary" href="mailto:hello@keelinfra.io?subject=Subscription">Email us</a>
     </div>
   </div>
 </section>
@@ -85,10 +106,10 @@
     <div class="kicker">FAQ</div>
     <h2>Straight answers</h2>
     <div class="grid">
-      <div class="card"><h3>Do I need the subscription to run keelinfra?</h3><p>No. The distribution is complete without it — install, upgrades, drills, monitoring, everything. The subscription adds offline bundles, CVE guidance and people.</p></div>
-      <div class="card"><h3>Per node vs per user — the math</h3><p>A 3-node HA cluster serving 50,000 users is $4,500/year. A managed tier at $599/month is $7,188/year before add-ons — and per-MAU vendors charge multiples of that. Growth costs you nothing here.</p></div>
+      <div class="card"><h3>Do I need the subscription to run keelinfra?</h3><p>No. The distribution is complete without it — install, upgrades, drills, monitoring, everything. The subscription adds CVE guidance, runbooks and people, and offline bundles once they ship.</p></div>
+      <div class="card"><h3>Per cluster vs per user — the math</h3><p>A 3-node HA cluster serving 50,000 users is $4,500/year. A managed tier at $599/month is $7,188/year before add-ons — and per-MAU vendors charge multiples of that. Growth costs you nothing here.</p></div>
       <div class="card"><h3>What does "fixed scope" mean?</h3><p>We agree on the deliverables and the price before work starts. If it takes us longer, that's our problem, not your invoice.</p></div>
-      <div class="card"><h3>What are your support hours?</h3><p>EU business hours, by email. We usually reply within one business day, but the subscription carries no response-time guarantee, and emergency help is best-effort — we do not sell a 24/7 SLA we cannot staff honestly.</p></div>
+      <div class="card"><h3>What are your support hours?</h3><p>EU business hours, by email. We usually reply within one business day. Enterprise aims for the next business day; neither tier carries a contractual response-time SLA, and emergency help is best-effort — we do not sell a 24/7 SLA we cannot staff honestly.</p></div>
       <div class="card"><h3>Invoicing?</h3><p>Invoices on request, paid by bank transfer. No procurement portal required.</p></div>
     </div>
     <p class="note">Choosing between self-hosting and a managed vendor?

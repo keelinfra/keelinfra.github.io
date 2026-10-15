@@ -46,8 +46,8 @@ keelinfra is built for exactly the case Phase Two's self-hosted path treats as a
 monitoring, and tested upgrades are [Apache-2.0 open source](https://github.com/keelinfra/keycloak)
 with [public docs](/docs/keycloak/) — and the upgrade claims are
 [re-proven nightly in public CI](https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml).
-Nothing phones home to keelinfra ([grep the source](/security/)). The subscription, in early
-access, is [$1,500 per node per year](/keycloak/pricing/), not $3,500 per month.
+Nothing phones home to keelinfra ([grep the source](/security/)). The subscription is
+[$4,500 per production cluster per year](/keycloak/pricing/), not $3,500 per month.
 
 What Phase Two has that we don't: SOC 2/ISO certificates, a managed cloud, and their extension
 ecosystem. If those decide it, choose them — [the full comparison table](/compare/managed-keycloak/)
