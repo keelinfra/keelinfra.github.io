@@ -37,7 +37,7 @@ leave your infrastructure, "a SaaS identity provider is off the table by definit
 <tr><td><strong>Who carries the 2am pager</strong></td><td>You — with drills, runbooks, and a <a href="/keycloak/pricing/">$200/hr emergency line</a></td><td class="yes">Them (managed); you + retainer (self-hosted)</td><td class="yes">Them</td><td>You, alone</td></tr>
 <tr><td><strong>Time to first login</strong></td><td>~10 minutes — but you bring 1–3 VMs</td><td class="yes">Minutes, free trial</td><td class="yes">Minutes, free trial</td><td>Days to weeks</td></tr>
 <tr><td><strong>Compliance paperwork</strong></td><td>None from us — your data never reaches us; auditable source instead</td><td class="yes">SOC 2 Type II, ISO 27001</td><td class="yes">SOC 2, ISO 27001, HIPAA claimed; documented pentests &amp; subprocessors</td><td>Yours</td></tr>
-<tr><td><strong>Pricing model</strong></td><td>$0 OSS · <a href="/keycloak/pricing/">$1,500/node/yr</a> sub · fixed-scope services</td><td><a href="https://phasetwo.io/pricing/hosting/">$149–2,999/mo</a> by MAU; <a href="https://phasetwo.io/pricing/support/">support $3.5K–7.5K/mo</a></td><td><a href="https://skycloak.io/pricing/">$29–599/mo</a> by infrastructure + Enterprise</td><td>Your engineers' time</td></tr>
+<tr><td><strong>Pricing model</strong></td><td>$0 OSS · <a href="/keycloak/pricing/">$4,500/cluster/yr</a> sub · fixed-scope services</td><td><a href="https://phasetwo.io/pricing/hosting/">$149–2,999/mo</a> by MAU; <a href="https://phasetwo.io/pricing/support/">support $3.5K–7.5K/mo</a></td><td><a href="https://skycloak.io/pricing/">$29–599/mo</a> by infrastructure + Enterprise</td><td>Your engineers' time</td></tr>
 </tbody>
 </table></div>
 
