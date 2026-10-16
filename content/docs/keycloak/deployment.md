@@ -4,10 +4,10 @@ description = "Putting a 3-node cluster into production: what runs where, the po
 weight = 4
 [extra]
 source_repo_path = "DEPLOYMENT.md"
-source_sha = "88206d8"
+source_sha = "d02cb0f"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@88206d8 (DEPLOYMENT.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@d02cb0f (DEPLOYMENT.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 How to put a keelinfra Keycloak cluster into production: what runs where, what the network must
 allow, how backups leave the cluster, where alerts go, and how to prove each piece works before
