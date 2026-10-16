@@ -177,10 +177,11 @@ an old Java, starts it with the usual command, and checks:
 The Java 8 runs use Temurin 8 on CentOS 6.10, and OpenJ9 8 (IBM Semeru) on Linux, which is
 the JVM family of IBM Java 8 on AIX. Java 11 and Java 17 builds are tested on Linux against the current LTS.
 
-Not yet verified: **AIX with IBM Java 8, builds on Solaris, and HP-UX.** OpenJ9 on Linux covers
+Not yet verified: **AIX with IBM Java 8, and builds on Solaris and HP-UX.** OpenJ9 on Linux covers
 the JVM that AIX uses, but not AIX itself. Update, October 2026: on a real Solaris host with
-Oracle Java 8, Agent8 now installs and connects over SSH; the first run there found a problem with
-Solaris' signed security providers, which is fixed. We will publish build results
+Oracle Java 8 and a real HP-UX host on Itanium with HP Java 8, Agent8 now installs and connects
+over SSH; the first Solaris run found a problem with Solaris' signed security providers, which is
+fixed. We will publish build results
 when we have them. Until then, treat Agent8 as working on Linux with Java 8, not as proven on
 your platform.
 
