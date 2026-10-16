@@ -90,9 +90,10 @@
   <div class="wrap">
     <div class="kicker">Support</div>
     <h2>Where it runs today</h2>
-    <p class="lead">Linux is tested in CI on every change. AIX, Solaris and HP-UX are experimental
-    until they have run on real hardware; <a class="textlink" href="/jenkins-assessment/">tell us if
-    you can help verify one</a>.</p>
+    <p class="lead">Linux is tested in CI on every change. On real Solaris (Oracle Java 8),
+    Agent8 now installs and connects over SSH; builds there, and AIX and HP-UX, are still being
+    verified. <a class="textlink" href="/jenkins-assessment/">Tell us if you can help verify
+    one</a>.</p>
     <div class="table-scroll">
     <table class="status-table">
       <thead><tr><th>Build host</th><th>Java</th><th>Status</th></tr></thead>
@@ -101,7 +102,7 @@
         <tr><td>Linux, IBM Semeru (OpenJ9, the JVM family of IBM Java 8)</td><td class="mono">OpenJ9 8</td><td><span class="chip ok">Tested in CI · best effort</span></td></tr>
         <tr><td>Linux</td><td class="mono">HotSpot 11, 17</td><td><span class="chip ok">Tested in CI (LTS)</span></td></tr>
         <tr><td>AIX 7.1 / 7.2</td><td class="mono">IBM Java 8</td><td><span class="chip exp">Experimental</span></td></tr>
-        <tr><td>Solaris</td><td class="mono">Java 8, 11</td><td><span class="chip exp">Experimental</span></td></tr>
+        <tr><td>Solaris</td><td class="mono">Java 8, 11</td><td><span class="chip exp">Connects on real Solaris · experimental</span></td></tr>
         <tr><td>HP-UX</td><td class="mono">Java 8</td><td><span class="chip exp">Experimental</span></td></tr>
       </tbody>
     </table>
@@ -183,15 +184,17 @@
       </div>
       <div>
         <h3>What hasn't been tested yet?</h3>
-        <p>Real AIX, Solaris and HP-UX hosts; plugins that run their own code on the agent beyond
+        <p>Builds on real Solaris; real AIX and HP-UX hosts; plugins that run their own code on the agent beyond
         Git checkout (JGit) and credentials, such as Maven or Docker; and the Maven project type.
         The <a href="https://github.com/keelinfra/agent8#known-gaps">README</a> keeps the
         list.</p>
       </div>
       <div>
         <h3>Which launch methods work?</h3>
-        <p>Inbound agents, started with <code>java -jar agent.jar</code>. The SSH Build Agents
-        launcher copies its own jar to the host and isn't supported yet.</p>
+        <p>Inbound agents, started with <code>java -jar agent.jar</code>, and the SSH Build Agents
+        launcher: set the node's <em>Java Path</em> to the <code>java</code> file
+        <code>install.sh</code> writes, and it runs Agent8 instead of the stock jar the launcher
+        copies.</p>
       </div>
       <div>
         <h3>What is the license?</h3>
