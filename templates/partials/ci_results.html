@@ -1,0 +1,13 @@
+{# Included by templates/evidence.html. Last nights of the scheduled upgrade drills in keelinfra/keycloak, from
+   data/ci-results.json (scripts/fetch_ci.py, refreshed daily by deploy.yml). #}
+{% set ci = load_data(path="data/ci-results.json") %}
+{% for w in ci.workflows %}
+<h3 class="ci-title"><a href="{{ w.url }}">{{ w.file }}</a> <small>{{ w.what }}</small></h3>
+<div class="table-scroll"><table class="ci-nights">
+<thead><tr><th>Upgrade path</th><th>Strategy</th>{% for n in w.nights %}<th class="night"><a href="{{ n.url }}">{{ n.label }}</a></th>{% endfor %}</tr></thead>
+<tbody>
+{% for p in w.paths %}<tr><td class="path">{{ p.from }} → {{ p.to }}</td><td>{{ p.strategy }}</td>{% for r in p.results %}{% if r %}<td class="night {% if r.ok %}pass{% else %}fail{% endif %}"><a href="{{ r.url }}" title="{{ r.conclusion }}{% if r.minutes %}, {{ r.minutes }} min{% endif %}">{% if r.ok %}✓{% else %}✗{% endif %}</a></td>{% else %}<td class="night none" title="not in the matrix yet">–</td>{% endif %}{% endfor %}</tr>
+{% endfor %}
+</tbody></table></div>
+{% endfor %}
+<p class="ci-note">✓ passed, ✗ failed, – not in the matrix that night. Each mark links to the job's full log. Fetched from the GitHub Actions API on {{ ci.generated }}.</p>

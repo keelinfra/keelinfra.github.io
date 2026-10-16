@@ -354,3 +354,14 @@ footer .legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
 .hero .sub code,.step code,.faq code,h2 code{font-size:.92em}
 .how-anim{margin-top:36px}
 .how-anim img{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+/* evidence: last nights of the upgrade matrices (shortcodes/ci_results.html) */
+.ci-title{margin-top:28px;font-size:16px}
+.ci-title small{font-weight:400;color:var(--muted);font-size:13.5px;margin-left:6px}
+.ci-nights th.night,.ci-nights td.night{text-align:center;white-space:nowrap;padding-left:8px;padding-right:8px}
+.ci-nights td.path{white-space:nowrap;font-variant-numeric:tabular-nums}
+.ci-nights td.pass a{color:var(--ci-pass,#1a7f37);text-decoration:none;font-weight:700}
+.ci-nights td.fail a{color:var(--ci-fail,#cf222e);text-decoration:none;font-weight:700}
+.ci-nights td.none{color:var(--muted)}
+.ci-note{font-size:13.5px;color:var(--muted);margin-top:10px}
+@media (prefers-color-scheme: dark){:root{--ci-pass:#3fb950;--ci-fail:#f85149}}
+.ci-nights{width:100%}

@@ -3,6 +3,10 @@ name: deploy
 on:
   push:
     branches: [main]
+  schedule:
+    # After keelinfra/keycloak's nightly matrices (cron 01:47 and 03:17 UTC,
+    # often started late): refreshes the evidence page's last-seven-nights table.
+    - cron: "15 9 * * *"
   workflow_dispatch:
 
 permissions:
@@ -35,6 +39,11 @@ jobs:
 
       - name: Demo CSS must match its generator (no hand-edits)
         run: python3 scripts/gen_demo_css.py --check
+
+      - name: Nightly CI results for the evidence page (keeps the committed snapshot on failure)
+        run: python3 scripts/fetch_ci.py
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Build
         run: zola build
