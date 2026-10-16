@@ -1,7 +1,7 @@
 +++
 title = "Evidence"
 description = "Every claim keelinfra makes, and where its proof lives: public CI runs, published probe logs, and drills you can run against your own cluster."
-template = "page.html"
+template = "evidence.html"
 [extra]
 subtitle = "Every claim we make, and where its proof lives. If you find a claim on this site that isn't on this page, email us and we'll either add the receipt or delete the claim."
 +++
@@ -30,6 +30,13 @@ subtitle = "Every claim we make, and where its proof lives. If you find a claim 
 <a href="https://github.com/keelinfra/keycloak/actions/workflows/smoke.yml"><img src="https://github.com/keelinfra/keycloak/actions/workflows/smoke.yml/badge.svg" alt="smoke CI status"></a>
 <a href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml"><img src="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml/badge.svg" alt="upgrade matrix CI status"></a>
 </div>
+
+## The last seven nights
+
+Every supported upgrade path, every night, in public. The table is rebuilt
+from the GitHub Actions API each morning; a red mark stays here for a week.
+
+<!-- ci-results -->
 
 ## Claims we do not make (yet)
 

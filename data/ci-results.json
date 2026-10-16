@@ -1,0 +1,1301 @@
+{
+ "generated": "2026-10-16 17:41 UTC",
+ "workflows": [
+  {
+   "file": "ha-matrix.yml",
+   "what": "3 nodes, load balancer probed every second, then every drill",
+   "url": "https://github.com/keelinfra/keycloak/actions/workflows/ha-matrix.yml",
+   "nights": [
+    {
+     "date": "2026-10-10",
+     "label": "10-10",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503",
+     "ok": true
+    },
+    {
+     "date": "2026-10-11",
+     "label": "10-11",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898",
+     "ok": true
+    },
+    {
+     "date": "2026-10-12",
+     "label": "10-12",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508",
+     "ok": true
+    },
+    {
+     "date": "2026-10-13",
+     "label": "10-13",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724",
+     "ok": true
+    },
+    {
+     "date": "2026-10-14",
+     "label": "10-14",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816",
+     "ok": true
+    },
+    {
+     "date": "2026-10-15",
+     "label": "10-15",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603",
+     "ok": true
+    },
+    {
+     "date": "2026-10-16",
+     "label": "10-16",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147",
+     "ok": true
+    }
+   ],
+   "paths": [
+    {
+     "from": "26.8.0",
+     "to": "26.8.1",
+     "strategy": "rolling",
+     "results": [
+      null,
+      null,
+      null,
+      null,
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450374"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671345"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 14,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978043"
+      }
+     ]
+    },
+    {
+     "from": "26.7.5",
+     "to": "26.8.1",
+     "strategy": "stop-start",
+     "results": [
+      null,
+      null,
+      null,
+      null,
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450328"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671384"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 13,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978090"
+      }
+     ]
+    },
+    {
+     "from": "26.7.5",
+     "to": "26.8.0",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908734"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562953"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 14,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717743"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482563"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450314"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671370"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978007"
+      }
+     ]
+    },
+    {
+     "from": "26.7.3",
+     "to": "26.8.0",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908739"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562902"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 16,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717646"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482534"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450425"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671338"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 13,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978045"
+      }
+     ]
+    },
+    {
+     "from": "26.7.3",
+     "to": "26.7.5",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908855"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420563048"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 20,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717606"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482510"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450558"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671406"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 13,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978037"
+      }
+     ]
+    },
+    {
+     "from": "26.7.0",
+     "to": "26.7.5",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908835"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562950"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 16,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717662"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482488"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450451"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671363"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 14,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978066"
+      }
+     ]
+    },
+    {
+     "from": "26.6.7",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908747"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562957"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 17,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717674"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482514"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450458"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671317"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842977993"
+      }
+     ]
+    },
+    {
+     "from": "26.6.6",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908781"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420563096"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 17,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717766"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482665"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450431"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671396"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978004"
+      }
+     ]
+    },
+    {
+     "from": "26.6.2",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908786"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562942"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 15,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717569"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482515"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450478"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671689"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 13,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842977988"
+      }
+     ]
+    },
+    {
+     "from": "26.6.6",
+     "to": "26.6.7",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908749"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562930"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 18,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717772"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482525"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450548"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671495"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978010"
+      }
+     ]
+    },
+    {
+     "from": "26.6.4",
+     "to": "26.6.6",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908759"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562987"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 18,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717669"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482504"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450427"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671371"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 14,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842977992"
+      }
+     ]
+    },
+    {
+     "from": "26.6.0",
+     "to": "26.6.2",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908732"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562895"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 18,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717630"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482460"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450329"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671377"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 13,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842978017"
+      }
+     ]
+    },
+    {
+     "from": "26.2.5",
+     "to": "26.2.16",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38035476503/job/114164908787"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38122701898/job/114420562917"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 14,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38220911508/job/114716717670"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 10,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38369431724/job/115202482530"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 9,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38523825816/job/115719450389"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 11,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38692565603/job/116281671538"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 12,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38860978147/job/116842977979"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "file": "upgrade-matrix.yml",
+   "what": "single node: install, log in, upgrade, the session must refresh",
+   "url": "https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml",
+   "nights": [
+    {
+     "date": "2026-10-10",
+     "label": "10-10",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741",
+     "ok": true
+    },
+    {
+     "date": "2026-10-11",
+     "label": "10-11",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700",
+     "ok": true
+    },
+    {
+     "date": "2026-10-12",
+     "label": "10-12",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906",
+     "ok": true
+    },
+    {
+     "date": "2026-10-13",
+     "label": "10-13",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595",
+     "ok": true
+    },
+    {
+     "date": "2026-10-14",
+     "label": "10-14",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806",
+     "ok": true
+    },
+    {
+     "date": "2026-10-15",
+     "label": "10-15",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185",
+     "ok": true
+    },
+    {
+     "date": "2026-10-16",
+     "label": "10-16",
+     "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491",
+     "ok": true
+    }
+   ],
+   "paths": [
+    {
+     "from": "26.8.0",
+     "to": "26.8.1",
+     "strategy": "rolling",
+     "results": [
+      null,
+      null,
+      null,
+      null,
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900141"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379536"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132792"
+      }
+     ]
+    },
+    {
+     "from": "26.7.5",
+     "to": "26.8.1",
+     "strategy": "stop-start",
+     "results": [
+      null,
+      null,
+      null,
+      null,
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900144"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379566"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132873"
+      }
+     ]
+    },
+    {
+     "from": "26.7.5",
+     "to": "26.8.0",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930300"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948971"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865682"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374989"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900148"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379773"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132843"
+      }
+     ]
+    },
+    {
+     "from": "26.7.3",
+     "to": "26.8.0",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930333"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948894"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865668"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374850"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900125"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379551"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132884"
+      }
+     ]
+    },
+    {
+     "from": "26.7.3",
+     "to": "26.7.5",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930387"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948976"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865601"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374889"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900149"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379577"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132888"
+      }
+     ]
+    },
+    {
+     "from": "26.7.0",
+     "to": "26.7.5",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930359"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948933"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865804"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374796"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900079"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379708"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132748"
+      }
+     ]
+    },
+    {
+     "from": "26.6.7",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930293"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443949042"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865812"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374915"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900120"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379526"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132908"
+      }
+     ]
+    },
+    {
+     "from": "26.6.6",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930365"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948902"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865777"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254375009"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900203"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379575"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132816"
+      }
+     ]
+    },
+    {
+     "from": "26.6.2",
+     "to": "26.7.5",
+     "strategy": "stop-start",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930312"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948889"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865670"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374870"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900046"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379512"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132853"
+      }
+     ]
+    },
+    {
+     "from": "26.6.6",
+     "to": "26.6.7",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930368"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948966"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865710"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374913"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900111"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379547"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132769"
+      }
+     ]
+    },
+    {
+     "from": "26.6.4",
+     "to": "26.6.6",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930285"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948921"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865699"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374886"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900102"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379828"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132840"
+      }
+     ]
+    },
+    {
+     "from": "26.6.0",
+     "to": "26.6.2",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930289"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948910"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865679"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374821"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900168"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379664"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 6,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132918"
+      }
+     ]
+    },
+    {
+     "from": "26.2.5",
+     "to": "26.2.16",
+     "strategy": "rolling",
+     "results": [
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38043027741/job/114186930398"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38130597700/job/114443948996"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38239347906/job/114777865742"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38384950595/job/115254374873"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38537497806/job/115763900236"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 5,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38705065185/job/116322379545"
+      },
+      {
+       "ok": true,
+       "conclusion": "success",
+       "minutes": 4,
+       "url": "https://github.com/keelinfra/keycloak/actions/runs/38872325491/job/116879132761"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
