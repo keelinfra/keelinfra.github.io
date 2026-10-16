@@ -12,7 +12,7 @@ hosts stuck on Java 8, 11 or 17 connected to a current Jenkins controller.
 ## Deliberately small
 
 keelinfra is not a platform company with an account team. It's built by
-[Xianpeng Shen](https://shenxianpeng.dev/about/), an engineer in Vilnius, Lithuania, who wrote
+[Xianpeng Shen](https://shenxianpeng.dev/about/), an engineer based in Lithuania, who wrote
 every playbook in the distribution and publishes every claim with a receipt. When you email
 [hello@keelinfra.io](mailto:hello@keelinfra.io), the person who answers is the person who will do
 the work. For the buyer we serve, that's not a limitation; it's the point:
@@ -22,15 +22,19 @@ the work. For the buyer we serve, that's not a limitation; it's the point:
   [docs](/docs/keycloak/), the CI runs, the [claims ledger](/evidence/). A small company can't hide behind process, so we don't try.
 - **We say "you don't need us" when you don't.** Both products are complete without a
   subscription or a service engagement — that's by design.
-- **If keelinfra stopped tomorrow, nothing you run would stop.** The code is open source and runs
-  on your own machines, so you can keep it going yourself.
+- **If keelinfra stopped tomorrow, nothing you run would stop.** The code runs on your own machines,
+  and it is open source down to the build scripts
+  ([Keycloak builds](https://github.com/keelinfra/keycloak/blob/main/lts/build-from-tag.sh),
+  [Agent8](https://github.com/keelinfra/agent8/blob/main/build.sh)), so you can keep it going
+  yourself.
 
 ## Who builds it
 
 Xianpeng Shen maintains open-source tools for building and shipping software:
 
 - [cpp-linter](https://github.com/cpp-linter) — clang-format and clang-tidy on every pull request.
-  More than 1,000 repositories on GitHub depend on it.
+  More than 1,000 repositories on GitHub
+  [depend on it](https://github.com/cpp-linter/cpp-linter-action/network/dependents).
 - [explain-error-plugin](https://github.com/jenkinsci/explain-error-plugin) and
   [jenkinsfilelint](https://github.com/jenkinsci/jenkinsfilelint), in the jenkinsci organization.
   Agent8 itself is independent and not endorsed by the Jenkins project.
