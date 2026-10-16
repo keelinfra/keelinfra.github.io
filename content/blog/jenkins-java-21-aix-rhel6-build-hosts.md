@@ -177,8 +177,10 @@ an old Java, starts it with the usual command, and checks:
 The Java 8 runs use Temurin 8 on CentOS 6.10, and OpenJ9 8 (IBM Semeru) on Linux, which is
 the JVM family of IBM Java 8 on AIX. Java 11 and Java 17 builds are tested on Linux against the current LTS.
 
-Not yet verified: **AIX with IBM Java 8, Solaris, and HP-UX.** OpenJ9 on Linux covers the JVM
-that AIX uses, but not AIX itself. We will publish those results
+Not yet verified: **AIX with IBM Java 8, builds on Solaris, and HP-UX.** OpenJ9 on Linux covers
+the JVM that AIX uses, but not AIX itself. Update, October 2026: on a real Solaris host with
+Oracle Java 8, Agent8 now installs and connects over SSH; the first run there found a problem with
+Solaris' signed security providers, which is fixed. We will publish build results
 when we have them. Until then, treat Agent8 as working on Linux with Java 8, not as proven on
 your platform.
 
@@ -187,8 +189,9 @@ Known gaps:
 - A newer JDK API that JvmDowngrader cannot stub fails only when that code runs. Git checkout
   and credentials binding are tested; other plugins that run code on agents, such as Maven or
   Docker, still need testing.
-- Use an inbound agent for now. The SSH Build Agents plugin copies its own `remoting.jar` to
-  the host, and that jar does not run on Java 8.
+- SSH agents work since October 2026: the SSH Build Agents plugin copies its own `remoting.jar`
+  to the host on every launch, so set the node's *Java Path* to the `java` file `install.sh`
+  writes, which runs Agent8 instead.
 - The Maven project type (maven-plugin), which starts its own agent JVM, is untested.
 
 ## Try it, or get help
