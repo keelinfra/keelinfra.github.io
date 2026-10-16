@@ -45,7 +45,8 @@ version bump and document the operator actions in
 
 The distribution makes **no network calls to keelinfra** — no telemetry, no license checks, no
 registry pulls from our infrastructure. Artifacts are fetched from upstream project sources at
-install time (and the planned [air-gapped bundle](/keycloak/pricing/) would remove even that).
+install time, or from an [offline bundle](https://github.com/keelinfra/keycloak/blob/main/bundle/README.md) you build and carry in yourself, which removes
+even that.
 Grafana, installed from its upstream packages, keeps its default usage reporting; set
 `reporting_enabled = false` in `grafana.ini` if you want it off.
 
