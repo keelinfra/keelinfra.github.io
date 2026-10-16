@@ -164,11 +164,8 @@
       </div>
       <div>
         <h3>Why not run agent.jar on Java 21 and build with the old JDK?</h3>
-        <p>If the host can install Java 21, do exactly that: the agent's Java and the build's Java are
-        separate, and you don't need Agent8. Agent8 is for hosts that can't: AIX 7.1, HP-UX on
-        Itanium, Solaris 10, and hosts where nothing new may be installed. The usual workaround there,
-        copying the workspace over with scp and building over ssh, struggles with parallel builds and
-        aborts; with Agent8 the host is an ordinary node.</p>
+        <p>If the host can install Java 21, do that and keep building with the old JDK; you
+        don't need Agent8. It is for hosts that can't, such as AIX 7.1, HP-UX on Itanium and Solaris.</p>
       </div>
       <div>
         <h3>Why not run the build in a container?</h3>
