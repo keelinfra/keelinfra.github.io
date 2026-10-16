@@ -90,7 +90,7 @@
 <pre class="term"><span class="p">$</span> git clone https://github.com/keelinfra/keycloak &amp;&amp; cd keycloak
 <span class="p">$</span> ./configure -c examples/ha-3node.yml   <span class="c"># describe your nodes</span>
 <span class="p">$</span> ./install                              <span class="c"># then open https://&lt;your-host&gt;/admin</span></pre>
-    <p class="note">Requirements: 1 or 3 Linux nodes (Ubuntu 24.04, tested in CI), SSH access with
+    <p class="note">Requirements: 1 or 3 Linux nodes (Ubuntu 24.04 or Rocky Linux 9, both tested in CI), SSH access with
     passwordless sudo. That's it. Single machine instead? Use <code>examples/single-node.yml</code> —
     same flow, no HA. <a href="/docs/keycloak/install-ha/">Full install guide →</a></p>
   </div>
@@ -129,7 +129,7 @@
     <div class="kicker">Honesty</div>
     <h2>What it doesn't do (yet)</h2>
     <div class="grid">
-      <div class="card"><h3>RHEL and Rocky Linux</h3><p>Nodes run Ubuntu 24.04 today, online or from an offline bundle. RHEL and Rocky 9 support is being built; until CI installs on them, we don't claim it.</p></div>
+      <div class="card"><h3>SELinux, and offline RHEL</h3><p>Rocky Linux 9 installs and passes every drill in CI, but in containers, where SELinux is off. Enforcing mode is not tested yet, and offline bundles are Ubuntu-only. RHEL and AlmaLinux 9 take the Rocky path but are not in CI.</p></div>
       <div class="card"><h3>Single node → HA growth</h3><p>Growing from a single node to a 3-node cluster means a fresh 3-node install plus a realm import. Start with <code>ha-3node.yml</code> if HA is where you're headed.</p></div>
     </div>
     <p class="note">Everything else we claim is on <a href="/evidence/">the evidence ledger</a>, with receipts.</p>
