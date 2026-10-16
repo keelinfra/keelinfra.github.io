@@ -163,6 +163,12 @@
         the Jenkins tracker.</p>
       </div>
       <div>
+        <h3>Why not run agent.jar on Java 21 and build with the old JDK?</h3>
+        <p>If the host can install Java 21, do that and keep building with the old JDK; you
+        don't need Agent8. It is for hosts that can't, such as AIX 7.1, HP-UX on Itanium and Solaris. Not sure
+        which yours is? <a href="/jenkins-assessment/">Ask us</a>.</p>
+      </div>
+      <div>
         <h3>Why not run the build in a container?</h3>
         <p>That works for many RHEL 6 builds, and RHEL 6 x86_64 hosts can also install Amazon
         Corretto 21 or Azul Zulu 21 and run the stock agent. Neither covers builds that must run natively on AIX,
