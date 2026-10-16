@@ -10,8 +10,8 @@ weight = 1
   setups (no HA — see [the growth caveat](/docs/keycloak/install-single-node/)).
 - **Supported OS:** Ubuntu 24.04 and Rocky Linux 9, both tested in CI. RHEL 9 and AlmaLinux 9
   take the same path as Rocky but are not in CI; Ubuntu 22.04 and Debian 12 are untested. On the
-  RHEL family the install enables EPEL (pgBackRest needs a library from it), and SELinux in
-  enforcing mode is not tested yet.
+  RHEL family the install enables EPEL (pgBackRest needs a library from it), and SELinux stays
+  enforcing: a weekly test installs three real Rocky 9 VMs and fails on any SELinux denial.
 - **SSH access with passwordless sudo** from your control node (key or agent based — password auth is not
   supported).
 - That's it. Ansible runs from the control node; **nothing is pre-installed on the targets.**

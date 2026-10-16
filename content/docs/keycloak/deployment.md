@@ -147,8 +147,14 @@ restored.
 ## 3. Install
 
 ```bash
+./preflight    # optional: ./install runs the same checks first
 ./install
 ```
+
+Before anything changes, the install checks every node and lists every problem at once: OS,
+memory and disk, ports already taken, a node that doesn't own the address in `cluster.yml`, peers
+it can't reach, download sources, firewalls, clock skew, and a VIP outside the nodes' network or
+already in use. Failures stop the install; warnings only report.
 
 The playbooks run in order: OS preparation, etcd, PostgreSQL and Patroni, HAProxy, pgBackRest
 (including a first full backup to every repository), TLS material, Keycloak, realm
@@ -219,6 +225,11 @@ grouped by alert and node, repeating every 4 hours while it fires. Without `aler
 are only visible in Grafana and Alertmanager. Run `./verify --drill alert` after any change to
 the receivers.
 
+Each alert links to its section in
+[RUNBOOKS.md](https://github.com/keelinfra/keycloak/blob/main/RUNBOOKS.md): what it means,
+the commands to check, how to fix each likely cause, and when to get help. Set
+`alert_runbook_base` to point the links at your own copy.
+
 Grafana is on `http://<first node>:3000`, user `admin`, password `vault_grafana_admin_password`
 in the vault. The **keelinfra: Keycloak cluster** dashboard shows nodes up, PostgreSQL leader and
 replica lag, hours since the last backup per repository, logins and failed logins per realm, HTTP
@@ -247,8 +258,8 @@ ANSIBLE_VAULT_PASSWORD_FILE=inventory/.vault_pass ansible-vault view inventory/g
 Stated plainly, so you can plan around them:
 
 - Traffic between the nodes is not encrypted (see Network above).
-- Ubuntu 24.04 and Rocky Linux 9 are tested; RHEL and AlmaLinux 9 are not in CI. SELinux in
-  enforcing mode is untested, and offline bundles exist for Ubuntu only.
+- Ubuntu 24.04 and Rocky Linux 9 are tested; RHEL and AlmaLinux 9 are not in CI. Offline
+  bundles exist for Ubuntu only.
 - Monitoring and repository 1 live on the first node. Losing it stops backups and alerting until
   it returns; `backup_s3` keeps the backups safe, nothing yet keeps alerting up.
 - Prometheus and Grafana listen on all interfaces; restrict them with your firewall.
