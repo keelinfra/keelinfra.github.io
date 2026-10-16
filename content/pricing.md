@@ -1,12 +1,23 @@
 +++
 title = "Keycloak pricing"
-description = "The distribution is free and Apache-2.0. Fixed-scope services from $3,000, emergency help at $200/hour, and a self-hosted subscription from $4,500 per production cluster per year."
+description = "The distribution is free and Apache-2.0. A $400 health check, fixed-scope services from $3,000, emergency help at $200/hour, and a self-hosted subscription from $4,500 per production cluster per year."
 template = "pricing.html"
 path = "keycloak/pricing"
 aliases = ["/pricing/"]
 
 [extra]
 subscription_price = 4500
+
+# Shown on its own above the service cards: the small first step.
+[[extra.services]]
+name = "Keycloak health check"
+featured = true
+price = 400
+price_label = "$400"
+price_note = "fixed price"
+mailto = "mailto:hello@keelinfra.io?subject=Keycloak%20health%20check"
+cta = "Book a health check"
+blurb = "Send your Keycloak and database versions and a realm and config export with secrets removed, or walk us through your setup on a one-hour call. Within three business days you get a written report: which known CVEs reach your version and configuration, what in your clustering, proxy, hostname and database settings matches the failure modes we see in the field, where backups and restores have gaps, and the upgrade path we would take. Subscribe within 60 days and the $400 comes off your first year."
 
 [[extra.services]]
 name = "Upgrade drill"

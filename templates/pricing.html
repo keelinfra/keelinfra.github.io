@@ -36,8 +36,17 @@
     <div class="kicker">Services</div>
     <h2>Fixed-scope engagements, delivered by the engineer who builds the distribution</h2>
     <p class="lead">Every engagement ends with a written runbook your team keeps.</p>
+    {% for s in page.extra.services %}{% if s.featured %}
+    <div class="teaser" id="health-check">
+      <div class="t-main">
+        <h3>Not ready for a project? Start with a {{ s.name }} — {{ s.price_label }}, {{ s.price_note }}</h3>
+        <p>{{ s.blurb }}</p>
+      </div>
+      <a class="btn btn-primary" href="{{ s.mailto }}">{{ s.cta }}</a>
+    </div>
+    {% endif %}{% endfor %}
     <div class="svc">
-      {% for s in page.extra.services %}
+      {% for s in page.extra.services %}{% if not s.featured %}
       <div class="card">
         <h3>{{ s.name }}</h3>
         <div class="price">{{ s.price_label }} <small>{{ s.price_note }}</small></div>
@@ -47,7 +56,7 @@
         {% if s.details %}<p class="more"><a href="{{ s.details }}">How it works, and what it does not prove →</a></p>{% endif %}
         <a class="btn btn-ghost" href="{{ s.mailto }}">{{ s.cta }}</a>
       </div>
-      {% endfor %}
+      {% endif %}{% endfor %}
     </div>
     <p class="note">Based in the EU · invoices on request · response within one business day.
     Not sure which fits? Describe your situation at
