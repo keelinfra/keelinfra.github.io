@@ -16,6 +16,7 @@ subtitle = "Every claim we make, and where its proof lives. If you find a claim 
 <tr><td>Every upgrade path is drilled nightly on 3 nodes under load-balancer probes, then failover, restore and session drills run</td><td><a href="https://github.com/keelinfra/keycloak/actions/workflows/ha-matrix.yml">The HA matrix</a>: public GitHub Actions, cron 01:47 UTC, on a 3-node container rig</td><td class="when">nightly, in public</td></tr>
 <tr><td>Every supported upgrade path re-proves itself nightly</td><td><a href="https://github.com/keelinfra/keycloak/actions/workflows/upgrade-matrix.yml">The upgrade matrix</a>: public GitHub Actions, cron 03:17 UTC — install the old version, log in, upgrade, and the pre-upgrade session must still refresh</td><td class="when">nightly, in public</td></tr>
 <tr><td>A clean 3-node install takes ~10 minutes</td><td><a href="https://github.com/keelinfra/keycloak/actions/workflows/ha-smoke.yml">The HA smoke workflow</a> installs 3 nodes from scratch on every change to the roles — run durations are public</td><td class="when">every roles change</td></tr>
+<tr><td>A 3-node cluster installs and upgrades with no internet access on the nodes</td><td><a href="https://github.com/keelinfra/keycloak/actions/workflows/offline.yml">The offline workflow</a> builds <a href="https://github.com/keelinfra/keycloak/blob/main/bundle/README.md">offline bundles</a> for two releases, removes the nodes' default route, then installs from one, runs every drill, and rolls onto the next release from the other; a bundle missing the target version stops the upgrade before it touches the cluster</td><td class="when">every roles change and weekly</td></tr>
 <tr><td>Sessions survive a full rolling restart</td><td><code>./verify --drill session</code> — runs in CI on every commit, and on your cluster whenever you like</td><td class="when">every commit</td></tr>
 <tr><td>Backups actually restore</td><td><code>./verify --drill restore</code> — pgBackRest restores the latest backup to a scratch directory; CI runs it on every commit and nightly on 3 nodes, and you can run it on your own cluster</td><td class="when">every commit</td></tr>
 <tr><td>PostgreSQL fails over automatically</td><td><code>./verify --drill failover</code> — Patroni switchover with a write test through the load balancer; CI runs it on 3 nodes on every roles change and nightly</td><td class="when">nightly, in public</td></tr>
@@ -40,7 +41,6 @@ from the GitHub Actions API each morning; a red mark stays here for a week.
 
 ## Claims we do not make (yet)
 
-- **Air-gapped installs.** The offline bundle is planned and will ship with the [subscription](/keycloak/pricing/). Until it exists, we don't sell it.
 - **A single-node-to-HA growth path.** Growing from one node to three today means a fresh 3-node install plus a realm import. Documented, not hidden.
 - **An SLA.** We publish measurements, not promises. An uptime number without a public probe log is marketing.
 - **SOC 2 / ISO certification.** Certifications attest to how a vendor handles your data. Your data never reaches us — the code is auditable and the drills are runnable instead.
