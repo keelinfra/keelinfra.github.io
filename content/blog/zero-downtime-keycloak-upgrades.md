@@ -186,7 +186,7 @@ and the pre-upgrade session must still refresh.
 ---
 
 *keelinfra is an open-source (Apache-2.0), production-ready self-hosted Keycloak
-distribution. If you'd rather have the people who wrote this run your deployment,
+distribution. If you'd rather have the engineer who wrote this run your deployment,
 migration, or a very bad Keycloak day: [keelinfra.io](https://keelinfra.io) ·
 hello@keelinfra.io.*
 
