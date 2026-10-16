@@ -42,7 +42,7 @@ cta = "Ask about Standard"
 bullets = [
   "A tested Agent8 build within five business days of every Jenkins LTS",
   "Your installed build checked against each upcoming LTS, with a warning before it would be refused",
-  "Email support from the people who build Agent8, reply within two business days",
+  "Email support from the engineer who builds Agent8, reply within two business days",
   "Help with each controller upgrade across your hosts",
 ]
 
