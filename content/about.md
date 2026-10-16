@@ -11,7 +11,7 @@ hosts stuck on Java 8, 11 or 17 connected to a current Jenkins controller.
 
 ## Deliberately small
 
-keelinfra is not a platform company with an account team. It's built by
+keelinfra is not a platform vendor with an account team. It's built by
 [Xianpeng Shen](https://shenxianpeng.dev/about/), an engineer based in Lithuania, who wrote
 every playbook in the distribution and publishes every claim with a receipt. When you email
 [hello@keelinfra.io](mailto:hello@keelinfra.io), the person who answers is the person who will do
@@ -19,7 +19,7 @@ the work. For the buyer we serve, that's not a limitation; it's the point:
 
 - **You talk to the engineer, not an account manager.**
 - **Everything is in the open** — the [code](https://github.com/keelinfra), the
-  [docs](/docs/keycloak/), the CI runs, the [claims ledger](/evidence/). A small company can't hide behind process, so we don't try.
+  [docs](/docs/keycloak/), the CI runs, the [claims ledger](/evidence/). At this size there's no process to hide behind, so we don't try.
 - **We say "you don't need us" when you don't.** Both products are complete without a
   subscription or a service engagement — that's by design.
 - **If keelinfra stopped tomorrow, nothing you run would stop.** The code runs on your own machines,
