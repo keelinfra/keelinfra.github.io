@@ -1,6 +1,6 @@
 +++
 title = "Security & verifiability"
-description = "How to report vulnerabilities in keelinfra, what ships secure by default, how it maps to NIS2 and DORA reviews, and why nothing phones home."
+description = "How to report vulnerabilities in keelinfra, what ships secure by default, how it maps to NIS2, DORA and the Cyber Resilience Act, and why nothing phones home."
 template = "page.html"
 +++
 
@@ -69,6 +69,26 @@ systems a NIS2 or DORA review looks at, and these are the questions it asks:
 The backup, restore and TLS claims are re-checked in public CI: [the evidence ledger](/evidence/).
 If your auditor wants something not listed here, [ask us](mailto:hello@keelinfra.io?subject=NIS2%2FDORA%20question).
 
+## Cyber Resilience Act
+
+The EU Cyber Resilience Act puts security duties on whoever sells software in the EU. Its
+reporting duties apply since 11 September 2026; the rest from 11 December 2027. keelinfra sells
+subscriptions for the distribution and its Keycloak builds, so we treat ourselves as their
+manufacturer and do now what the act will require:
+
+- **SBOM with every new release.** A CycloneDX file listing what the release contains or installs.
+- **Signed provenance.** `gh attestation verify <file> --repo keelinfra/keycloak` shows a download
+  came unmodified from our public release workflow.
+- **Free security updates**, for everyone, until at least 31 December 2031, with a public advisory
+  for each fix.
+- **Reporting.** An actively exploited vulnerability in our products goes to ENISA within 24 hours,
+  and to you at the same time.
+
+What we meet, what is still open, and how we read the act:
+[CRA.md](https://github.com/keelinfra/keycloak/blob/main/CRA.md). If you ship software into the EU
+and want to know what it means for your own release pipeline,
+[ask us](mailto:hello@keelinfra.io?subject=CRA%20question).
+
 ## What we don't have
 
 No SOC 2, no ISO 27001 badge. Those certifications attest to how a vendor handles your data — and
@@ -78,5 +98,6 @@ What we offer instead is auditable source and reproducible drills:
 
 ## Supported versions
 
+The distribution is supported until at least 31 December 2031, and security updates are free.
 Until tagged releases begin, the latest commit on `main` is the supported version and security
-fixes land there.
+fixes land there. Details: [SECURITY.md](https://github.com/keelinfra/keycloak/blob/main/SECURITY.md#supported-versions).
