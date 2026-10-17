@@ -1,4 +1,4 @@
-# keelinfra.github.io
+# keelinfra.io
 
 Source for [keelinfra.io](https://keelinfra.io) — built with [Zola](https://www.getzola.org/).
 
