@@ -24,6 +24,7 @@ LINK_MAP = {
     "DEPLOYMENT.md": "/docs/keycloak/deployment/",
     "SECURITY.md": "/docs/keycloak/security/",
     "CVE-POLICY.md": "/docs/keycloak/cve-policy/",
+    "CRA.md": f"{REPO_URL}/blob/main/CRA.md",
     "LICENSE": f"{REPO_URL}/blob/main/LICENSE",
     "bundle/README.md": f"{REPO_URL}/blob/main/bundle/README.md",
     "examples/ha-3node.yml": "/docs/keycloak/example-ha-3node/",

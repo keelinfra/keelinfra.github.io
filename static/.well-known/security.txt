@@ -1,0 +1,7 @@
+# keelinfra security contact (RFC 9116). Policy: how reports are handled.
+Contact: https://github.com/keelinfra/keycloak/security/advisories/new
+Contact: mailto:hello@keelinfra.io
+Expires: 2027-10-17T00:00:00.000Z
+Policy: https://github.com/keelinfra/keycloak/blob/main/SECURITY.md
+Preferred-Languages: en
+Canonical: https://keelinfra.io/.well-known/security.txt
