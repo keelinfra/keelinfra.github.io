@@ -25,6 +25,7 @@ LINK_MAP = {
     "SECURITY.md": "/docs/keycloak/security/",
     "CVE-POLICY.md": "/docs/keycloak/cve-policy/",
     "LICENSE": f"{REPO_URL}/blob/main/LICENSE",
+    "bundle/README.md": f"{REPO_URL}/blob/main/bundle/README.md",
     "examples/ha-3node.yml": "/docs/keycloak/example-ha-3node/",
     "examples/single-node.yml": "/docs/keycloak/example-single-node/",
     # Directory link with no site page — it resolved to /docs/keycloak/upgrades/lts/.
