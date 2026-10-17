@@ -8,8 +8,9 @@ weight = 1
 
 - **1 or 3 Linux nodes.** Three for production HA; one for evaluation, dev, or small internal
   setups (no HA — see [the growth caveat](/docs/keycloak/install-single-node/)).
-- **Supported OS:** Ubuntu 24.04 and Rocky Linux 9, both tested in CI. RHEL 9 and AlmaLinux 9
-  take the same path as Rocky but are not in CI; Ubuntu 22.04 and Debian 12 are untested. On the
+- **Supported OS:** Ubuntu 24.04, Rocky Linux 9 and AlmaLinux 9, all tested in CI. RHEL 9 takes
+  the same path but is not in CI (its packages need a subscription); Ubuntu 22.04 and Debian 12 are
+  untested. On the
   RHEL family the install enables EPEL (pgBackRest needs a library from it), and SELinux stays
   enforcing: a weekly test installs three real Rocky 9 VMs and fails on any SELinux denial.
 - **SSH access with passwordless sudo** from your control node (key or agent based — password auth is not
