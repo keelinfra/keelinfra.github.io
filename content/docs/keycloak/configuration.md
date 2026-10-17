@@ -51,6 +51,10 @@ plaintext. Keycloak's own cluster traffic (port 7800) is mutual TLS. The one pla
 which carries only Keycloak's liveness checks (node names and addresses). Details in the
 [deployment guide](/docs/keycloak/deployment/#before-you-start).
 
+Node certificates last two years. `./verify` and the CertificateExpiringSoon alert warn 30 days
+before any certificate expires, and `./renew-certs` replaces them without downtime (also the
+HTTPS certificate with `selfsigned`).
+
 `internal_tls: false` in the cluster definition turns this off. Clusters installed before it
 existed keep running unencrypted; etcd cannot switch in place, so moving one to TLS means a new
 install.
