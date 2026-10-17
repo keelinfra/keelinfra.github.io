@@ -4,10 +4,10 @@ description = "How to report vulnerabilities privately, what is in scope, and ho
 weight = 7
 [extra]
 source_repo_path = "SECURITY.md"
-source_sha = "4b31172"
+source_sha = "5f50b62"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@4b31172 (SECURITY.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@5f50b62 (SECURITY.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 ## Reporting a vulnerability
 

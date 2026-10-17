@@ -22,6 +22,7 @@ you edit. `./configure -c <file>` validates it and generates the Ansible invento
 | `tls_cert_file` | With `custom`: your certificate in PEM, server certificate first, then any intermediates. |
 | `tls_key_file` | With `custom`: its private key in PEM, without a passphrase. |
 | `tls_ca_file` | Optional, with `custom`: a private CA certificate the nodes should trust. |
+| `internal_tls` | `true` (default): traffic between the nodes uses TLS from a cluster-internal CA. See [below](#traffic-between-the-nodes). |
 
 ## TLS mode
 
@@ -39,9 +40,20 @@ Keycloak re-reads its certificate files every hour, so the new one is served wit
 without a restart. To switch at once, restart Keycloak one node at a time
 (`sudo systemctl restart keycloak`). The same steps move a cluster from `selfsigned` to `custom`.
 
-Client traffic to Keycloak is TLS: HAProxy passes it through and Keycloak terminates it. Traffic
-between the nodes is not encrypted yet: etcd, PostgreSQL replication and the Patroni API run
-over plain connections on the node network, so keep that network private.
+Client traffic to Keycloak is TLS: HAProxy passes it through and Keycloak terminates it.
+
+## Traffic between the nodes
+
+Encrypted by default. The install creates a cluster-internal CA on the first node and gives each
+node its own certificate. etcd, the Patroni API, PostgreSQL (replication and Keycloak's
+connections) and the metrics exporters use TLS, and `./verify` fails if one of them answers in
+plaintext. Keycloak's own cluster traffic (port 7800) is mutual TLS. The one plain port is 57800,
+which carries only Keycloak's liveness checks (node names and addresses). Details in the
+[deployment guide](/docs/keycloak/deployment/#before-you-start).
+
+`internal_tls: false` in the cluster definition turns this off. Clusters installed before it
+existed keep running unencrypted; etcd cannot switch in place, so moving one to TLS means a new
+install.
 
 ## Secrets
 

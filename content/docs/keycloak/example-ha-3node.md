@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a 3-node HA install."
 weight = 8
 [extra]
 source_repo_path = "examples/ha-3node.yml"
-source_sha = "4b31172"
+source_sha = "5f50b62"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@4b31172 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@5f50b62 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a production 3-node HA install — this is the only file you edit. Run `./configure -c examples/ha-3node.yml` against it.
 
@@ -46,8 +46,11 @@ keycloak_version: "26.8.1"
 # TLS: "selfsigned" generates a local CA and certs (good for eval/intranet).
 # "custom" uses your own certificate for <domain>; ./configure checks that it
 # is not expired, lists the domain, and matches the key. Paths are relative to
-# this file. Traffic between the nodes is not encrypted yet.
+# this file.
 tls_mode: selfsigned
+# Traffic between the nodes always uses TLS from a separate cluster-internal
+# CA, whichever tls_mode you pick. Only for a cluster installed before that
+# (DEPLOYMENT.md, Network): internal_tls: false
 # tls_cert_file: tls/sso.example.com.crt   # PEM: server certificate, then intermediates
 # tls_key_file: tls/sso.example.com.key    # PEM private key, no passphrase
 # tls_ca_file: tls/internal-ca.crt         # optional: private CA to trust on the nodes

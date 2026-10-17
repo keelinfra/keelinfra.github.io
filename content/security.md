@@ -31,8 +31,9 @@ version bump and document the operator actions in
 
 - **TLS to Keycloak.** `tls_mode: selfsigned` generates a local CA; `tls_mode: custom` uses your
   own certificate, which `./configure` checks for expiry, domain and key match before anything
-  is installed. Traffic between the nodes (etcd, PostgreSQL replication, the Patroni API) is not
-  encrypted yet, so keep the node network private.
+  is installed.
+- **TLS between the nodes.** A cluster-internal CA encrypts etcd, PostgreSQL replication, the
+  Patroni API and the metrics scrapes; `./verify` fails if one of them answers in plaintext.
 - **Secrets stay encrypted.** Generated credentials live in an ansible-vault; nothing sensitive is
   written in plain text to the inventory.
 - **No password SSH.** Key or agent-based authentication only.
