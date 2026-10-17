@@ -1,6 +1,6 @@
 +++
 title = "Security & verifiability"
-description = "How to report vulnerabilities in keelinfra, what ships secure by default, and why nothing phones home."
+description = "How to report vulnerabilities in keelinfra, what ships secure by default, how it maps to NIS2 and DORA reviews, and why nothing phones home."
 template = "page.html"
 +++
 
@@ -53,6 +53,21 @@ Grafana, installed from its upstream packages, keeps its default usage reporting
 
 Verify it: `grep -r "keelinfra.io" roles/ playbooks/` in the
 [source](https://github.com/keelinfra/keycloak). It's not there.
+
+## NIS2 and DORA reviews
+
+No product makes you compliant; your controls and your auditor do. But identity is one of the first
+systems a NIS2 or DORA review looks at, and these are the questions it asks:
+
+| The review asks | Where it comes from | What the distribution gives you |
+|---|---|---|
+| Can you restore it, and have you tried? | NIS2 Art. 21(2)(c); DORA Art. 12 | Scheduled pgBackRest backups, an optional encrypted off-site copy to S3, point-in-time `./restore --time`, and `./verify --drill restore` you can run on your own cluster and keep the output as evidence |
+| Is it encrypted in transit? | NIS2 Art. 21(2)(h); DORA Art. 9 | TLS to Keycloak and between every node by default; `./verify` fails on a plaintext listener |
+| Access control and MFA? | NIS2 Art. 21(2)(i)–(j); DORA Art. 9 | Upstream Keycloak's OTP and WebAuthn, on infrastructure you control, with audit events in your own database |
+| What is your exposure to this vendor, and how do you exit? | DORA Art. 28–30 | We never hold your data or run your systems. The distribution is Apache-2.0 and runs without us; stopping the subscription changes nothing on your cluster |
+
+The backup, restore and TLS claims are re-checked in public CI: [the evidence ledger](/evidence/).
+If your auditor wants something not listed here, [ask us](mailto:hello@keelinfra.io?subject=NIS2%2FDORA%20question).
 
 ## What we don't have
 
