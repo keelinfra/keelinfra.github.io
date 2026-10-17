@@ -57,8 +57,8 @@ What survives what, on a 3-node cluster:
 
 ## Before you start
 
-**Nodes.** Three machines running Ubuntu 24.04 or Rocky Linux 9 (both tested in CI; RHEL 9 and
-AlmaLinux 9 take the Rocky path but are not in CI).
+**Nodes.** Three machines running Ubuntu 24.04, Rocky Linux 9 or AlmaLinux 9 (all tested in CI;
+RHEL 9 takes the same path but is not in CI).
 For evaluation, 4 GB RAM and 2 vCPU per node is enough. The defaults size Keycloak's heap at
 512 MB to 1 GB and PostgreSQL's shared buffers at 512 MB; for production, size to your login
 volume and watch the dashboard.
@@ -258,8 +258,8 @@ ANSIBLE_VAULT_PASSWORD_FILE=inventory/.vault_pass ansible-vault view inventory/g
 Stated plainly, so you can plan around them:
 
 - Traffic between the nodes is not encrypted (see Network above).
-- Ubuntu 24.04 and Rocky Linux 9 are tested; RHEL and AlmaLinux 9 are not in CI. Offline
-  bundles exist for Ubuntu only.
+- Ubuntu 24.04, Rocky Linux 9 and AlmaLinux 9 are tested; RHEL 9 is not in CI. Offline bundles
+  exist for Ubuntu 24.04 and Rocky Linux 9.
 - Monitoring and repository 1 live on the first node. Losing it stops backups and alerting until
   it returns; `backup_s3` keeps the backups safe, nothing yet keeps alerting up.
 - Prometheus and Grafana listen on all interfaces; restrict them with your firewall.
