@@ -4,10 +4,10 @@ description = "Putting a 3-node cluster into production: what runs where, the po
 weight = 4
 [extra]
 source_repo_path = "DEPLOYMENT.md"
-source_sha = "d02cb0f"
+source_sha = "4b31172"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@d02cb0f (DEPLOYMENT.md) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@4b31172 (DEPLOYMENT.md) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 How to put a keelinfra Keycloak cluster into production: what runs where, what the network must
 allow, how backups leave the cluster, where alerts go, and how to prove each piece works before
@@ -57,8 +57,7 @@ What survives what, on a 3-node cluster:
 
 ## Before you start
 
-**Nodes.** Three machines running Ubuntu 24.04, Rocky Linux 9 or AlmaLinux 9 (all tested in CI;
-RHEL 9 takes the same path but is not in CI).
+**Nodes.** Three machines running Ubuntu 24.04 (the only OS tested in CI; the roles use apt).
 For evaluation, 4 GB RAM and 2 vCPU per node is enough. The defaults size Keycloak's heap at
 512 MB to 1 GB and PostgreSQL's shared buffers at 512 MB; for production, size to your login
 volume and watch the dashboard.
@@ -147,14 +146,8 @@ restored.
 ## 3. Install
 
 ```bash
-./preflight    # optional: ./install runs the same checks first
 ./install
 ```
-
-Before anything changes, the install checks every node and lists every problem at once: OS,
-memory and disk, ports already taken, a node that doesn't own the address in `cluster.yml`, peers
-it can't reach, download sources, firewalls, clock skew, and a VIP outside the nodes' network or
-already in use. Failures stop the install; warnings only report.
 
 The playbooks run in order: OS preparation, etcd, PostgreSQL and Patroni, HAProxy, pgBackRest
 (including a first full backup to every repository), TLS material, Keycloak, realm
@@ -225,11 +218,6 @@ grouped by alert and node, repeating every 4 hours while it fires. Without `aler
 are only visible in Grafana and Alertmanager. Run `./verify --drill alert` after any change to
 the receivers.
 
-Each alert links to its section in
-[RUNBOOKS.md](https://github.com/keelinfra/keycloak/blob/main/RUNBOOKS.md): what it means,
-the commands to check, how to fix each likely cause, and when to get help. Set
-`alert_runbook_base` to point the links at your own copy.
-
 Grafana is on `http://<first node>:3000`, user `admin`, password `vault_grafana_admin_password`
 in the vault. The **keelinfra: Keycloak cluster** dashboard shows nodes up, PostgreSQL leader and
 replica lag, hours since the last backup per repository, logins and failed logins per realm, HTTP
@@ -258,8 +246,7 @@ ANSIBLE_VAULT_PASSWORD_FILE=inventory/.vault_pass ansible-vault view inventory/g
 Stated plainly, so you can plan around them:
 
 - Traffic between the nodes is not encrypted (see Network above).
-- Ubuntu 24.04, Rocky Linux 9 and AlmaLinux 9 are tested; RHEL 9 is not in CI. Offline bundles
-  exist for Ubuntu 24.04 and Rocky Linux 9.
+- Ubuntu 24.04 only. The roles use apt; RHEL and Rocky are not supported.
 - Monitoring and repository 1 live on the first node. Losing it stops backups and alerting until
   it returns; `backup_s3` keeps the backups safe, nothing yet keeps alerting up.
 - Prometheus and Grafana listen on all interfaces; restrict them with your firewall.

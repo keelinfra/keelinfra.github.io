@@ -4,10 +4,10 @@ description = "The annotated cluster definition for a 3-node HA install."
 weight = 8
 [extra]
 source_repo_path = "examples/ha-3node.yml"
-source_sha = "d02cb0f"
+source_sha = "4b31172"
 +++
 
-<!-- GENERATED from keelinfra/keycloak@d02cb0f (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
+<!-- GENERATED from keelinfra/keycloak@4b31172 (examples/ha-3node.yml) by scripts/sync_docs.py — edit it THERE, not here. -->
 
 The complete cluster definition for a production 3-node HA install — this is the only file you edit. Run `./configure -c examples/ha-3node.yml` against it.
 
@@ -29,7 +29,7 @@ nodes:
     name: kc-node3
 
 # SSH connection for Ansible (agent or key-based; password auth not supported)
-ssh_user: ubuntu
+ssh_user: ubuntu      # rocky on Rocky Linux cloud images, ec2-user on RHEL
 # ssh_private_key: ~/.ssh/id_ed25519   # optional, defaults to agent
 
 # Public entrypoint. Users reach Keycloak at https://<domain>/
